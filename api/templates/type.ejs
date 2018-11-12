@@ -1,0 +1,13 @@
+var g = require('./graphql');
+
+var <%- name %>Type = module.exports = new g.GraphQLObjectType(g.BookshelfType({
+    name: '<%- name %>',
+    description: 'This type object wraps the <%- name %> Bookshelf Model',
+    fields: function(model) {
+        return {
+            id: {
+                type: g.GraphQLLong
+            }
+        };
+    }
+}));
