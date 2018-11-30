@@ -50,7 +50,7 @@ export default class LandingPage extends React.Component {
                         height="30px"
                         mx='auto'
                         my='1rem'
-                        depth='-1px 0px 14px rgba(0,0,0,0.65)'
+                        depth='-1px 0px 15px rgba(0,0,0,0.65)'
                         
                         onClick={this.goToPage}
                     >
