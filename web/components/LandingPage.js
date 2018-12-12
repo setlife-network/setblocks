@@ -7,7 +7,6 @@ import Box from './Box';
 import Icon from './Icon';
 import Text from './Text';
 import Image from './Image';
-import Card from './Card';
 
 /* TODO
 
