@@ -23,18 +23,20 @@ export default {
         background: '#F6F7F9',
         border: '#ECEFF3',
         lightGrey: '#C9D6E2',
-        grey: '#6185A3',
+        grey: '#B5B5B5',
         charcoal: '#2E497A',
         purple: '#C15BEE',
         blue: '#1C9EF6',
         lightBlue: '#8CC3E6',
+        veryLightBlue: '#CCEDFF',
         darkBlue: '#1373BD',
         green: '#2BC094',
         yellow: '#F5D76E',
         red: '#F93B6A',
         facebook: '#32529F',
         overlay: 'rgba(0,0,0,0.5)',
-        transparent: 'transparent'
+        transparent: 'transparent',
+        bottomColor: '#3B3B3B'
     },
     gradients: {
         vertical: 'linear-gradient(#1C9EF6, #0ACFFE)',

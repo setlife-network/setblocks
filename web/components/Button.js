@@ -8,7 +8,7 @@ import Card from './Card'
 
 const Button = styled(Card)`
     font-family: 'Inter UI';
-    font-size: 14px;
+    font-size: 15px;
     outline: 0;
     border: none;
     
@@ -37,7 +37,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
     as: 'button',
-    bg: 'blue',
+    bg: 'red',
     color: 'white',
     disabled: false,
     borderRadius: 3,

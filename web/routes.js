@@ -8,7 +8,7 @@ export default (
         <Switch>
             <Route exact path='/' component={LandingPage}/>
             <Route path='/dashboard' component={LandingPage}/>
-            
+            <Route path='/teamlist' component={LandingPage}/>
         </Switch>
     </div>
     
