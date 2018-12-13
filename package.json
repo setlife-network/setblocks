@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf node_modules && rm -rf public",
-    "dev": "eslint ./web --ext .jsx,.js; ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --config config/webpack.config.dev.js",
+    "dev": "eslint ./web --ext .jsx,.js & node node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --config config/webpack.config.dev.js",
     "prebuild": "rm -rf public",
     "build": "./node_modules/webpack/bin/webpack.js -p --config config/webpack.config.production.js",
     "lint": "eslint src",

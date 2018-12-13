@@ -1,22 +1,21 @@
 #!/usr/bin/env node
 
-'use strict';
 
 process.bin = process.title = 'setlife';
 
 var program = require('commander');
-var pkg = require('./package.json');
 var fs = require('fs-extra');
 var path = require('path');
 var ejs = require('ejs');
 var _ = require('lodash');
 var pluralize = require('pluralize');
+var pkg = require('./package.json');
 
 var generateComponent = function(name, options) {
     console.log('Creating ' + name + ' component...');
 
-    var templatePath = path.join(process.cwd(), 'src/templates', 'component.ejs');
-    var destinationPath = path.join(process.cwd(), 'src/components', name + '.jsx');
+    var templatePath = path.join(process.cwd(), 'templates', 'component.ejs');
+    var destinationPath = path.join(process.cwd(), 'web/components', name + '.jsx');
     var redux = options.redux || false;
     var stateless = options.stateless || false;
 
@@ -35,8 +34,8 @@ var generateComponent = function(name, options) {
 var generateStylesheet = function(name) {
     console.log('Creating ' + name + ' stylesheet...');
 
-    var styleTemplate = path.join(process.cwd(), 'src/templates', 'stylesheet.ejs');
-    var styleDestination = path.join(process.cwd(), 'src/styles', name + '.less');
+    var styleTemplate = path.join(process.cwd(), 'templates', 'stylesheet.ejs');
+    var styleDestination = path.join(process.cwd(), 'web/styles', name + '.less');
 
     fs.readFile(styleTemplate, 'utf8', function(err, data) {
         var stylesheet = ejs.render(data, { name: name });
@@ -159,41 +158,41 @@ const amendJsIndex = (params) => {
 // Parse command line options
 
 program
-    .version(pkg.version)
-    .usage('<command> [options]');
+.version(pkg.version)
+.usage('<command> [options]');
 
 program
-    .command('create-component <name>')
-    .option('-s, --style', 'Create dedicated stylesheet')
-    .option('-r, --redux', 'Connect Redux state mappings')
-    .option('-t, --stateless', 'Create a stateless component')
-    .description('Generate a new React component.')
-    .action(function(name, options) {
-        generateComponent(name, options);
+.command('create-component <name>')
+.option('-s, --style', 'Create dedicated stylesheet')
+.option('-r, --redux', 'Connect Redux state mappings')
+.option('-t, --stateless', 'Create a stateless component')
+.description('Generate a new React component.')
+.action(function(name, options) {
+    generateComponent(name, options);
         
-        var style = options.style;
+    var style = options.style;
 
-        if (style) {
-            generateStylesheet(name);
-            addStyleToIndex(name);
-        }
-    });
+    if (style) {
+        generateStylesheet(name);
+        addStyleToIndex(name);
+    }
+});
 
 program
-    .command('create-model <name>')
-    .option('-t, --type', 'Create associated Bookshelf-GraphQL Type file in /api/types/')
-    .description('Generate a new Bookshelf Model and associated GraphQL Type (optional). Use Pascal Case (ie: NewUser) and do not write the \'-Type\' suffix, it will be appended automagically.')
-    .action(function(name, options) {
-        generateModel(name);
-        addModelToIndex(name);
+.command('create-model <name>')
+.option('-t, --type', 'Create associated Bookshelf-GraphQL Type file in /api/types/')
+.description('Generate a new Bookshelf Model and associated GraphQL Type (optional). Use Pascal Case (ie: NewUser) and do not write the \'-Type\' suffix, it will be appended automagically.')
+.action(function(name, options) {
+    generateModel(name);
+    addModelToIndex(name);
         
-        var type = options.type;
+    var type = options.type;
 
-        if (type) {
-            generateType(name);
-            addTypeToIndex(name);
-        }
-    });
+    if (type) {
+        generateType(name);
+        addTypeToIndex(name);
+    }
+});
 
 
 // Failsafe that shows the help dialogue if the command is not recognized (`$ react xyz`)
