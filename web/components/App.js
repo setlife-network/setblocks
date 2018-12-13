@@ -11,6 +11,7 @@ class App extends React.Component {
     componentDidMount() {
         // Run initialization functions here
     }
+
     render() {
         return (
             <Flex>

@@ -27,7 +27,7 @@ const renderContainer = Component => {
             <ThemeProvider theme={theme}>
                 <Provider store={store}>
                     <Router>
-                        <Component/>
+                        <Component />
                     </Router>
                 </Provider>
             </ThemeProvider>

@@ -5,17 +5,23 @@ import NavLinkItem from './NavLinkItem';
 
 import { NAVIGATION } from '../constants';
 
+
 class NavigationBar extends React.Component {
     renderNavItem = (item) => {
         return (
-            <NavLinkItem {...item}/>
+            <NavLinkItem
+                {...item}
+                selected={item.route === '/'}
+                width={100 / NAVIGATION.items.length}
+            />
         )
     }
+
     render() {
         return (
             <div className='NavigationBar'>
                 <div className='logo-container'>
-                    <div className='logo'/>
+                    <div className='logo' />
                 </div>
                 <div className='nav-container'>
                     {NAVIGATION.items.map(this.renderNavItem)}
@@ -26,13 +32,11 @@ class NavigationBar extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return {
-    };
+    return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-    };
+    return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);

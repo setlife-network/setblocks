@@ -5,8 +5,21 @@ export const NAVIGATION = {
     items: [
         {
             text: 'Home',
-            routes: ['/'],
-            imageUrl: null
+            icon: 'fas fa-home',
+            route: '/',
+            imageUrl: null,
+        },
+        {
+            text: 'Home',
+            icon: 'fas fa-home',
+            route: '/dashboard',
+            imageUrl: null,
+        },
+        {
+            text: 'Home',
+            icon: 'fas fa-home',
+            route: '/teamlist',
+            imageUrl: null,
         }
     ]
 }

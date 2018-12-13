@@ -40,10 +40,9 @@ bookshelf.Collection = bookshelf.Collection.extend({
                 items.push('...');
                 //lets check if we our current page is towards the end
                 if (lastpage - currentpage < 2) {
-                     lowestF -=  3; // add more previous links
+                    lowestF -= 3; // add more previous links
                 }
-            }
-            else {
+            } else {
                 lowestF = 3; // lowest num to start looping from
             }
             for (var counter = lowestF; counter < lowestF + 5; counter++) {
@@ -58,8 +57,7 @@ bookshelf.Collection = bookshelf.Collection.extend({
             }
             items.push(lastpage - 1);
             items.push(lastpage);
-        }
-        else {
+        } else {
             // no complex pagination required
             for (var counter2 = 1; counter2 <= lastpage; counter2++) {
                 items.push(counter2);
@@ -90,8 +88,7 @@ bookshelf.Collection = bookshelf.Collection.extend({
             self.queries.forEach(function (where, i) {
                 if (i === 0) {
                     query.where(where[0], where[1], where[2]);
-                }
-                else {
+                } else {
                     query.andWhere(where[0], where[1], where[2]);
                 }
             });
@@ -125,8 +122,7 @@ bookshelf.Collection = bookshelf.Collection.extend({
                 self.queries.forEach(function (where, i) {
                     if (i === 0) {
                         query.where(where[0], where[1], where[2]);
-                    }
-                    else {
+                    } else {
                         query.andWhere(where[0], where[1], where[2]);
                     }
                 });

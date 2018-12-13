@@ -1,157 +1,44 @@
 import React from 'react';
-
-import Button from './Button';
-import Flex from './Flex';
-import Box from './Box';
-import Icon from './Icon';
-import Text from './Text';
-import Image from './Image';
-import Card from './Card';
+import TeamMember from './TeamMember'
 
 export default class TeamList extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            mockTeamMembers: ['Oscar Lafarga', 'Vitoria Lafarga', 'Quinn Pruit', 'David Lafarga']
+        }
+    }
+
     goToPage = () => {
         console.log('goToTeamMember')
-    }
+    };
+
+
     render() {
+        const { mockTeamMembers } = this.state;
         return (
             <>
-                <Card 
-                    bg='red'
-                    borderRadius={5}
-                    width='250px'
-                    height="30px"
-                    mx='auto'
-                    my='1rem'
-                    depth='-1px 0px 15px rgba(0,0,0,0.65)'
-                >
-                    <Flex 
-                        direction='row'
-                        justifyContent='space-between'
-                        mb='2rem' 
-                        width='250px'
-                        height='50px'
-                        onClick={this.goToPage}
-                    >
-                        <Text 
-                            color='black'
-                            ml='0.75rem'
-                            mt='0.25rem'
-                            fontSize='2.5rem' 
-                        >
-                            David Lafarga
-                        </Text>
-                            
-                        <Card
-                            mr='1rem'
-                            mt='0.38rem'
-                        >
-                            <Image 
-                                
-                                height='20px' 
-                                src={require('../images/SettingsIcon.png')} 
-                            />
-                        </Card>
-                    </Flex>
-                </Card>
-                <Card 
-                    bg='blue'
-                    borderRadius={5}
-                    width='250px'
-                    height="30px"
-                    mx='auto'
-                    my='1rem'
-                    depth='-1px 0px 15px rgba(0,0,0,0.65)'
-                >
-                    <Flex
-                        direction='row'
-                        justifyContent='space-between'
-                        mb='2rem' 
-                        width='250px'
-                        height='50px'
-                        onClick={this.goToPage}
-                    >
-                        <Text 
-                            color='black'
-                            ml='0.75rem'
-                            mt='0.25rem'
-                            fontSize='2.5rem' 
-                        >
-                            Oscar Lafarga
-                        </Text>
-                        <Image 
-                            mr='1rem'
-                            mt='0.38rem'
-                            height='20px' 
-                            src={require('../images/SettingsIcon.png')} 
-                        />
-                    </Flex>
-                </Card>
-                <Card 
-                    bg='purple'
-                    borderRadius={5}
-                    width='250px'
-                    height="30px"
-                    mx='auto'
-                    my='1rem'
-                    depth='-1px 0px 15px rgba(0,0,0,0.65)'
-                >
-                    <Flex 
-                        direction='row'
-                        justifyContent='space-between'
-                        mb='2rem' 
-                        width='250px'
-                        height='50px'
-                        onClick={this.goToPage}
-                    >
-                        <Text
-                            color='black'
-                            ml='0.75rem'
-                            mt='0.25rem'
-                            fontSize='2.5rem' 
-                        >
-                            Quinn Pruitt
-                        </Text>
-                        <Image 
-                            mr='1rem'
-                            mt='0.38rem'
-                            height='20px' 
-                            src={require('../images/SettingsIcon.png')} 
-                        />
-                    </Flex>
-                </Card>
-                <Card 
-                    bg='green'
-                    borderRadius={5}
-                    width='250px'
-                    height="30px"
-                    mx='auto'
-                    my='1rem'
-                    depth='-1px 0px 15px rgba(0,0,0,0.65)'
-                >
-                    <Flex 
-                        direction='row'
-                        justifyContent='space-between'
-                        mb='2rem' 
-                        width='250px'
-                        height='50px'
-                        onClick={this.goToPage}
-                    >
-                        <Text 
-                            color='black'
-                            ml='0.75rem'
-                            mt='0.25rem'
-                            fontSize='2.5rem' 
-                        >
-                            Viki Lafarga
-                        </Text>
-                        <Image 
-                            mr='1rem'
-                            mt='0.38rem'
-                            height='20px' 
-                            src={require('../images/SettingsIcon.png')} 
-                        />
-                    </Flex>
-                </Card>
+                <TeamMember
+                    name={mockTeamMembers[0]}
+                    goToPage={this.goToPage}
+                    color='red'
+                />
+                <TeamMember
+                    name={mockTeamMembers[1]}
+                    goToPage={this.goToPage}
+                    color='blue'
+                />
+                <TeamMember
+                    name={mockTeamMembers[2]}
+                    goToPage={this.goToPage}
+                    color='purple'
+                />
+                <TeamMember
+                    name={mockTeamMembers[3]}
+                    goToPage={this.goToPage}
+                    color='green'
+                />
             </>
         )
     }

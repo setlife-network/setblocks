@@ -3,14 +3,15 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
 export default class Icon extends React.Component {
     render() {
+        const { onClick, faIconName, size } = this.props;
         return (
             <div
-                className={'Icon ' + this.props.faIconName}
-                onClick={this.props.onClick}
+                className={'Icon ' + faIconName}
+                onClick={onClick}
             >
                 <FontAwesomeIcon
-                    icon={this.props.faIconName}
-                    size={this.props.size}
+                    icon={faIconName}
+                    size={size}
                 />
             </div>
         )
