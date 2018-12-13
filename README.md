@@ -6,9 +6,9 @@ Libaries used: Express, React, Redux, React Router, Webpack
 
 ## Setup
 
-1. Clone the repo `git clone https://github.com/setlife-network/setlife-tools`
+1. Clone the repo `git clone https://github.com/setlife-network/setblocks`
 
-2. Move into the directory `cd setlife-tools`
+2. Move into the directory `cd setblocks`
 
 3. Install dependencies `yarn install`
 
