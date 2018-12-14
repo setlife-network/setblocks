@@ -10,6 +10,7 @@ import {
     display,
     opacity
 } from 'styled-system'
+import React from 'react';
 
 const variants = variant({
     key: 'fonts'
@@ -64,7 +65,8 @@ Text.defaultProps = {
     color: 'charcoal',
     size: 16,
     lineHeight: 1.6,
-    letterSpacing: '0.025rem'
+    letterSpacing: '0.025rem',
+    fontFamily: 'Nunito,sans-serif',
 }
 
 export default Text

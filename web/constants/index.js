@@ -10,15 +10,15 @@ export const NAVIGATION = {
             imageUrl: null,
         },
         {
-            text: 'Home',
-            icon: 'fas fa-home',
-            route: '/dashboard',
+            text: 'Team',
+            icon: 'fas fa-users',
+            route: '/team',
             imageUrl: null,
         },
         {
-            text: 'Home',
-            icon: 'fas fa-home',
-            route: '/teamlist',
+            text: 'Schedule',
+            icon: 'fas fa-sliders-h',
+            route: '/schedule',
             imageUrl: null,
         }
     ]

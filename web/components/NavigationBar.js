@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 import NavLinkItem from './NavLinkItem';
 
 import { NAVIGATION } from '../constants';
-
+import Flex from './Flex';
 
 class NavigationBar extends React.Component {
     renderNavItem = (item) => {
+        const { path } = this.props;
         return (
             <NavLinkItem
                 {...item}
-                selected={item.route === '/'}
+                selected={item.route === path}
                 width={100 / NAVIGATION.items.length}
             />
         )
@@ -19,14 +20,20 @@ class NavigationBar extends React.Component {
 
     render() {
         return (
-            <div className='NavigationBar'>
-                <div className='logo-container'>
+            <Flex
+                className='NavigationBar'
+                width='100%'
+            >
+                <Flex className='logo-container'>
                     <div className='logo' />
-                </div>
-                <div className='nav-container'>
+                </Flex>
+                <Flex
+                    className='nav-container'
+                    width='100vw'
+                >
                     {NAVIGATION.items.map(this.renderNavItem)}
-                </div>
-            </div>
+                </Flex>
+            </Flex>
         );
     }
 }

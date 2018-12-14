@@ -18,6 +18,7 @@ export default ({
             }}
             bg={selected ? 'black' : 'grey'}
             width='100%'
+            borderLeft='2px solid black'
             borderRight='2px solid black'
         >
             <Link
@@ -46,6 +47,8 @@ export default ({
                             mt={['4px', '4px', 0]}
                             ml={[0, 0, '1rem']}
                             size={[10, 10, 14]}
+                            fontFamily='Nunito,Helvetica Neue,Helvetica,Arial,sans-serif'
+                            weight='600'
                         >
                             {text}
                         </Text>
