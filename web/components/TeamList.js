@@ -1,4 +1,5 @@
 import React from 'react';
+
 import TeamMember from './TeamMember'
 
 export default class TeamList extends React.Component {

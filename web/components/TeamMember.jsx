@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Flex from './Flex';
 import Text from './Text';
 import Card from './Card';
@@ -34,6 +35,7 @@ export default class TeamMember extends React.Component {
                             ml='0.75rem'
                             mt='0.25rem'
                             size='1rem'
+                            weight='600'
                         >
                             {name}
                         </Text>
