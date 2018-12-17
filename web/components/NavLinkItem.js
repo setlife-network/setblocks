@@ -29,7 +29,7 @@ export default ({
                     bg='black'
                     mx='50%'
                     mt='5%'
-                    depth='-2px 0px 10px rgba(0,0,0,0.5)'
+                    depth={6}
                 >
                     <Flex
                         direction={['column', 'column', 'row']}
@@ -40,14 +40,13 @@ export default ({
                         <Icon
                             faIconName={icon} 
                             size='5x'
-                            color={selected ? 'white' : 'charcoal'}
+                            color={selected ? 'white' : 'black'}
                         />
                         <Text
-                            color={selected ? 'white' : 'charcoal'}
+                            color={selected ? 'white' : 'black'}
                             mt={['4px', '4px', 0]}
                             ml={[0, 0, '1rem']}
                             size={[10, 10, 14]}
-                            fontFamily='Nunito,Helvetica Neue,Helvetica,Arial,sans-serif'
                             weight='600'
                         >
                             {text}

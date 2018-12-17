@@ -7,13 +7,13 @@ import Flex from './Flex';
 
 
 
-export default class LandingPage extends React.Component {
+export default class TeamPage extends React.Component {
 
     render() {
         return (
             <Flex
                 column
-                className='LandingPage'
+                className='TeamPage'
                 bg='lightGrey'
                 width='100%'
             >

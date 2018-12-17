@@ -16,6 +16,8 @@ export default {
         3: '0px 3px 16px rgba(0,0,0,0.12)',
         4: '0px 4px 21px rgba(0,0,0,0.14)',
         5: '0px 5px 25px rgba(0,0,0,0.14)',
+        6: '-2px 0px 10px rgba(0,0,0,0.5)',
+        7: '-1px 0px 15px rgba(0,0,0,0.65)'
     },
     // Colors (styled-system)
     colors: {
