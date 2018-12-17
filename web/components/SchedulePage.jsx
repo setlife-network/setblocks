@@ -1,16 +1,6 @@
 import React from 'react';
 
 export default class SchedulePage extends React.Component {
-    render() {
-        const { match } = this.props;
-        return (
-            <div className='SchedulePage'>
-                <h6>SchedulePage</h6>
-                {this.renderBaseOnParams(match)}
-            </div>
-        );
-    }
-
     renderBaseOnParams = (match) => {
         if (match.params.teamMemberId) {
             return (
@@ -29,5 +19,15 @@ export default class SchedulePage extends React.Component {
                 </h6>
             )
         }
+    }
+
+    render() {
+        const { match } = this.props;
+        return (
+            <div className='SchedulePage'>
+                <h6>SchedulePage</h6>
+                {this.renderBaseOnParams(match)}
+            </div>
+        );
     }
 }

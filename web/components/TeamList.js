@@ -1,14 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
 import TeamMember from './TeamMember'
 
-export default class TeamList extends React.Component {
+import { fetchAllTeamMembers } from '../reducers/environment'
+
+class TeamList extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             mockTeamMembers: ['Oscar Lafarga', 'Vitoria Lafarga', 'Quinn Pruit', 'David Lafarga']
         }
+    }
+
+    componentDidMount() {
+        this.props.fetchAllTeamMembers()
     }
 
     goToPage = () => {
@@ -44,3 +51,17 @@ export default class TeamList extends React.Component {
         )
     }
 }
+
+const mapStateToProps = ({ environment }) => {
+    return {
+        ...environment
+    };
+};
+
+const mapDispatchToProps = () => {
+    return {
+        fetchAllTeamMembers
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamList)

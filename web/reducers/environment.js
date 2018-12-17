@@ -1,19 +1,19 @@
 import api from 'scripts/api'
 
 // Index of Action Types
-const ACTION_NAME = 'ACTION_NAME'
+const RECEIVE_TEAM_MEMBERS = 'RECEIVE_TEAM_MEMBERS'
 
 // Reducer
 const initialState = {
-    setLife: true
+    teamMembers: []
 }
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-    case ACTION_NAME:
+    case RECEIVE_TEAM_MEMBERS:
         return {
             ...state,
-            setLife: action.setLife
+            teamMembers: action.members
         }
     default:
         return state
@@ -21,16 +21,20 @@ export default function reducer(state = initialState, action) {
 }
 
 // Actions
-export function sampleAsyncAction(params) {
+export function fetchAllTeamMembers(params) {
     return dispatch => {
         api.graph({
             query: `query {
-                apiGraphRoute
+                teamMembers {
+                    id,
+                    name
+                }
             }`
         })
         .then(payload => {
             // Handle payload
             // Dispatch additional actions
+            dispatch(receiveTeamMembers(payload.teamMembers))
         })
         .catch(err => {
             // Handle error
@@ -38,9 +42,9 @@ export function sampleAsyncAction(params) {
     }
 }
 
-export function sampleAction(setLife) {
+export function receiveTeamMembers(members) {
     return {
-        type: ACTION_NAME,
-        setLife
+        type: RECEIVE_TEAM_MEMBERS,
+        members
     }
 }

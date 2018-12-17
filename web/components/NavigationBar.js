@@ -24,9 +24,6 @@ class NavigationBar extends React.Component {
                 className='NavigationBar'
                 width='100%'
             >
-                <Flex className='logo-container'>
-                    <div className='logo' />
-                </Flex>
                 <Flex
                     className='nav-container'
                     width='100vw'

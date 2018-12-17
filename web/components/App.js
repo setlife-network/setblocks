@@ -21,7 +21,6 @@ class App extends React.Component {
                     {routes}
                 </Flex>
                 <Flex
-                    my='auto'
                     height='8vh'
                 >
                     <NavigationBar path={location.pathname} />
