@@ -1,3 +1,4 @@
+require('dotenv').config() 
 var express = require('express');
 var path = require('path');
 var fs = require('fs');
@@ -67,4 +68,5 @@ app.use('/api/v/:vid/graph', graphqlHTTP(function(req, res) {
 
 app.listen(port, function() {
     console.log('SetLife-ReactWithApi: Server running on port ' + port);
+    // require('./api/modules/team').fetchAllTeamMembers({})
 });

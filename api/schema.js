@@ -95,7 +95,7 @@ var apiSchema = new g.GraphQLSchema(
                     }
                 },
                 teamMemberById: {
-                    type: new g.GraphQLList(types.SetBlockType),
+                    type: types.TeamMemberType,
                     description: 'Fetches a data model object by specified properties',
                     args: {
                         id: {
