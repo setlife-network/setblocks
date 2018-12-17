@@ -17,7 +17,6 @@ export default class TeamLogo extends React.Component {
                 <Card
                     width='80px'
                     height='40px'
-                    bg=''
                     border='2px solid'
                     borderColor='grey'
                     borderRadius={5}

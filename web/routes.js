@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 
-import LandingPage from 'components/LandingPage';
+import TeamPage from 'components/TeamPage';
+import SchedulePage from './components/SchedulePage';
 import Flex from './components/Flex';
 
 
 /*
 
 -- Routing guide --
-/ - LandingPage
 /team - TeamPage
 /team/:teamMemberId - TeamMemberPage
 /schedule - SchedulePage, with today's day selected by default
@@ -20,12 +20,12 @@ import Flex from './components/Flex';
 export default (
     <Flex className='routes-container' width='100vw'>
         <Switch>
-            <Route exact path='/' component={LandingPage} />
-            <Route path='/team' component={LandingPage} />
-            <Route path='/team/:teamMemberId' component={LandingPage} />
-            <Route path='/schedule' component={LandingPage} />
-            <Route path='/schedule/:dayOfWeek' component={LandingPage} />
-            <Route path='/schedule/edit/:setblockId' component={LandingPage} />
+            <Route exact path='/' component={TeamPage} />
+            <Route path='/team/:teamMemberId' render={props => <SchedulePage {...props} />} />
+            <Route path='/schedule/:dayOfWeek' render={props => <SchedulePage {...props} />} />
+            <Route path='/schedule/edit/:setblockId?' render={props => <SchedulePage {...props} />} />
+            <Route path='/schedule' component={SchedulePage} />
+            <Route path='/team' component={TeamPage} />
         </Switch>
     </Flex>
 );
