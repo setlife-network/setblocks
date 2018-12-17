@@ -41,3 +41,6 @@ public/**
 
 # Hide Environment Variables
 .env
+.idea/
+yarn.lock
+package-lock.json

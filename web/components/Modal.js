@@ -78,6 +78,7 @@ class ModalComponent extends Component {
         onClose: PropTypes.func.isRequired,
         children: PropTypes.any.isRequired
     }
+
     constructor(props) {
         super(props)
         if (!this.container && typeof document !== 'undefined') {
@@ -85,13 +86,16 @@ class ModalComponent extends Component {
             document.body.appendChild(this.container)
         }
     }
+
     componentDidMount() {
         this.attachEventHandlers()
         // Router.events.on('routeChangeStart', this.props.onClose.bind(null, false))
     }
+
     componentDidUpdate() {
         this.attachEventHandlers()
     }
+
     attachEventHandlers() {
         if (this.props.opened) {
             // prevent page from scrolling when modal is opened
@@ -103,11 +107,13 @@ class ModalComponent extends Component {
             // Router.events.off('routeChangeStart', this.props.onClose.bind(null, false))
         }
     }
+
     onKeyUp = ({ keyCode }) => {
         if (keyCode === 27) {
             this.props.onClose()
         }
     }
+
     render() {
         const {
             onClose,

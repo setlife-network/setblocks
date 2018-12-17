@@ -6,9 +6,11 @@ export default class Toggle extends Component {
         children: PropTypes.func.isRequired,
         onToggle: PropTypes.func
     }
+
     state = {
         toggled: false
     }
+
     onToggle = value => {
         this.setState(
             prevState => ({
@@ -21,6 +23,7 @@ export default class Toggle extends Component {
             }
         )
     }
+
     render() {
         return this.props.children({
             toggled: this.state.toggled,
