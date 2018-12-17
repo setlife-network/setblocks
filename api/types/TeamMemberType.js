@@ -28,6 +28,7 @@ var TeamMemberType = module.exports = new g.GraphQLObjectType({
             //         })
             //     }
             // }
+
         };
     }
 });

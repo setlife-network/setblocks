@@ -28,7 +28,7 @@ var SetblockType = module.exports = new g.GraphQLObjectType({
                 description: 'A brief description of the work being performed during this setblock if no issueUrl is provided'
             },
             teamMember: {
-                type: TeamMemberType,
+                type: types.TeamMemberType,
                 description: 'The TeamMember who has committed to working this setblock'
             }
         };
