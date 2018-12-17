@@ -1,7 +1,8 @@
 var types = module.exports = (function() {
     return {
-        NestedSampleType: require('./NestedSampleType'),
-        SampleModelType: require('./SampleModelType'),
+        SetblockInputType: require('./SetblockInputType'),
+        SetblockType: require('./SetblockType'),
+        TeamMemberType: require('./TeamMemberType'),
         graphql: require('./graphql')
     };
 })();
