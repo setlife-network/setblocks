@@ -1,8 +1,8 @@
 module.exports = {
     // API Access Keys
 
-    SAMPLE_KEYS: {
-        ACCESS_KEY: 'Do not hardcode sensitive API keys',
-        SECRET: 'Use environment variables'
+    AIRTABLE: {
+        API_KEY: process.env.AIRTABLE_API_KEY,
+        BASE_ID: process.env.AIRTABLE_BASE_ID
     }
 };

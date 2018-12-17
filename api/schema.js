@@ -12,50 +12,69 @@ var apiSchema = new g.GraphQLSchema(
             description: 'Endpoints with POST, PUT, and DELETE functionality go here',
 
             fields: {
-                executeRoute: {
+                createSetblock: {
                     args: {
-                        requiredArgument: {
-                            description: 'This argument is required to execute this route',
+                        teamMemberId: {
+                            description: 'The ID of the TeamMember committing to work this setblock',
                             type: new g.GraphQLNonNull(g.GraphQLString)
                         },
-                        optionalArgument: {
-                            description: 'This argument is not necessary. Be sure to handle null cases.',
-                            type: g.GraphQLString
+                        date: {
+                            description: 'The date this Setblock will be worked on',
+                            type: new g.GraphQLNonNull(g.GraphQLString)
+                        },
+                        blockTime: {
+                            description: 'See SetblockType description for allowed values',
+                            type: new g.GraphQLNonNull(g.GraphQLString)
+                        },
+                        blockFraction: {
+                            type: new g.GraphQLNonNull(g.GraphQLString)
                         }
                     },
 
-                    description: 'A sample mutation route executed. Whenever possible, name mutation routes as a grammatical combination of action verb and direct object. (ex: confirmOrder, sendInvoice, registerCustomer) ',
+                    description: 'Adds a Setblock to TeamMember\'s schedule',
 
                     type: g.GraphQLString,
 
-                    resolve: function(root, args) {
-                        return apiModules.sampleModule.publicFunction1(args);
+                    resolve: function (root, args) {
+                        return apiModules.schedule.createSetblock(args);
                     }
                 },
-                submitContactForm: {
+                deleteSetblock: {
                     args: {
-                        name: {
-                            description: 'The name of the person trying to get in touch',
-                            type: new g.GraphQLNonNull(g.GraphQLString)
-                        },
-                        email: {
-                            description: 'The email address of the person trying to get in touch',
-                            type: new g.GraphQLNonNull(g.GraphQLString)
-                        },
-                        message: {
-                            description: 'The message from the person trying to get in touch',
+                        setblockId: {
+                            description: 'The ID of the Setblock to delete',
                             type: new g.GraphQLNonNull(g.GraphQLString)
                         }
                     },
 
-                    description: 'A POST request with information from the Contact Form',
+                    description: 'Safely deletes a Setblock from a TeamMember\'s schedule',
 
                     type: g.GraphQLString,
 
                     resolve: function(root, args) {
-                        return apiModules.contact.sendEmail(args);
+                        return apiModules.schedule.deleteSetblock(args);
                     }
-                }
+                },
+                updateSetblock: {
+                    args: {
+                        setblockId: {
+                            description: 'The ID of the Setblock to update',
+                            type: new g.GraphQLNonNull(g.GraphQLString)
+                        },
+                        updatedFields: {
+                            description: 'This should be an object with any SetblockType properties that are allowed to be updated',
+                            type: types.SetblockInputType
+                        }
+                    },
+
+                    description: 'Updates a Setblock',
+
+                    type: g.GraphQLString,
+
+                    resolve: function (root, args) {
+                        return apiModules.schedule.updateSetblock(args);
+                    }
+                },
             }
         }),
 
@@ -65,38 +84,27 @@ var apiSchema = new g.GraphQLSchema(
             description: 'Endpoints with GET functionality go here',
 
             fields: {
-                sampleModel: {
-                    type: types.SampleModelType,
+                teamMembers: {
+                    type: new g.GraphQLList(types.TeamMemberType),
+                    description: 'Fetches a data model object by specified properties',
+                    args: {
+                    },
+
+                    resolve: function(root, args) {
+                        return apiModules.team.fetchAllTeamMembers(args);
+                    }
+                },
+                teamMemberById: {
+                    type: types.TeamMemberType,
                     description: 'Fetches a data model object by specified properties',
                     args: {
                         id: {
-                            description: 'Specify the data model\'s unique ID',
-                            type: g.GraphQLLong,
-                            defaultValue: 10
-                        },
-                        property: {
-                            description: 'Or allow the client to specify any other properties as needed',
                             type: g.GraphQLString
                         }
                     },
 
                     resolve: function(root, args) {
-                        return apiModules.sampleModule.publicFunction2(args);
-                    }
-                },
-
-                sampleModels: {
-                    type: new g.GraphQLList(types.SampleModelType),
-                    description: 'Same as the above query, but returns an array of objects',
-                    args: {
-                        property: {
-                            description: 'If multiple data models match the same specified property, they will all be returned in an array',
-                            type: g.GraphQLString
-                        }
-                    },
-
-                    resolve: function(root, args) {
-                        return apiModules.sampleModule.publicFunction3(args);
+                        return apiModules.team.fetchTeamMemberById(args);
                     }
                 }
             }
