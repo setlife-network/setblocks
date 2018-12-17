@@ -39,7 +39,7 @@ module.exports = {
         'jsx-a11y/no-static-element-interactions': 'off',
         'jsx-quotes': ['error', 'prefer-single'],
         'keyword-spacing': ['error', { 'after': true }],
-        'linebreak-style': ['error', 'unix'],
+        'linebreak-style': ['off'],
         'max-len': 'off',
         'new-cap': 'off',
         'no-alert': 'off',
