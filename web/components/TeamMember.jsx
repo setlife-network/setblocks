@@ -4,8 +4,6 @@ import Flex from './Flex';
 import Text from './Text';
 import Card from './Card';
 import Image from './Image';
-import Icon from './Icon';
-
 
 export default class TeamMember extends React.Component {
     render() {

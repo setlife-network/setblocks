@@ -10,6 +10,7 @@ import Flex from './Flex';
 export default class TeamPage extends React.Component {
 
     render() {
+
         return (
             <Flex
                 column
