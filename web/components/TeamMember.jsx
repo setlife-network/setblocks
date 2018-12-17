@@ -4,6 +4,7 @@ import Flex from './Flex';
 import Text from './Text';
 import Card from './Card';
 import Image from './Image';
+import Icon from './Icon';
 
 
 export default class TeamMember extends React.Component {
@@ -20,7 +21,7 @@ export default class TeamMember extends React.Component {
                     height='30px'
                     mx='auto'
                     my='1rem'
-                    depth='-1px 0px 15px rgba(0,0,0,0.65)'
+                    depth={7}
                 >
                     <Flex
                         direction='row'
