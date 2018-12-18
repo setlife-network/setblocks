@@ -12,7 +12,9 @@ export default class Header extends React.Component {
                 width='375px'
             >
                 <Image
-                    src={require('../images/CombinedHeader.png')}
+                    my='auto'
+                    mx='auto'
+                    src={require('../images/SetBlockHeading2.png')}
                 />
             </Flex>
         );

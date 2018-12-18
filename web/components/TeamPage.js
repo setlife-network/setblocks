@@ -6,8 +6,12 @@ import Header from './Header';
 import Flex from './Flex';
 
 
-
 export default class TeamPage extends React.Component {
+
+    goToPage = (teamMember) => {
+        const { history } = this.props;
+        history.push('/team/' + teamMember.id + '/1');
+    }
 
     render() {
 
@@ -15,14 +19,14 @@ export default class TeamPage extends React.Component {
             <Flex
                 column
                 className='TeamPage'
-                bg='lightGrey'
+                bg='white'
                 width='100%'
             >
                 <Header />
 
                 <TeamLogo />
 
-                <TeamList />
+                <TeamList goToPage={this.goToPage} />
             </Flex>
         );
     }

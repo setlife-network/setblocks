@@ -9,44 +9,31 @@ class TeamList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            mockTeamMembers: ['Oscar Lafarga', 'Vitoria Lafarga', 'Quinn Pruit', 'David Lafarga']
-        }
     }
 
     componentDidMount() {
         this.props.fetchAllTeamMembers()
     }
 
-    goToPage = () => {
-        console.log('goToTeamMember')
-    };
-
+    generateColor () {
+        return '#' + Math.random().toString(16).substr(-6);
+    }
 
     render() {
-        const { mockTeamMembers } = this.state;
+        const { teamMembers, goToPage } = this.props;
         return (
             <>
-                <TeamMember
-                    name={mockTeamMembers[0]}
-                    goToPage={this.goToPage}
-                    color='red'
-                />
-                <TeamMember
-                    name={mockTeamMembers[1]}
-                    goToPage={this.goToPage}
-                    color='blue'
-                />
-                <TeamMember
-                    name={mockTeamMembers[2]}
-                    goToPage={this.goToPage}
-                    color='purple'
-                />
-                <TeamMember
-                    name={mockTeamMembers[3]}
-                    goToPage={this.goToPage}
-                    color='green'
-                />
+                {teamMembers.map(teamMember => {
+                    return (
+                        <TeamMember
+                            key={teamMember.id}
+                            name={teamMember.name}
+                            goToPage={() => { goToPage(teamMember) }}
+                            color={this.generateColor()}
+                        />
+                    )
+                })
+                }
             </>
         )
     }
@@ -58,9 +45,9 @@ const mapStateToProps = ({ environment }) => {
     };
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        fetchAllTeamMembers
+        fetchAllTeamMembers: () => dispatch(fetchAllTeamMembers())
     };
 };
 

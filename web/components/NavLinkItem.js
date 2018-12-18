@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import Box from './Box'
 import Flex from './Flex'
 import Text from './Text'
@@ -16,9 +17,11 @@ export default ({
             style={{ textDecoration: 'none' }}
         >
             <Card
-                bg={selected ? 'black' : 'grey'}
+                bg='white'
                 width='100%'
                 height='100%'
+                borderTop={selected ? '2px green solid' : ''}
+                depth={8}
             >
                 <Flex
                     column
@@ -28,10 +31,10 @@ export default ({
                 >
                     {React.createElement(icon, {
                         size: 24,
-                        color: selected ? 'white' : 'black'
+                        color: selected ? 'green' : 'black'
                     })}
                     <Text
-                        color={selected ? 'white' : 'black'}
+                        color={selected ? 'green' : 'black'}
                         size={[10]}
                         my='0'
                         weight='600'

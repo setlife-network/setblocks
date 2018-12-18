@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+var _ = require('lodash');
 
 import NavLinkItem from './NavLinkItem';
 
@@ -9,10 +10,11 @@ import Flex from './Flex';
 class NavigationBar extends React.Component {
     renderNavItem = (item) => {
         const { path } = this.props;
+        const route = '/' + _.split(path, '/', 2)[1];
         return (
             <NavLinkItem
                 {...item}
-                selected={item.route === path}
+                selected={item.route === route}
                 width={100 / NAVIGATION.items.length}
             />
         )
