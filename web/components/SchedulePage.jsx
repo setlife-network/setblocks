@@ -34,16 +34,29 @@ export default class SchedulePage extends React.Component {
         }
     }
     
-    componentDidMount(
-    ) {
+    componentDidMount() {
+        const { history, match } = this.props;
         this.getDaysOfWeek()
+        if (!match.params.teamMemberId) {
+            const today = moment().toDate();
+            // If the match.params don't have a teamMemberId are u seeing your schedule
+            history.push('/schedule/' + today.getDay());
+            // /schedule - SchedulePage, have today's day selected by default
+            this.setState({ selectedDay: today })
+        }
     }
 
-    renderBaseOnParams = () => {
+    renderSetBlocks = () => {
         const { setBlocks } = this.state;
-        return setBlocks.map(setBlock => {
-            return <SetBlock data={setBlock} key={setBlock.id} />
-        })
+        if (setBlocks) {
+            return setBlocks.map(setBlock => {
+                return <SetBlock data={setBlock} key={setBlock.id} />
+            })
+        } else {
+            return (
+                <Text align='center'> This user hasn't committed any Setblocks for this day </Text>
+            )
+        }
     }
 
     goToScheduleDay = (day) => {
@@ -118,9 +131,10 @@ export default class SchedulePage extends React.Component {
                                 match.params.teamMemberId ? 'Team Member ' : 'Your '
                             }
 
+
                             Schedule's Page
                         </Text>
-                        {this.renderBaseOnParams(match)}
+                        {this.renderSetBlocks()}
                     </Flex>
                 </Flex>
             </Flex>

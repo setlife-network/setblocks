@@ -27,7 +27,7 @@ export default class ScheduleHeader extends React.Component {
                     align='center'
                     color='textSecondary'
                 >
-                    {moment(selectedDay).format('dddd, MMMM Do YYYY')}
+                    {moment(selectedDay).format('dddd, MMMM D, YYYY')}
                 </Text>
             </Flex>
         );

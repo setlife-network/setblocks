@@ -11,7 +11,7 @@ export default class TeamMember extends React.Component {
         return (
             <>
                 <Card
-                    bg='backgroundPrimary'
+                    bg='backgroundSecondary'
                     width='95%'
                     minWidth='20%'
                     maxWidth='530px'

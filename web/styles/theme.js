@@ -19,7 +19,7 @@ export default {
         6: '-2px 0px 10px rgba(0,0,0,0.5)',
         7: '1px 0px 5px rgba(0,0,0,0.65)',
         8: '1px 0px 5px 0px rgba(136,136,136, 0.8)',
-        9: '5px 5px 5px -1px rgba(136,136,136, 0.8)'
+        9: '4px 4px 4px -1px rgba(136,136,136, 0.8)'
     },
     // Colors (styled-system)
     colors: {
@@ -44,9 +44,9 @@ export default {
 
         backgroundPrimary: '#E1E2E1',
         backgroundSecondary: '#F5F5F6',
-        primary: '#304ffe',
-        primaryLight: '#7a7cff',
-        primaryDark: '#0026ca',
+        primary: '#f93b6a',
+        primaryLight: '#ff7498',
+        primaryDark: '#c00040',
         textPrimary: '#ffffff',
         secondary: '#00e676',
         secondaryLight: '#66ffa6',

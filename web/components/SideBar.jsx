@@ -15,14 +15,14 @@ export default class SideBar extends React.Component {
                 column
                 className='SideBar'
                 justifyContent='space-around'
-                bg='white'
+                bg='lightGrey'
             >
                 {
                     days.map(day => (
                         <DayBlock
                             day={day}
                             key={day.getDay()}
-                            selected={selectedDay === day}
+                            selected={selectedDay.getDay() === day.getDay()}
                             onClick={goToScheduleDay}
                         />
                     ))
