@@ -32,7 +32,14 @@ var schedule = module.exports = (function () {
     
     const deleteSetblock = function (params) {
         return new Promise(function (resolve, reject) {
-            resolve('In progress')
+            airtable.deleteRecord({
+                tableName: 'Scheduling',
+                recordId: params.setblockId
+            })
+            .then(() => {
+                resolve('Deleted Setblock: ' + params.setblockId)
+            })
+            .catch(reject)
         });
     };
 

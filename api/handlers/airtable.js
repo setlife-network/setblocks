@@ -26,6 +26,24 @@ const airtable = module.exports = (function () {
         });
     };
 
+    const deleteRecord = (params) => {
+        return new Promise((resolve, reject) => {
+            
+            base(params.tableName)
+            .destroy(
+                params.recordId,
+                function(err, record) {
+                    if (err) {
+                        console.error(err);
+                        reject(err);
+                    } else {
+                        resolve(record)
+                    }
+                }
+            );
+        });
+    };
+
     const fetchBaseRecords = (params) => {
         return new Promise((resolve, reject) => {
             let baseRecords = []
@@ -99,6 +117,7 @@ const airtable = module.exports = (function () {
 
     return {
         createRecord,
+        deleteRecord,
         fetchBaseRecords,
         fetchFilteredRecords,
         fetchTableRecord
