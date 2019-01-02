@@ -35,6 +35,34 @@ const airtable = module.exports = (function () {
         });
     };
 
+    const fetchFilteredRecords = (params) => {
+        return new Promise((resolve, reject) => {
+            let baseRecords = []
+            
+            base(params.tableName)
+            .select({
+                filterByFormula: params.filterFormula,
+                maxRecords: params.maxRecords || 20,
+                sort: params.sort || [{ field: 'Date', direction: 'asc' }],
+                view: params.viewName,
+            })
+            .eachPage((records, fetchNextPage) => {
+                records.forEach((record) => {
+                    baseRecords.push(record)
+                });
+
+                fetchNextPage();
+            }, function done(err) {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                } else {
+                    resolve(baseRecords)
+                }
+            });
+        });
+    };
+
     const fetchTableRecord = (params) => {
         return new Promise((resolve, reject) => {
             base(params.tableName)
@@ -54,6 +82,7 @@ const airtable = module.exports = (function () {
 
     return {
         fetchBaseRecords,
+        fetchFilteredRecords,
         fetchTableRecord
     };
 
