@@ -13,7 +13,7 @@ export default class SetBlock extends React.Component {
                     <Card
                         height='15px'
                         width='20px'
-                        borderRight={data.blockFraction === '1.0' ? '' : '10px lightGrey solid'}
+                        borderRight={data.blockFraction === 1.0 ? '' : '10px lightGrey solid'}
                         bg='red'
                         mx='1rem'
                     >

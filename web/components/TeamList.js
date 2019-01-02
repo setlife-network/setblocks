@@ -7,10 +7,6 @@ import { fetchAllTeamMembers } from '../reducers/environment'
 
 class TeamList extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.fetchAllTeamMembers()
     }

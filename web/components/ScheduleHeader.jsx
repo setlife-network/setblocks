@@ -17,7 +17,7 @@ export default class ScheduleHeader extends React.Component {
                 <Card
                     width='10px'
                     height='10px'
-                    bg='green' // TODO This color must be the color of the member
+                    bg='green'
                     borderRadius={50}
                     my='auto'
                     mx='1rem'

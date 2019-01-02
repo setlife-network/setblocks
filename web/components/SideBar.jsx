@@ -1,15 +1,27 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import Flex from './Flex';
 import DayBlock from './DayBlock';
 
-export default class SideBar extends React.Component {
+import { setSelectedDay } from '../reducers/environment';
 
-    constructor(props) {
-        super(props)
+class SideBar extends React.Component {
+
+    goToScheduleDay(day) {
+        const { history, match } = this.props;
+        if (match.params.teamMemberId) {
+            history.push('/team/' + match.params.teamMemberId + '/' + day.getDay());
+        } else {
+            // If the match.params don't have a teamMemberId are u seeing your schedule
+            history.push('/schedule/' + day.getDay());
+        }
+        this.props.setSelectedDay(day);
     }
-    
+
     render() {
-        const { days, selectedDay, goToScheduleDay } = this.props;
+        const { days, selectedDay } = this.props;
         return (
             <Flex
                 column
@@ -23,7 +35,7 @@ export default class SideBar extends React.Component {
                             day={day}
                             key={day.getDay()}
                             selected={selectedDay.getDay() === day.getDay()}
-                            onClick={goToScheduleDay}
+                            onClick={(day) => this.goToScheduleDay(day)}
                         />
                     ))
                 }
@@ -32,3 +44,16 @@ export default class SideBar extends React.Component {
         );
     }
 }
+
+const mapStateToProps = ({ environment }) => {
+    return {
+        ...environment
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setSelectedDay: (selectedDay) => dispatch(setSelectedDay(selectedDay))
+    };
+};
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SideBar));

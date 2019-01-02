@@ -1,17 +1,24 @@
+import { connect } from 'react-redux';
+import moment from 'moment';
 import React from 'react';
+
 import Flex from './Flex';
 import Text from './Text';
 import Card from './Card';
 
-export default class DayBlock extends React.Component {
+class DayBlock extends React.Component {
 
-    renderTinySetBlocks = (setBlocks) => {
-        return setBlocks.map( setBlock => (
+    renderTinySetBlocks = (setBlocks, day) => {
+        const blockDay = moment(day).format('YYYY-MM-DD')
+        const setBlocksByDate = _.groupBy(setBlocks, 'date')
+        const setBlocksToRender = setBlocksByDate[blockDay] || [];
+
+        return setBlocksToRender.map( setBlock => (
             <Card
                 key={setBlock.id}
                 height='8px'
                 width='5px'
-                borderBottom={setBlock.blockFraction === '1.0' ? '' : '4px lightGrey solid'}
+                borderBottom={setBlock.blockFraction === 1.0 ? '' : '4px lightGrey solid'}
                 bg='red'
                 my='0.3rem'
                 mr='0.3rem'
@@ -21,10 +28,7 @@ export default class DayBlock extends React.Component {
     }
 
     render() {
-        const { day, selected, onClick } = this.props
-
-        // TODO Remove this mock data and use a graphQl api
-        const setBlocks = [{ id: '1', blockFraction: '1.0' }, { id: '2', blockFraction: '0.5' }, { id: '3', blockFraction: '1' }, { id: '4', blockFraction: '-0.5' }];
+        const { day, selected, onClick, currentTeamMember } = this.props
 
         return (
             <Flex
@@ -43,7 +47,7 @@ export default class DayBlock extends React.Component {
                 >
                     <Flex row center>
                         <Flex column>
-                            {this.renderTinySetBlocks(setBlocks)}
+                            {this.renderTinySetBlocks(currentTeamMember.weeklySetblocks, day)}
                         </Flex>
                         <Flex column>
                             <Text align='center' mb='0rem' color={selected ? 'red' : 'textSecondary'}>
@@ -59,3 +63,13 @@ export default class DayBlock extends React.Component {
         );
     }
 }
+
+const mapStateToProps = ({ environment }) => {
+    return {
+        ...environment
+    };
+};
+
+const mapDispatchToProps = {
+};
+export default connect(mapStateToProps, mapDispatchToProps)(DayBlock)
