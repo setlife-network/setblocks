@@ -27,13 +27,19 @@ var apiSchema = new g.GraphQLSchema(
                             type: new g.GraphQLNonNull(g.GraphQLString)
                         },
                         blockFraction: {
-                            type: new g.GraphQLNonNull(g.GraphQLString)
+                            type: new g.GraphQLNonNull(g.GraphQLFloat)
+                        },
+                        issueUrl: {
+                            type: g.GraphQLString
+                        },
+                        description: {
+                            type: g.GraphQLString
                         }
                     },
 
-                    description: 'Adds a Setblock to TeamMember\'s schedule',
+                    description: 'Adds a Setblock to TeamMember\'s schedule. Returns the specified TeamMember to allow for direct query to weeklySetblocks. May consider returning the SetblockType with the new ID instead if re-querying Airtable becomes a rate limit concern.',
 
-                    type: g.GraphQLString,
+                    type: types.TeamMemberType,
 
                     resolve: function (root, args) {
                         return apiModules.schedule.createSetblock(args);

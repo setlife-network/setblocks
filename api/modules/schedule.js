@@ -2,17 +2,44 @@
 var _ = require('lodash');
 
 var schedule = module.exports = (function () {
+    const { fetchTeamMemberById } = require('./team')
+
+    const airtable = require('../handlers/airtable')
 
     const createSetblock = function (params) {
         return new Promise(function (resolve, reject) {
-            resolve('In progress')
+            airtable.createRecord({
+                tableName: 'Scheduling',
+                fieldData: {
+                    Date: params.date,
+                    Member: [
+                        params.teamMemberId
+                    ],
+                    Blocktime: params.blockTime,
+                    Blocks: params.blockFraction,
+                    Issue: params.issueUrl || '',
+                    Description: params.description || ''
+                }
+            })
+            .then(newSetBlock => {
+                return fetchTeamMemberById({ id: params.teamMemberId })
+            })
+            .then(resolve)
+            .catch(reject)
         });
     };
     
     
     const deleteSetblock = function (params) {
         return new Promise(function (resolve, reject) {
-            resolve('In progress')
+            airtable.deleteRecord({
+                tableName: 'Scheduling',
+                recordId: params.setblockId
+            })
+            .then(() => {
+                resolve('Deleted Setblock: ' + params.setblockId)
+            })
+            .catch(reject)
         });
     };
 
