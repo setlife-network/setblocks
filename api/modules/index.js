@@ -1,6 +1,6 @@
 var apiModules = module.exports = (function() {
     return {
-        schedules: require('./schedule'),
+        schedule: require('./schedule'),
         team: require('./team')
     };
 })();
