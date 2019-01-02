@@ -28,7 +28,7 @@ class DayBlock extends React.Component {
     }
 
     render() {
-        const { day, selected, onClick, currentTeamMember } = this.props
+        const { day, selected, onClick, currentTeamMember, fetchingData } = this.props
 
         return (
             <Flex
@@ -47,7 +47,9 @@ class DayBlock extends React.Component {
                 >
                     <Flex row center>
                         <Flex column>
-                            {this.renderTinySetBlocks(currentTeamMember.weeklySetblocks, day)}
+                            { // If you are waiting for the API to respond, it does not render
+                                !fetchingData && this.renderTinySetBlocks(currentTeamMember.weeklySetblocks, day)
+                            }
                         </Flex>
                         <Flex column>
                             <Text align='center' mb='0rem' color={selected ? 'red' : 'textSecondary'}>

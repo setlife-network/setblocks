@@ -9,6 +9,7 @@ import SetBlock from './SetBlock';
 import Text from './Text';
 
 import { fetchCurrentTeamMemberById, setSelectedDay } from '../reducers/environment';
+import LoadingDots from './Loading';
 
 class SchedulePage extends React.Component {
     state = {
@@ -66,8 +67,42 @@ class SchedulePage extends React.Component {
         this.props.setSelectedDay(days[0])
     }
 
+    renderIfItReady() {
+        const {
+            match, currentTeamMember, fetchingData, selectedDay 
+        } = this.props
+        if (fetchingData) {
+            return ( // If you are waiting for the API to respond, render a loading
+                <Flex
+                    center
+                    row
+                >
+                    <Text weight='900'>Loading</Text>
+                    <LoadingDots />
+                </Flex>
+            )
+        } else {
+            return (
+                <Flex
+                    center
+                    column
+                >
+                    <Text
+                        weight='900'
+                        aling='center'
+                        style={{ borderBottom: '1px solid red' }}
+                    >
+                        {match.params.teamMemberId ? currentTeamMember.name : 'Your'}
+                        {' Schedule\'s Page'}
+                    </Text>
+                    {this.renderSetBlocks(selectedDay)}
+                </Flex>
+            )
+        }
+    }
+
     render() {
-        const { match, currentTeamMember, selectedDay } = this.props;
+        const { selectedDay } = this.props;
         const { daysOfWeek } = this.state;
         return (
             <Flex
@@ -92,20 +127,7 @@ class SchedulePage extends React.Component {
                     >
                         <ScheduleHeader selectedDay={selectedDay} />
                     </Flex>
-                    <Flex
-                        center
-                        column
-                    >
-                        <Text
-                            weight='900'
-                            aling='center'
-                            style={{ borderBottom: '1px solid red' }}
-                        >
-                            {match.params.teamMemberId ? currentTeamMember.name : 'Your'}
-                            {' Schedule\'s Page'}
-                        </Text>
-                        {this.renderSetBlocks(selectedDay)}
-                    </Flex>
+                    {this.renderIfItReady()}
                 </Flex>
             </Flex>
         );
