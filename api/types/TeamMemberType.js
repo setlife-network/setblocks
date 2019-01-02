@@ -1,4 +1,7 @@
 var g = require('./graphql');
+const moment = require('moment')
+
+const airtable = require('../handlers/airtable')
 
 var TeamMemberType = module.exports = new g.GraphQLObjectType({
     name: 'TeamMember',
@@ -12,22 +15,41 @@ var TeamMemberType = module.exports = new g.GraphQLObjectType({
                 type: g.GraphQLString
             },
 
-            // weeklySetblocks: {
-            //     type: g.GraphQLList(SetblockType),
-            //     description: 'Returns the current week\'s SetBlocks for this TeamMember, starting from the 1st Setblock on Monday to the last Setblock on Sunday',
-            //     resolve: () => {
-            //         return new Promise((resolve, reject) => {
-            //             resolve([
-            //                 {
-            //                     date: '01-01-2019',
-            //                     blocktime: 'Setblock 1 (12am - 4am)',
-            //                     blockFraction: 0.5,
-            //                     description: 'Sample work description'
-            //                 }
-            //             ])
-            //         })
-            //     }
-            // }
+            weeklySetblocks: {
+                type: new g.GraphQLList(SetblockType),
+                description: 'Returns the current week\'s SetBlocks for this TeamMember, starting from the 1st Setblock on Monday to the last Setblock on Sunday',
+                resolve: () => {
+                    return new Promise((resolve, reject) => {
+
+                        // Offset 1 day before start and 1 day after end 
+                        // for moment-airtable date parsing compatibility
+                        const startOfWeek = moment().startOf('week').format('M/D/YYYY h:mm a')
+                        const endOfWeek = moment().endOf('week').add(1, 'days').format('M/D/YYYY h:mm a')
+
+                        airtable.fetchFilteredRecords({
+                            filterFormula: `AND(
+                                IS_AFTER({Date}, DATETIME_PARSE('${startOfWeek}', 'M/D/YYYY h:mm a')),
+                                IS_BEFORE({Date}, DATETIME_PARSE('${endOfWeek}', 'M/D/YYYY h:mm a'))
+                            )`,
+                            tableName: 'Scheduling',
+                            viewName: 'All'
+                        })
+                        .then(records => {
+                            const setblocks = records.map(r => {
+                                return {
+                                    id: r.id,
+                                    date: r.fields.Date,
+                                    blockTime: r.fields.Blocktime,
+                                    blockFraction: r.fields.Blocks,
+                                    issueUrl: r.fields.Issue,
+                                    description: r.fields.Description
+                                }
+                            })
+                            resolve(setblocks)
+                        })
+                    })
+                }
+            }
         };
     }
 });
