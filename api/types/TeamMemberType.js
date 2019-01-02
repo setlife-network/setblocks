@@ -18,7 +18,7 @@ var TeamMemberType = module.exports = new g.GraphQLObjectType({
             weeklySetblocks: {
                 type: new g.GraphQLList(SetblockType),
                 description: 'Returns the current week\'s SetBlocks for this TeamMember, starting from the 1st Setblock on Monday to the last Setblock on Sunday',
-                resolve: () => {
+                resolve: (rootModel) => {
                     return new Promise((resolve, reject) => {
 
                         // Offset 1 day before start and 1 day after end 
@@ -35,16 +35,19 @@ var TeamMemberType = module.exports = new g.GraphQLObjectType({
                             viewName: 'All'
                         })
                         .then(records => {
-                            const setblocks = records.map(r => {
-                                return {
-                                    id: r.id,
-                                    date: r.fields.Date,
-                                    blockTime: r.fields.Blocktime,
-                                    blockFraction: r.fields.Blocks,
-                                    issueUrl: r.fields.Issue,
-                                    description: r.fields.Description
+                            const setblocks = records.reduce((array, r, i) => {
+                                if (r.fields.Member[0] == rootModel.id) {
+                                    array.push({
+                                        id: r.id,
+                                        date: r.fields.Date,
+                                        blockTime: r.fields.Blocktime,
+                                        blockFraction: r.fields.Blocks,
+                                        issueUrl: r.fields.Issue,
+                                        description: r.fields.Description
+                                    })
                                 }
-                            })
+                                return array
+                            }, [])
                             resolve(setblocks)
                         })
                     })
