@@ -18,8 +18,9 @@ class DayBlock extends React.Component {
                 key={setBlock.id}
                 height='8px'
                 width='5px'
-                borderBottom={setBlock.blockFraction === 1.0 ? '' : '4px lightGrey solid'}
-                bg='red'
+                borderBottom={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === 0.5 ? '4px #F93B6A solid' : '')}
+                borderTop={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === -0.5 ? '4px #F93B6A solid' : '')}
+                bg='lightGrey'
                 my='0.3rem'
                 mr='0.3rem'
             >

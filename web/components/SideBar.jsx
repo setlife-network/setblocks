@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Flex from './Flex';
 import DayBlock from './DayBlock';
 
-import { setSelectedDay } from '../reducers/environment';
+import { setEditModeSchedule, setSelectedDay } from '../reducers/environment';
 
 class SideBar extends React.Component {
 
@@ -16,6 +16,7 @@ class SideBar extends React.Component {
         } else {
             // If the match.params don't have a teamMemberId are u seeing your schedule
             history.push('/schedule/' + day.getDay());
+            this.props.setEditModeSchedule(true);
         }
         this.props.setSelectedDay(day);
     }
@@ -53,7 +54,8 @@ const mapStateToProps = ({ environment }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setSelectedDay: (selectedDay) => dispatch(setSelectedDay(selectedDay))
+        setSelectedDay: (selectedDay) => dispatch(setSelectedDay(selectedDay)),
+        setEditModeSchedule: (editMode) => dispatch(setEditModeSchedule(editMode))
     };
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SideBar));

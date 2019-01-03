@@ -7,6 +7,8 @@ const RECEIVE_TEAM_MEMBERS = 'RECEIVE_TEAM_MEMBERS'
 const RECEIVE_TEAM_MEMBER = 'RECEIVE_TEAM_MEMBER'
 const SET_SELECTED_DAY = 'SET_SELECTED_DAY'
 const FETCHING_DATA = 'FETCHING_DATA'
+const EDIT_MODE_SCHEDULE = 'EDIT_MODE_SCHEDULE'
+const UPDATE_BLOCK_FRACTION = 'UPDATE_BLOCK_FRACTION'
 
 // Reducer
 const initialState = {
@@ -17,7 +19,8 @@ const initialState = {
         weeklySetblocks: []
     },
     selectedDay: moment.now(),
-    fetchingData: false
+    fetchingData: false,
+    editModeSchedule: false,
 }
 
 export default function reducer(state = initialState, action) {
@@ -41,6 +44,21 @@ export default function reducer(state = initialState, action) {
         return {
             ...state,
             fetchingData: action.fetchingData
+        }
+    case EDIT_MODE_SCHEDULE:
+        return {
+            ...state,
+            editModeSchedule: action.editModeSchedule
+        }
+    case UPDATE_BLOCK_FRACTION:
+        return {
+            ...state,
+            currentTeamMember: {
+                ...state.currentTeamMember,
+                weeklySetblocks: state.currentTeamMember.weeklySetblocks.map(
+                    (setBlock) => setBlock.id === action.blockId ? { ...setBlock, blockFraction: action.blockFraction } : setBlock
+                )
+            }
         }
     default:
         return state
@@ -102,6 +120,43 @@ export function fetchCurrentTeamMemberById(params) {
     }
 }
 
+export function createSetBlock(params) {
+    return dispatch => {
+        dispatch(setFetchingData(true))
+        api.graph({
+            query: `mutation {
+                          TeamMember: createSetblock(
+                            teamMemberId: "${params.teamMemberId}",
+                            date: "${params.date}",
+                            blockTime: "${params.blockTime}",
+                            blockFraction: ${params.blockFraction},
+                            description: "${params.description}",
+                            issueUrl: "${params.issueUrl}"
+                          ) {
+                            id,
+                            name,
+                            weeklySetblocks{
+                              id,
+                              blockTime,
+                              blockFraction,
+                              description,
+                              issueUrl,
+                              date
+                            }
+                          }
+                        }`
+        })
+        .then(payload => {
+                // Handle payload
+                // Dispatch additional actions
+            dispatch(receiveTeamMember(payload.teamMember))
+            dispatch(setFetchingData(false))
+        })
+        .catch(err => {
+                // Handle error
+        })
+    }
+}
 
 export function receiveTeamMembers(members) {
     return {
@@ -128,5 +183,27 @@ export function setFetchingData(fetchingData) {
     return {
         type: FETCHING_DATA,
         fetchingData
+    }
+}
+
+export function setEditModeSchedule(editModeSchedule) {
+    return {
+        type: EDIT_MODE_SCHEDULE,
+        editModeSchedule
+    }
+}
+
+export function updateBlockFraction(blockId, blockFraction) {
+    return {
+        type: UPDATE_BLOCK_FRACTION,
+        blockFraction,
+        blockId
+    }
+}
+
+export function createBlock(blockFraction) {
+    return {
+        type: CREATE_BLOCK,
+        blockFraction,
     }
 }
