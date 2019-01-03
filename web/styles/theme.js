@@ -17,7 +17,9 @@ export default {
         4: '0px 4px 21px rgba(0,0,0,0.14)',
         5: '0px 5px 25px rgba(0,0,0,0.14)',
         6: '-2px 0px 10px rgba(0,0,0,0.5)',
-        7: '-1px 0px 15px rgba(0,0,0,0.65)'
+        7: '1px 0px 5px rgba(0,0,0,0.65)',
+        8: '1px 0px 5px 0px rgba(136,136,136, 0.8)',
+        9: '4px 4px 4px -1px rgba(136,136,136, 0.8)'
     },
     // Colors (styled-system)
     colors: {
@@ -38,7 +40,18 @@ export default {
         facebook: '#32529F',
         overlay: 'rgba(0,0,0,0.5)',
         transparent: 'transparent',
-        bottomColor: '#3B3B3B'
+        bottomColor: '#3B3B3B',
+
+        backgroundPrimary: '#E1E2E1',
+        backgroundSecondary: '#F5F5F6',
+        primary: '#f93b6a',
+        primaryLight: '#ff7498',
+        primaryDark: '#c00040',
+        textPrimary: '#ffffff',
+        secondary: '#00e676',
+        secondaryLight: '#66ffa6',
+        secondaryDark: '#00b248',
+        textSecondary: '#000000'
     },
     gradients: {
         vertical: 'linear-gradient(#1C9EF6, #0ACFFE)',

@@ -11,44 +11,43 @@ export default class TeamMember extends React.Component {
         return (
             <>
                 <Card
-                    bg={color}
-                    borderRadius={5}
-                    width='70%'
+                    bg='backgroundSecondary'
+                    width='95%'
                     minWidth='20%'
                     maxWidth='530px'
-                    height='30px'
+                    height='60px'
                     mx='auto'
-                    my='1rem'
+                    mt='1rem'
                     depth={7}
                 >
                     <Flex
                         direction='row'
-                        justifyContent='space-between'
+                        justifyContent='space-evenly'
                         mb='2rem'
                         width='100%'
                         height='50px'
                         onClick={goToPage}
                     >
+                        <Card
+                            width='10px'
+                            height='10px'
+                            bg={color}
+                            borderRadius={50}
+                            my='auto'
+                        />
                         <Text
-                            color='black'
-                            ml='0.75rem'
-                            mt='0.25rem'
+                            color='textSecondary'
                             size='1rem'
                             weight='600'
                         >
                             {name}
                         </Text>
 
-                        <Card
-                            mr='10%'
-                            mt='0.38rem'
-                        >
-                            <Image
-
-                                height='20px'
-                                src={require('../images/SettingsIcon.png')}
-                            />
-                        </Card>
+                        <Image
+                            my='auto'
+                            height='20px'
+                            src={require('../images/SettingsIcon.png')}
+                        />
                     </Flex>
                 </Card>
             </>

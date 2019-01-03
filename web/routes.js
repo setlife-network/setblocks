@@ -21,11 +21,11 @@ export default (
     <Flex className='routes-container' width='100vw'>
         <Switch>
             <Route exact path='/' component={TeamPage} />
-            <Route path='/team/:teamMemberId' component={TeamPage} />
-            <Route path='/schedule/:dayOfWeek' render={props => <SchedulePage {...props} />} />
-            <Route path='/schedule/edit/:setblockId?' render={props => <SchedulePage {...props} />} />
-            <Route path='/schedule' component={SchedulePage} />
-            <Route path='/team' component={TeamPage} />
+            <Route key='teamMemberSchedule' path='/team/:teamMemberId/:dayOfWeek' component={SchedulePage} />
+            <Route key='myOwnSchedule' path='/schedule/:dayOfWeek' component={SchedulePage} />
+            <Route key='editMyOwnSchedule' path='/schedule/edit/:setblockId?' component={SchedulePage} />
+            <Route key='myOwnSchedule' path='/schedule' component={SchedulePage} />
+            <Route key='teamMemberSchedule' path='/team' component={TeamPage} />
         </Switch>
     </Flex>
 );
