@@ -31,6 +31,11 @@ const size = style({
     cssProperty: 'fontSize'
 })
 
+const whiteSpace = style({
+    prop: 'whiteSpace',
+    cssProperty: 'white-space'
+})
+
 const Text = styled.p.attrs({
     as: p => p.theme.tags[p.variant]
 })`
@@ -45,6 +50,7 @@ const Text = styled.p.attrs({
     ${weight};
     ${display};
     ${opacity};
+    ${whiteSpace};
     ${props => props.css};
 `
 
@@ -59,6 +65,7 @@ Text.propTypes = {
     ...weight.propTypes,
     ...display.propTypes,
     ...opacity.propTypes,
+    ...whiteSpace.propTypes
 }
 
 Text.defaultProps = {

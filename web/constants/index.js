@@ -20,3 +20,11 @@ export const NAVIGATION = {
         }
     ]
 }
+
+export const DEFAULT_SETBLOCKS = [
+    { blockTime: 'Setblock 1 (12am - 4am)', blockFraction: 0.0, description: '' },
+    { blockTime: 'Setblock 2 (4:30am - 8:30am)', blockFraction: 0.0, description: '' },
+    { blockTime: 'Setblock 3 (9am - 1pm)', blockFraction: 0.0, description: '' },
+    { blockTime: 'Setblock 4 (1:30pm - 5:30pm)', blockFraction: 0.0, description: '' },
+    { blockTime: 'Setblock 5 (6pm - 10pm)', blockFraction: 0.0, description: '' }
+];

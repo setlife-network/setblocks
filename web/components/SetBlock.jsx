@@ -5,6 +5,9 @@ import { Edit3 } from 'styled-icons/feather/Edit3.cjs'
 import Flex from './Flex';
 import Text from './Text';
 import Card from './Card';
+import Modal from './Modal';
+import Box from './Box';
+import Input from './Input';
 
 
 class SetBlock extends React.Component {
@@ -19,7 +22,8 @@ class SetBlock extends React.Component {
         prevTouchX: 0,
         beingTouched: false,
         widthRight: 0,
-        widthLeft: 0
+        widthLeft: 0,
+        toggled: false
     };
 
     componentDidMount() {
@@ -175,6 +179,93 @@ class SetBlock extends React.Component {
         });
     }
 
+    editDialog = () => {
+        const { toggled, data } = this.state
+        const onToggle = () => {
+            this.setState(prevState => ({
+                toggled: !prevState.toggled
+            }));
+        }
+        const onReady = () => {
+            const { updateSetBlock } = this.props
+            const { data } = this.state
+            updateSetBlock({ ...data })
+            onToggle()
+        }
+        const handleDescriptionChange = (event) => {
+            const { data } = this.state
+            const description = event.target.value
+            this.setState({
+                data: {
+                    ...data,
+                    description: description
+                }
+            })
+        }
+        const handleIssueChange = (event) => {
+            const { data } = this.state
+            const issueUrl = event.target.value
+            this.setState({
+                data: {
+                    ...data,
+                    issueUrl: issueUrl
+                }
+            })
+        }
+
+        return (
+            <>
+                {
+                    React.createElement(Edit3, {
+                        size: 24,
+                        color: 'black',
+                        onClick: onToggle
+                    })
+                }
+                <Modal opened={toggled} onClose={onToggle}>
+                    <Box p='2rem'>
+                        <Flex column center>
+                            <Text
+                                weight='600'
+                                aling='center'
+                                mb='5px'
+                            >
+                                {data.blockTime}
+                            </Text>
+
+                            <Text mb='0'>
+                                {'What issues are you going to work on?'}
+                            </Text>
+                            <Input textArea value={data.description} onChange={handleDescriptionChange} />
+
+                            <Text mb='0'>
+                                {'Issue URL: '}
+                            </Text>
+                            <Input textArea={false} value={data.issueUrl} onChange={handleIssueChange} />
+
+                            <Card
+                                bg='backgroundSecondary'
+                                minWidth='20%'
+                                maxWidth='100px'
+                                height='40px'
+                                mx='auto'
+                                mt='2rem'
+                                borderRadius='3px'
+                                depth={7}
+                                onClick={onReady}
+                            >
+                                <Text color='textSecondary' align='center' size='1rem' weight='600' mt='8px' mx='5px'>
+                                    {'Ready'}
+                                </Text>
+                            </Card>
+                        </Flex>
+                    </Box>
+                </Modal>
+            </>
+        )
+    }
+
+
     render() {
         const { editMode } = this.props;
         const { widthRight, widthLeft, data } = this.state;
@@ -224,7 +315,7 @@ class SetBlock extends React.Component {
         return (
             <Flex column center className='SetBlock' m='auto'>
                 <Flex row center>
-                    {!editMode && tinyBlocks}
+                    {!editMode && (tinyBlocks)}
                     <Text
                         weight='600'
                         aling='center'
@@ -245,11 +336,9 @@ class SetBlock extends React.Component {
                     )}
                     {editMode && ( // Icon to set/edit description and issueURL
                         <Flex row>
-                            {React.createElement(Edit3, {
-                                size: 24,
-                                color: 'black',
-                                onClick: () => console.log('Click in Edit - Open dialog to set description and issueURL')
-                            })}
+                            {
+                                this.editDialog()
+                            }
                             { //Timeline where you can swipe and tap to set the blockFraction
                                 timeLine
                             }
