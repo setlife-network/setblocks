@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Edit3 } from 'styled-icons/feather/Edit3.cjs'
 
-import Flex from './Flex';
-import Text from './Text';
-import Card from './Card';
-import Modal from './Modal';
 import Box from './Box';
+import Card from './Card';
+import Flex from './Flex';
+import Modal from './Modal';
 import Input from './Input';
+import Text from './Text';
 
 
 class SetBlock extends React.Component {
