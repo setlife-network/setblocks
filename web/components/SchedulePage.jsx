@@ -3,18 +3,20 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { cloneDeep } from 'lodash';
 
+import BlockList from './BlockList';
+import CommitBlock from './CommitBlock';
+import Flex from './Flex';
+import LoadingDots from './Loading';
 import ScheduleHeader from './ScheduleHeader';
 import SideBar from './SideBar';
-import Flex from './Flex';
-import SetBlock from './SetBlock';
 import Text from './Text';
-import LoadingDots from './Loading';
-import CommitBlock from './CommitBlock';
-import { DEFAULT_SETBLOCKS } from '../constants/index';
+
+import { DEFAULT_SETBLOCKS } from '../constants';
 
 import {
     fetchCurrentTeamMemberById,
     setEditModeSchedule,
+    setEnableSubmit,
     setSelectedDay,
     updateUnsavedSetblocks
 } from '../reducers/environment';
@@ -23,7 +25,6 @@ import {
 class SchedulePage extends React.Component {
     state = {
         daysOfWeek: [],
-        enableSubmit: false,
     }
     
     componentDidMount() {
@@ -72,7 +73,7 @@ class SchedulePage extends React.Component {
         }
         if ((editModeSchedule && currentTeamMember !== nextProps.currentTeamMember) || selectedDay !== nextProps.selectedDay) {
             this.makeSetBlocksForEdit(nextProps.currentWeeklySetblocks);
-            this.setState({ enableSubmit: false })
+            this.props.setEnableSubmit(false)
         }
     }
 
@@ -89,61 +90,21 @@ class SchedulePage extends React.Component {
         let replacedBlocks = 0;
         setBlocks = _.orderBy(setBlocks, ['blockTime'], ['asc']); // Use Lodash to sort array by 'name'
         setBlocks = _.uniqBy(setBlocks, 'blockTime'); // Use Lodash to delete repeated blockTimes
-        defaultSetBlocks.forEach((setBlock, index, theArray) => {
-            if (setBlocks && replacedBlocks < setBlocks.length && setBlock.blockTime === setBlocks[replacedBlocks].blockTime) {
-                theArray[index] = setBlocks[replacedBlocks];
-                replacedBlocks++;
-            }
-        });
-        return defaultSetBlocks
-    }
-
-    updateUnsavedSetBlock(selectedDay, index, editedSetBlock ) {
-        const { unsavedSetBlocks } = this.props
-        let dayEdited = unsavedSetBlocks[selectedDay];
-        dayEdited[index] = editedSetBlock; // index 0 = SetBlock with blockTime 1
-        this.props.updateUnsavedSetblocks({
-            ...unsavedSetBlocks,
-            [selectedDay]: dayEdited
-        })
-        this.setState({ enableSubmit: true })
-    }
-
-    renderSetBlocks = (selectedDay) => {
-        const { editModeSchedule, currentWeeklySetblocks, unsavedSetBlocks } = this.props;
-        selectedDay = moment(selectedDay).format('YYYY-MM-DD')
-        const setBlocksByDate = _.groupBy(currentWeeklySetblocks, 'date')
-        let setBlocks = setBlocksByDate[selectedDay];
-
-        if (editModeSchedule && unsavedSetBlocks) {
-            // If the match.params don't have a teamMemberId are u seeing your schedule
-            // As it is your schedule, you can see the empty blocks, to complete then, that's why it is completed with the missing ones
-            return this.completeWithEmptySetBlocks(setBlocks).map((setBlock, index) => {
-                return (
-                    <SetBlock
-                        data={setBlock}
-                        key={setBlock.id || (index + selectedDay)}
-                        editMode={editModeSchedule} 
-                        updateSetBlock={(editedSetBlock) => this.updateUnsavedSetBlock(selectedDay, index, editedSetBlock )}
-                    />
-                )
-            })
-        } else if (!editModeSchedule && setBlocks) {
-            return setBlocks.map((setBlock, index) => {
-                return <SetBlock data={setBlock} key={setBlock.id || index} />
-            })
-        } else {
-            return (
-                <Text weight='600' align='center'> This user hasn't committed any Setblocks for this day </Text>
-            )
+        if (setBlocks && setBlocks.length > 0) { // To avoid iterate if the array is empty, return default
+            defaultSetBlocks.forEach((setBlock, index, theArray) => {
+                if (setBlocks && replacedBlocks < setBlocks.length && setBlock.blockTime === setBlocks[replacedBlocks].blockTime) {
+                    theArray[index] = setBlocks[replacedBlocks];
+                    replacedBlocks++;
+                }
+            });
         }
+        return defaultSetBlocks
     }
 
     renderIfItReady() {
         const {
-            match, currentTeamMember, fetchingData, selectedDay, editModeSchedule
+            match, currentTeamMember, fetchingData, editModeSchedule, enableSubmit
         } = this.props
-        const { enableSubmit } = this.state
 
         if (fetchingData) {
             return ( // If you are waiting for the API to respond, render a loading
@@ -164,7 +125,7 @@ class SchedulePage extends React.Component {
                         {match.params.teamMemberId ? currentTeamMember.name : 'Your'}
                         {' Schedule\'s Page'}
                     </Text>
-                    {this.renderSetBlocks(selectedDay)}
+                    <BlockList />
                     {editModeSchedule && (<CommitBlock enableSubmit={enableSubmit} />)}
                 </Flex>
             )
@@ -215,6 +176,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchCurrentTeamMemberById: (params) => dispatch(fetchCurrentTeamMemberById(params)),
         setSelectedDay: (selectedDay) => dispatch(setSelectedDay(selectedDay)),
         setEditModeSchedule: (editMode) => dispatch(setEditModeSchedule(editMode)),
+        setEnableSubmit: (enableSubmit) => dispatch(setEnableSubmit(enableSubmit)),
         updateUnsavedSetblocks: (unsavedSetBlocks) => dispatch(updateUnsavedSetblocks(unsavedSetBlocks))
     };
 };
