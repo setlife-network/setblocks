@@ -1,11 +1,10 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import React from 'react';
 
-
-import Card from './Card';
 import Flex from './Flex';
 import Text from './Text';
+import Card from './Card';
 
 class DayBlock extends React.Component {
 

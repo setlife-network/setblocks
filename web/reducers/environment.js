@@ -1,55 +1,38 @@
-import api from 'scripts/api'
 import moment from 'moment';
 
+import api from 'scripts/api'
+
 // Index of Action Types
-const CREATE_SET_BLOCK = 'CREATE_SET_BLOCK'
-const EDIT_MODE_SCHEDULE = 'EDIT_MODE_SCHEDULE'
-const ENABLE_SUBMIT = 'ENABLE_SUBMIT'
-const FETCHING_DATA = 'FETCHING_DATA'
-const RECEIVE_TEAM_MEMBER = 'RECEIVE_TEAM_MEMBER'
 const RECEIVE_TEAM_MEMBERS = 'RECEIVE_TEAM_MEMBERS'
+const RECEIVE_TEAM_MEMBER = 'RECEIVE_TEAM_MEMBER'
 const SET_SELECTED_DAY = 'SET_SELECTED_DAY'
+const FETCHING_DATA = 'FETCHING_DATA'
+const EDIT_MODE_SCHEDULE = 'EDIT_MODE_SCHEDULE'
 const UPDATE_BLOCK_FRACTION = 'UPDATE_BLOCK_FRACTION'
+const CREATE_SET_BLOCK = 'CREATE_SET_BLOCK'
 const UPDATE_SET_BLOCK = 'UPDATE_SET_BLOCK'
 const UPDATE_UNSAVED_SET_BLOCKS = 'UPDATE_UNSAVED_SET_BLOCKS'
 
 // Reducer
 const initialState = {
+    teamMembers: [],
     currentTeamMember: {
         id: '',
         name: ''
     },
     currentWeeklySetblocks: [],
-    editModeSchedule: false,
-    enableSubmit: false,
-    fetchingData: false,
-    teamMembers: [],
     selectedDay: moment.now(),
+    fetchingData: false,
+    editModeSchedule: false,
     unsavedSetBlocks: [],
 }
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-    case CREATE_SET_BLOCK:
+    case RECEIVE_TEAM_MEMBERS:
         return {
             ...state,
-
-            currentWeeklySetblocks: action.teamMember.weeklySetblocks
-        }
-    case EDIT_MODE_SCHEDULE:
-        return {
-            ...state,
-            editModeSchedule: action.editModeSchedule
-        }
-    case ENABLE_SUBMIT:
-        return {
-            ...state,
-            enableSubmit: action.enableSubmit
-        }
-    case FETCHING_DATA:
-        return {
-            ...state,
-            fetchingData: action.fetchingData
+            teamMembers: action.members
         }
     case RECEIVE_TEAM_MEMBER:
         return {
@@ -57,15 +40,20 @@ export default function reducer(state = initialState, action) {
             currentTeamMember: { id: action.member.id, name: action.member.name },
             currentWeeklySetblocks: action.member.weeklySetblocks
         }
-    case RECEIVE_TEAM_MEMBERS:
-        return {
-            ...state,
-            teamMembers: action.members
-        }
     case SET_SELECTED_DAY:
         return {
             ...state,
             selectedDay: action.selectedDay
+        }
+    case FETCHING_DATA:
+        return {
+            ...state,
+            fetchingData: action.fetchingData
+        }
+    case EDIT_MODE_SCHEDULE:
+        return {
+            ...state,
+            editModeSchedule: action.editModeSchedule
         }
     case UPDATE_BLOCK_FRACTION:
         return {
@@ -73,6 +61,11 @@ export default function reducer(state = initialState, action) {
             currentWeeklySetblocks: state.currentWeeklySetblocks.map(
                 (setBlock) => setBlock.id === action.blockId ? { ...setBlock, blockFraction: action.blockFraction } : setBlock
             )
+        }
+    case CREATE_SET_BLOCK:
+        return {
+            ...state,
+            currentWeeklySetblocks: action.teamMember.weeklySetblocks
         }
     case UPDATE_SET_BLOCK:
         return {
@@ -238,13 +231,6 @@ export function setEditModeSchedule(editModeSchedule) {
     return {
         type: EDIT_MODE_SCHEDULE,
         editModeSchedule
-    }
-}
-
-export function setEnableSubmit(enableSubmit) {
-    return {
-        type: ENABLE_SUBMIT,
-        enableSubmit
     }
 }
 

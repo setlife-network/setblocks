@@ -2,8 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import DayBlock from './DayBlock';
 import Flex from './Flex';
+import DayBlock from './DayBlock';
 
 import { setEditModeSchedule, setSelectedDay } from '../reducers/environment';
 

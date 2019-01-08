@@ -1,10 +1,9 @@
 import React from 'react';
 
-import Card from './Card';
 import Flex from './Flex';
-import Image from './Image';
 import Text from './Text';
-
+import Card from './Card';
+import Image from './Image';
 
 export default class TeamMember extends React.Component {
     render() {
