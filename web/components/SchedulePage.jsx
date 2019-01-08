@@ -162,7 +162,7 @@ class SchedulePage extends React.Component {
                         {' Schedule\'s Page'}
                     </Text>
                     {this.renderSetBlocks(selectedDay)}
-                    {editModeSchedule && (<CommitBlock enableSubmit={enableSubmit}></CommitBlock>)}
+                    {editModeSchedule && (<CommitBlock enableSubmit={enableSubmit} />)}
                 </Flex>
             )
         }

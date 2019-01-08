@@ -7,7 +7,7 @@ import Text from './Text';
 import Card from './Card';
 import Flex from './Flex';
 
-import { createSetBlock, updateSetBlock } from '../reducers/environment';
+import { createSetBlock, setEditModeSchedule, updateSetBlock } from '../reducers/environment';
 
 class CommitBlock extends React.Component {
 
@@ -33,10 +33,11 @@ class CommitBlock extends React.Component {
         this.setState({
             showToast: true // Improve toast system in a future
         })
-        _.delay( () => {
+        _.delay( () => { // This probably made a warning but is only temporal, this will be removed with the toast system
             this.setState({
                 showToast: false // Improve toast system in a future
             })
+            this.props.setEditModeSchedule(false);
         }, 1000);
 
 
@@ -85,16 +86,19 @@ class CommitBlock extends React.Component {
                 </Text>
 
                 <Flex row center>
-                    <Text
-                        weight='600'
-                        aling='center'
-                        size='10px'
-                        whiteSpace='pre'
-                        mx='0.5rem'
-                    >
-                        {' Commit ' + this.countBlockFractions() + ' SetBlocks \n '
+                    {enableSubmit
+                    && (
+                        <Text
+                            weight='600'
+                            aling='center'
+                            size='10px'
+                            whiteSpace='pre'
+                            mx='0.5rem'
+                        >
+                            {' Commit ' + this.countBlockFractions() + ' SetBlocks \n '
                         + 'for ' + moment(selectedDay).format('dddd, MMM Do') + '?'}
-                    </Text>
+                        </Text>
+                    )}
                     <Card
                         bg={enableSubmit ? '#F5F5F6' : 'overlay'}
                         minWidth='20%'
@@ -129,7 +133,8 @@ const mapStateToProps = ({ environment }) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         createSetBlock: (params) => dispatch(createSetBlock(params)),
-        updateSetBlock: (params) => dispatch(updateSetBlock(params))
+        updateSetBlock: (params) => dispatch(updateSetBlock(params)),
+        setEditModeSchedule: (editMode) => dispatch(setEditModeSchedule(editMode))
     };
 };
 

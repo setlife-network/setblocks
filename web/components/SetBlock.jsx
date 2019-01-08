@@ -21,9 +21,12 @@ class SetBlock extends React.Component {
         touchStartX: 0,
         prevTouchX: 0,
         beingTouched: false,
+        beingMoved: false,
         widthRight: 0,
         widthLeft: 0,
-        toggled: false
+        toggled: false,
+        descriptionUnsaved: '',
+        issueUrlUnsaved: ''
     };
 
     componentDidMount() {
@@ -53,7 +56,7 @@ class SetBlock extends React.Component {
             timeOfLastDragEvent: 0,
             touchStartX: 0,
             prevTouchX: 0,
-            beingTouched: false,
+            beingTouched: true,
             widthRight: 110,
             data: {
                 ...data,
@@ -80,7 +83,7 @@ class SetBlock extends React.Component {
             timeOfLastDragEvent: 0,
             touchStartX: 0,
             prevTouchX: 0,
-            beingTouched: false,
+            beingTouched: true,
             widthLeft: 110,
             data: {
                 ...data,
@@ -115,22 +118,26 @@ class SetBlock extends React.Component {
                 this.handleLeftSwipe();
             } else if (deltaX > 50) {
                 this.handleRightSwipe();
+            } else {
+                this.setState({
+                    left: deltaX,
+                    velocity,
+                    timeOfLastDragEvent: currTime,
+                    prevTouchX: touchX,
+                    beingMoved: true
+                });
             }
-            this.setState({
-                left: deltaX,
-                velocity,
-                timeOfLastDragEvent: currTime,
-                prevTouchX: touchX
-            });
         }
     }
 
     handleEnd() {
         const { velocity } = this.state;
         this.setState({
+            left: 0,
             velocity: velocity,
             touchStartX: 0,
             beingTouched: false,
+            beingMoved: false
         });
     }
 
@@ -156,7 +163,7 @@ class SetBlock extends React.Component {
     }
 
     handleMouseUp() {
-        this.handleEnd();
+        _.delay(this.handleEnd.bind(this), 500);
     }
 
     handleMouseLeave() {
@@ -165,51 +172,52 @@ class SetBlock extends React.Component {
 
     handleTap() {
         const { updateSetBlock } = this.props;
-        const { data } = this.state;
-        // If the blockFraction is 0, set in 1, if not set in 0.
-        const newBlockFraction = data.blockFraction === 0 ? 1 : 0
-        updateSetBlock({ ...data, blockFraction: newBlockFraction });
-        this.setState({
-            data: {
-                ...data,
-                blockFraction: newBlockFraction
-            },
-            widthLeft: newBlockFraction * 110,
-            widthRight: newBlockFraction * 110
-        });
+        const { data, beingMoved } = this.state;
+        if (!beingMoved) {
+            // If the blockFraction is 0, set in 1, if not set in 0.
+            const newBlockFraction = data.blockFraction === 0 ? 1 : 0
+            updateSetBlock({ ...data, blockFraction: newBlockFraction });
+            this.setState({
+                data: {
+                    ...data,
+                    blockFraction: newBlockFraction
+                },
+                widthLeft: newBlockFraction * 110,
+                widthRight: newBlockFraction * 110,
+                beingTouched: false
+            });
+        }
     }
 
     editDialog = () => {
-        const { toggled, data } = this.state
+        const {
+            toggled, data, issueUrlUnsaved, descriptionUnsaved 
+        } = this.state
         const onToggle = () => {
             this.setState(prevState => ({
-                toggled: !prevState.toggled
+                toggled: !prevState.toggled,
+                descriptionUnsaved: prevState.data.description,
+                issueUrlUnsaved: prevState.data.issueUrl,
             }));
         }
         const onReady = () => {
             const { updateSetBlock } = this.props
-            const { data } = this.state
-            updateSetBlock({ ...data })
+            const { data, issueUrlUnsaved, descriptionUnsaved } = this.state
+            const dataToSave = { ...data, description: descriptionUnsaved, issueUrl: issueUrlUnsaved }
+            this.setState({ data: { ...dataToSave } }) // Save in the data state, only when press Ready
+            updateSetBlock({ ...dataToSave }) // Save in the parent component state, only when press Ready
             onToggle()
         }
         const handleDescriptionChange = (event) => {
-            const { data } = this.state
             const description = event.target.value
             this.setState({
-                data: {
-                    ...data,
-                    description: description
-                }
+                descriptionUnsaved: description
             })
         }
         const handleIssueChange = (event) => {
-            const { data } = this.state
             const issueUrl = event.target.value
             this.setState({
-                data: {
-                    ...data,
-                    issueUrl: issueUrl
-                }
+                issueUrlUnsaved: issueUrl
             })
         }
 
@@ -236,12 +244,12 @@ class SetBlock extends React.Component {
                             <Text mb='0'>
                                 {'What issues are you going to work on?'}
                             </Text>
-                            <Input textArea value={data.description} onChange={handleDescriptionChange} />
+                            <Input textArea value={descriptionUnsaved || ''} onChange={handleDescriptionChange} />
 
                             <Text mb='0'>
                                 {'Issue URL: '}
                             </Text>
-                            <Input textArea={false} value={data.issueUrl} onChange={handleIssueChange} />
+                            <Input textArea={false} value={issueUrlUnsaved || ''} onChange={handleIssueChange} />
 
                             <Card
                                 bg='backgroundSecondary'
