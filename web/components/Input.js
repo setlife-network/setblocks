@@ -8,6 +8,35 @@ const StyledInput = styled.input.attrs({
     ${is('disabled')`
 
     `}
+    background: none;
+    color: textSecondary;
+    font-size: 18px;
+    padding: 10px 5px 10px 5px;
+    display: block;
+    min-width: 290px;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid lightBlue;
+    font-family: Nunito,sans-serif
+`
+
+const StyledTextArea = styled.textarea.attrs({
+    type: 'text'
+})`
+    ${is('disabled')`
+
+    `}
+    background: none;
+    color: textSecondary;
+    font-size: 18px;
+    padding: 10px 5px 10px 5px;
+    display: block;
+    min-height: 150px;
+    min-width: 290px;
+    border: none;
+    border-radius: 0;
+    border: 1px solid lightBlue;
+    font-family: Nunito,sans-serif
 `
 
 const Input = ({
@@ -16,10 +45,18 @@ const Input = ({
     ...props
 }) => (
     <div>
-        <StyledInput
-            // {...field}
-            {...props}
-        />
+        {props.textArea && (
+            <StyledTextArea
+                // {...field}
+                {...props}
+            />
+        )}
+        {!props.textArea && (
+            <StyledInput
+                // {...field}
+                {...props}
+            />
+        )}
     </div>
 )
 

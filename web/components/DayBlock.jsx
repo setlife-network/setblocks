@@ -18,8 +18,9 @@ class DayBlock extends React.Component {
                 key={setBlock.id}
                 height='8px'
                 width='5px'
-                borderBottom={setBlock.blockFraction === 1.0 ? '' : '4px lightGrey solid'}
-                bg='red'
+                borderBottom={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === 0.5 ? '4px #F93B6A solid' : '')}
+                borderTop={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === -0.5 ? '4px #F93B6A solid' : '')}
+                bg='lightGrey'
                 my='0.3rem'
                 mr='0.3rem'
             >
@@ -28,7 +29,7 @@ class DayBlock extends React.Component {
     }
 
     render() {
-        const { day, selected, onClick, currentTeamMember, fetchingData } = this.props
+        const { day, selected, onClick, fetchingData, currentWeeklySetblocks } = this.props
 
         return (
             <Flex
@@ -48,7 +49,7 @@ class DayBlock extends React.Component {
                     <Flex row center>
                         <Flex column>
                             { // If you are waiting for the API to respond, it does not render
-                                !fetchingData && this.renderTinySetBlocks(currentTeamMember.weeklySetblocks, day)
+                                !fetchingData && this.renderTinySetBlocks(currentWeeklySetblocks, day)
                             }
                         </Flex>
                         <Flex column>
