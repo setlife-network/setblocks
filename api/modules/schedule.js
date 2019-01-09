@@ -45,7 +45,23 @@ var schedule = module.exports = (function () {
 
     const updateSetblock = function (params) {
         return new Promise(function(resolve, reject) {
-            resolve('In progress')
+            const { setblockId, updatedFields } = params
+            let updatedFieldData = {}
+            Object.keys(updatedFields).map(k => {
+                if (k == 'blockFraction') updatedFieldData['Blocks'] = updatedFields[k]
+                if (k == 'issueUrl') updatedFieldData['Issue'] = updatedFields[k]
+                if (k == 'description') updatedFieldData['Description'] = updatedFields[k]
+            })
+
+            airtable.updateRecord({
+                tableName: 'Scheduling',
+                recordId: setblockId,
+                updatedFieldData
+            })
+            .then(record => {
+                resolve('Updated Setblock: ' + setblockId)
+            })
+            .catch(reject)
         });
     };
 

@@ -115,12 +115,34 @@ const airtable = module.exports = (function () {
         });
     };
 
+    const updateRecord = (params) => {
+        return new Promise((resolve, reject) => {
+            
+            base(params.tableName)
+            .update(
+                params.recordId,
+                {
+                    ...params.updatedFieldData
+                },
+                function(err, record) {
+                    if (err) {
+                        console.error(err);
+                        reject(err);
+                    } else {
+                        resolve(record)
+                    }
+                }
+            );
+        });
+    };
+
     return {
         createRecord,
         deleteRecord,
         fetchBaseRecords,
         fetchFilteredRecords,
-        fetchTableRecord
+        fetchTableRecord,
+        updateRecord
     };
 
 })();
