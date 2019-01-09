@@ -100,10 +100,12 @@ export function fetchAllTeamMembers(params) {
             // Handle payload
             // Dispatch additional actions
             dispatch(receiveTeamMembers(payload.teamMembers))
-            dispatch(setFetchingData(false))
         })
         .catch(err => {
             // Handle error
+        })
+        .finally(() => {
+            dispatch(setFetchingData(false))
         })
     }
 }
@@ -130,10 +132,13 @@ export function fetchCurrentTeamMemberById(params) {
                 // Handle payload
                 // Dispatch additional actions
             dispatch(receiveTeamMember(payload.teamMemberById))
-            dispatch(setFetchingData(false))
         })
         .catch(err => {
                 // Handle error
+            dispatch(receiveTeamMember({ id: 'error' }))
+        })
+        .finally(() => {
+            dispatch(setFetchingData(false))
         })
     }
 }

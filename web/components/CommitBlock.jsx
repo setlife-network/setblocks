@@ -26,7 +26,7 @@ class CommitBlock extends React.Component {
                 // this.props.updateSetBlock(setBlock)
             } else if (setBlock.blockFraction !== 0) {
                 // Create a new one if have blockFraction != 0
-                this.props.createSetBlock({ teamMemberId: currentTeamMember.id, date: day, ...setBlock })
+                this.props.createSetBlock({ teamMemberId: currentTeamMember.id, date: day, ...setBlock, issueUrl: (setBlock.issueUrl || '') })
             }
         })
 
