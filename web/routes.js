@@ -22,7 +22,7 @@ export default (
         <Switch>
             <Route exact path='/' component={TeamPage} />
             <Route key='teamMemberSchedule' path='/team/:teamMemberId/:dayOfWeek' component={SchedulePage} />
-            <Route key='myOwnSchedule' path='/schedule/:dayOfWeek' component={SchedulePage} />
+            <Route key='myOwnSchedule' path='/schedule/:dayOfWeek/:teamMemberName' component={SchedulePage} />
             <Route key='editMyOwnSchedule' path='/schedule/edit/:setblockId?' component={SchedulePage} />
             <Route key='myOwnSchedule' path='/schedule' component={SchedulePage} />
             <Route key='teamMemberSchedule' path='/team' component={TeamPage} />

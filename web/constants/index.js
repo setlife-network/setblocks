@@ -28,3 +28,10 @@ export const DEFAULT_SETBLOCKS = [
     { blockTime: 'Setblock 4 (1:30pm - 5:30pm)', blockFraction: 0.0, description: '' },
     { blockTime: 'Setblock 5 (6pm - 10pm)', blockFraction: 0.0, description: '' }
 ];
+
+export const TEAM_NAME_ID_MAP = {
+    'Oscar Lafarga': 'recGVSamjigJbZoJ8',
+    'Quinn Pruitt': 'rec0akTPTocs76bQU',
+    'David Lafarga': 'recaUadUZZ7qomfLM',
+    'Victoria Lafarga': 'reczBZOIamQbd1Anq'
+}
