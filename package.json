@@ -12,8 +12,8 @@
       "win32": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --config config/webpack.config.dev.js"
     },
     "lint": "eslint ./web",
-    "prebuild": "rm -rf public",
-    "build": "./node_modules/webpack/bin/webpack.js -p --config config/webpack.config.production.js",
+    "prebuild": "rm -rf public && mkdir public",
+    "build": "./node_modules/webpack/bin/webpack.js -p --config config/webpack.config.prod.js",
     "start": "node server.js"
   },
   "bin": {

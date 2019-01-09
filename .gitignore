@@ -37,7 +37,7 @@ jspm_packages
 .node_repl_history
 
 # React package bundles
-public/**
+# public/**
 
 # Hide Environment Variables
 .env
