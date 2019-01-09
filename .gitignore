@@ -44,3 +44,6 @@ jspm_packages
 .idea/
 yarn.lock
 package-lock.json
+
+# Mac filesystem
+**/.DS_Store
