@@ -283,8 +283,8 @@ class SetBlock extends React.Component {
             <Card
                 height='16px'
                 width='16px'
-                borderRight={data.blockFraction === 1.0 ? '8px #F93B6A solid' : (data.blockFraction === 0.5 ? '8px #F93B6A solid' : '')}
-                borderLeft={data.blockFraction === 1.0 ? '8px #F93B6A solid' : (data.blockFraction === -0.5 ? '8px #F93B6A solid' : '')}
+                borderBottom={data.blockFraction === 1.0 ? '8px #F93B6A solid' : (data.blockFraction === 0.5 ? '8px #F93B6A solid' : '')}
+                borderTop={data.blockFraction === 1.0 ? '8px #F93B6A solid' : (data.blockFraction === -0.5 ? '8px #F93B6A solid' : '')}
                 bg='lightGrey'
                 mx='1rem'
             >

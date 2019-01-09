@@ -82,7 +82,7 @@ class CommitBlock extends React.Component {
                     size='10px'
                     ml='-10rem'
                 >
-                    {' Hours Counter: ' + this.countHours()}
+                    {this.countHours() + ' work hours scheduled'}
                 </Text>
 
                 <Flex row center>
