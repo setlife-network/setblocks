@@ -226,7 +226,7 @@ class SetBlock extends React.Component {
                 {
                     React.createElement(Edit3, {
                         size: 24,
-                        color: 'black',
+                        color: data.description || data.issueUrl ? 'blue' : 'black',
                         onClick: onToggle
                     })
                 }
