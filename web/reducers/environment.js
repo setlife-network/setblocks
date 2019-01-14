@@ -3,6 +3,7 @@ import moment from 'moment';
 
 // Index of Action Types
 const CREATE_SET_BLOCK = 'CREATE_SET_BLOCK'
+const DELETE_SET_BLOCK = 'DELETE_SET_BLOCK'
 const EDIT_MODE_SCHEDULE = 'EDIT_MODE_SCHEDULE'
 const ENABLE_SUBMIT = 'ENABLE_SUBMIT'
 const FETCHING_DATA = 'FETCHING_DATA'
@@ -35,6 +36,11 @@ export default function reducer(state = initialState, action) {
             ...state,
 
             currentWeeklySetblocks: action.teamMember.weeklySetblocks
+        }
+    case DELETE_SET_BLOCK:
+        return {
+            ...state,
+            currentWeeklySetblocks: state.currentWeeklySetblocks.filter(setBlock => setBlock.id !== action.setBlockId )
         }
     case EDIT_MODE_SCHEDULE:
         return {
@@ -211,6 +217,25 @@ export function updateSetBlock(params) {
     }
 }
 
+export function deleteSetblock(params) {
+    return dispatch => {
+        api.graph({
+            query: `mutation {
+                       deleteSetblock(
+                        setblockId: "${params.setblockId}"
+                      )
+                    }`
+        })
+        .then(payload => {
+            // Handle payload
+            // Dispatch additional actions
+            dispatch(deleteBlock(params.setblockId))
+        })
+        .catch(err => {
+            // Handle error
+        })
+    }
+}
 export function receiveTeamMembers(members) {
     return {
         type: RECEIVE_TEAM_MEMBERS,
@@ -279,5 +304,12 @@ export function updateBlock(setBlocks) {
     return {
         type: UPDATE_SET_BLOCK,
         setBlocks,
+    }
+}
+
+export function deleteBlock(setBlockId) {
+    return {
+        type: DELETE_SET_BLOCK,
+        setBlockId,
     }
 }

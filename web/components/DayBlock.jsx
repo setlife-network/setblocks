@@ -12,8 +12,8 @@ class DayBlock extends React.Component {
     renderTinySetBlocks = (setBlocks, day) => {
         const blockDay = moment(day).format('YYYY-MM-DD')
         const setBlocksByDate = _.groupBy(setBlocks, 'date')
-        const setBlocksToRender = setBlocksByDate[blockDay] || [];
-
+        let setBlocksToRender = setBlocksByDate[blockDay] || [];
+        setBlocksToRender = _.orderBy(setBlocksToRender, 'blockTime') // Order by blockTime to have all the tinyBlock ordered
         return setBlocksToRender.map( setBlock => (
             <Card
                 key={setBlock.id}

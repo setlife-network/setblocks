@@ -50,7 +50,6 @@ class SetBlock extends React.Component {
         }
         updateSetBlock({ ...data, blockFraction: blockFraction });
         this.setState({
-            left: 0,
             originalOffset: 0,
             velocity: 0,
             timeOfLastDragEvent: 0,
@@ -77,7 +76,6 @@ class SetBlock extends React.Component {
         }
         updateSetBlock({ ...data, blockFraction: blockFraction });
         this.setState({
-            left: 0,
             originalOffset: 0,
             velocity: 0,
             timeOfLastDragEvent: 0,
@@ -116,7 +114,7 @@ class SetBlock extends React.Component {
             let deltaX = touchX - touchStartX + originalOffset;
             if (deltaX < -50) {
                 this.handleLeftSwipe();
-            } else if (deltaX > 50) {
+            } else if (deltaX > 50 && deltaX < 100) {
                 this.handleRightSwipe();
             } else {
                 this.setState({

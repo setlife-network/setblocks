@@ -7,7 +7,9 @@ import Card from './Card';
 import Flex from './Flex';
 import Text from './Text';
 
-import { createSetBlock, setEditModeSchedule, updateSetBlock } from '../reducers/environment';
+import {
+    createSetBlock, deleteSetblock, setEditModeSchedule, updateSetBlock 
+} from '../reducers/environment';
 
 class CommitBlock extends React.Component {
 
@@ -21,9 +23,13 @@ class CommitBlock extends React.Component {
         unsavedSetBlocks[day].map( (setBlock) => {
             if (setBlock.id) {
                 // Update
-                console.log('Update - ID: ' + setBlock.id)
-                // Remove console.log and add the follow line, when the method is ready
-                // this.props.updateSetBlock(setBlock)
+                if (setBlock.blockFraction !== 0) {
+                    // Update if change description, issueUrl, or blockFraction
+                    this.props.updateSetBlock(setBlock)
+                } else {
+                    // Delete if blockFraction is 0
+                    this.props.deleteSetblock({ setblockId: setBlock.id })
+                }
             } else if (setBlock.blockFraction !== 0) {
                 // Create a new one if have blockFraction != 0
                 this.props.createSetBlock({ teamMemberId: currentTeamMember.id, date: day, ...setBlock, issueUrl: (setBlock.issueUrl || '') })
@@ -133,6 +139,7 @@ const mapStateToProps = ({ environment }) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         createSetBlock: (params) => dispatch(createSetBlock(params)),
+        deleteSetblock: (params) => dispatch(deleteSetblock(params)),
         updateSetBlock: (params) => dispatch(updateSetBlock(params)),
         setEditModeSchedule: (editMode) => dispatch(setEditModeSchedule(editMode))
     };
