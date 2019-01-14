@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Edit3 } from 'styled-icons/feather/Edit3.cjs'
 
-import Flex from './Flex';
-import Text from './Text';
-import Card from './Card';
-import Modal from './Modal';
 import Box from './Box';
+import Card from './Card';
+import Flex from './Flex';
+import Modal from './Modal';
 import Input from './Input';
+import Text from './Text';
 
 
 class SetBlock extends React.Component {
@@ -283,8 +283,8 @@ class SetBlock extends React.Component {
             <Card
                 height='16px'
                 width='16px'
-                borderRight={data.blockFraction === 1.0 ? '8px #F93B6A solid' : (data.blockFraction === 0.5 ? '8px #F93B6A solid' : '')}
-                borderLeft={data.blockFraction === 1.0 ? '8px #F93B6A solid' : (data.blockFraction === -0.5 ? '8px #F93B6A solid' : '')}
+                borderBottom={data.blockFraction === 1.0 ? '8px #F93B6A solid' : (data.blockFraction === 0.5 ? '8px #F93B6A solid' : '')}
+                borderTop={data.blockFraction === 1.0 ? '8px #F93B6A solid' : (data.blockFraction === -0.5 ? '8px #F93B6A solid' : '')}
                 bg='lightGrey'
                 mx='1rem'
             >

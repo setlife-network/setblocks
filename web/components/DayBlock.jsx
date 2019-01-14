@@ -1,10 +1,11 @@
+import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import React from 'react';
 
+
+import Card from './Card';
 import Flex from './Flex';
 import Text from './Text';
-import Card from './Card';
 
 class DayBlock extends React.Component {
 
@@ -17,7 +18,7 @@ class DayBlock extends React.Component {
             <Card
                 key={setBlock.id}
                 height='8px'
-                width='5px'
+                width='8px'
                 borderBottom={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === 0.5 ? '4px #F93B6A solid' : '')}
                 borderTop={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === -0.5 ? '4px #F93B6A solid' : '')}
                 bg='lightGrey'
@@ -47,12 +48,12 @@ class DayBlock extends React.Component {
                     onClick={() => onClick(day)}
                 >
                     <Flex row center>
-                        <Flex column>
+                        <Flex column mx='auto'>
                             { // If you are waiting for the API to respond, it does not render
                                 !fetchingData && this.renderTinySetBlocks(currentWeeklySetblocks, day)
                             }
                         </Flex>
-                        <Flex column>
+                        <Flex column mr='auto'>
                             <Text align='center' mb='0rem' color={selected ? 'red' : 'textSecondary'}>
                                 {day.getDate()}
                             </Text>

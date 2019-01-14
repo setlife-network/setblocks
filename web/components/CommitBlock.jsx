@@ -3,9 +3,9 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { Check } from 'styled-icons/feather/Check.cjs'
 
-import Text from './Text';
 import Card from './Card';
 import Flex from './Flex';
+import Text from './Text';
 
 import { createSetBlock, setEditModeSchedule, updateSetBlock } from '../reducers/environment';
 
@@ -82,7 +82,7 @@ class CommitBlock extends React.Component {
                     size='10px'
                     ml='-10rem'
                 >
-                    {' Hours Counter: ' + this.countHours()}
+                    {this.countHours() + ' work hours scheduled'}
                 </Text>
 
                 <Flex row center>

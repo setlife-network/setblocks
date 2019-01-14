@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-var _ = require('lodash');
+import _ from 'lodash'
 
 import NavLinkItem from './NavLinkItem';
 
