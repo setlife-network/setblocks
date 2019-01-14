@@ -197,7 +197,7 @@ export function updateSetBlock(params) {
         api.graph({
             query: `mutation {
                        updateSetblock(
-                        setblockId: "${params.setblockId}"
+                        setblockId: "${params.id}"
                         updatedFields: {
                             blockFraction: ${params.blockFraction},
                                 issueUrl: "${params.issueUrl}",

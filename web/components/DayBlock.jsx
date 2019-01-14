@@ -14,19 +14,23 @@ class DayBlock extends React.Component {
         const setBlocksByDate = _.groupBy(setBlocks, 'date')
         let setBlocksToRender = setBlocksByDate[blockDay] || [];
         setBlocksToRender = _.orderBy(setBlocksToRender, 'blockTime') // Order by blockTime to have all the tinyBlock ordered
-        return setBlocksToRender.map( setBlock => (
-            <Card
-                key={setBlock.id}
-                height='8px'
-                width='8px'
-                borderBottom={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === 0.5 ? '4px #F93B6A solid' : '')}
-                borderTop={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === -0.5 ? '4px #F93B6A solid' : '')}
-                bg='lightGrey'
-                my='0.3rem'
-                mr='0.3rem'
-            >
-            </Card>
-        ))
+        if (setBlocksToRender.length > 0) {
+            return setBlocksToRender.map(setBlock => (
+                <Card
+                    key={setBlock.id}
+                    height='8px'
+                    width='8px'
+                    borderBottom={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === 0.5 ? '4px #F93B6A solid' : '')}
+                    borderTop={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === -0.5 ? '4px #F93B6A solid' : '')}
+                    bg='lightGrey'
+                    my='0.3rem'
+                    mr='0.3rem'
+                >
+                </Card>
+            ))
+        } else {
+            return <Card height='8px' width='5px' bg='none' my='0.3rem' mr='0.3rem' /> // To prevent the sidebar grows slightly in width when render the tinySetBlocks
+        }
     }
 
     render() {
@@ -50,7 +54,7 @@ class DayBlock extends React.Component {
                     <Flex row center>
                         <Flex column mx='auto'>
                             { // If you are waiting for the API to respond, it does not render
-                                !fetchingData && this.renderTinySetBlocks(currentWeeklySetblocks, day)
+                                this.renderTinySetBlocks(currentWeeklySetblocks, day, fetchingData)
                             }
                         </Flex>
                         <Flex column mr='auto'>
