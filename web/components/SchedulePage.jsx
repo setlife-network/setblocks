@@ -115,7 +115,7 @@ class SchedulePage extends React.Component {
                     weight='900'
                     align='center'
                     mb='0px'
-                    style={{ borderBottom: `1px solid ${theme.colors.secondary}` }}
+                    style={{ borderBottom: `1px solid ${theme.colors.accent}` }}
                 >
                     {match.params.teamMemberId ? currentTeamMember.name : 'Your'}
                     {' Schedule\'s Page'}
@@ -149,7 +149,7 @@ class SchedulePage extends React.Component {
                 >
                     <Flex
                         center
-                        bg='primary'
+                        bg='accent'
                     >
                         <ScheduleHeader selectedDay={selectedDay} />
                     </Flex>
