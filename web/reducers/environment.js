@@ -4,9 +4,10 @@ import moment from 'moment';
 // Index of Action Types
 const CREATE_SET_BLOCK = 'CREATE_SET_BLOCK'
 const DELETE_SET_BLOCK = 'DELETE_SET_BLOCK'
+const DECREMENT_PENDING_NETWORK_CALLS = 'DECREMENT_PENDING_NETWORK_CALLS'
 const EDIT_MODE_SCHEDULE = 'EDIT_MODE_SCHEDULE'
 const ENABLE_SUBMIT = 'ENABLE_SUBMIT'
-const FETCHING_DATA = 'FETCHING_DATA'
+const INCREMENT_PENDING_NETWORK_CALLS = 'INCREMENT_PENDING_NETWORK_CALLS'
 const RECEIVE_TEAM_MEMBER = 'RECEIVE_TEAM_MEMBER'
 const RECEIVE_TEAM_MEMBERS = 'RECEIVE_TEAM_MEMBERS'
 const SET_SELECTED_DAY = 'SET_SELECTED_DAY'
@@ -23,7 +24,7 @@ const initialState = {
     currentWeeklySetblocks: [],
     editModeSchedule: false,
     enableSubmit: false,
-    fetchingData: false,
+    pendingNetworkCalls: 0,
     teamMembers: [],
     selectedDay: moment.now(),
     unsavedSetBlocks: [],
@@ -42,6 +43,11 @@ export default function reducer(state = initialState, action) {
             ...state,
             currentWeeklySetblocks: state.currentWeeklySetblocks.filter(setBlock => setBlock.id !== action.setBlockId )
         }
+    case DECREMENT_PENDING_NETWORK_CALLS:
+        return {
+            ...state,
+            pendingNetworkCalls: state.pendingNetworkCalls - 1
+        }
     case EDIT_MODE_SCHEDULE:
         return {
             ...state,
@@ -52,10 +58,10 @@ export default function reducer(state = initialState, action) {
             ...state,
             enableSubmit: action.enableSubmit
         }
-    case FETCHING_DATA:
+    case INCREMENT_PENDING_NETWORK_CALLS:
         return {
             ...state,
-            fetchingData: action.fetchingData
+            pendingNetworkCalls: state.pendingNetworkCalls + 1
         }
     case RECEIVE_TEAM_MEMBER:
         return {
@@ -100,7 +106,7 @@ export default function reducer(state = initialState, action) {
 // Actions
 export function fetchAllTeamMembers(params) {
     return dispatch => {
-        dispatch(setFetchingData(true))
+        dispatch(incrementPendingNetworkCalls())
         api.graph({
             query: `query {
                 teamMembers {
@@ -118,14 +124,14 @@ export function fetchAllTeamMembers(params) {
             // Handle error
         })
         .finally(() => {
-            dispatch(setFetchingData(false))
+            dispatch(decrementPendingNetworkCalls())
         })
     }
 }
 
 export function fetchCurrentTeamMemberById(params) {
     return dispatch => {
-        dispatch(setFetchingData(true))
+        dispatch(incrementPendingNetworkCalls())
         api.graph({
             query: `query {
                       teamMemberById(id: "${params.id}") {
@@ -151,13 +157,14 @@ export function fetchCurrentTeamMemberById(params) {
             dispatch(receiveTeamMember({ id: 'error' }))
         })
         .finally(() => {
-            dispatch(setFetchingData(false))
+            dispatch(decrementPendingNetworkCalls())
         })
     }
 }
 
 export function createSetBlock(params) {
     return dispatch => {
+        dispatch(incrementPendingNetworkCalls())
         api.graph({
             query: `mutation {
                           TeamMember: createSetblock(
@@ -189,11 +196,15 @@ export function createSetBlock(params) {
         .catch(err => {
                 // Handle error
         })
+        .finally(() => {
+            dispatch(decrementPendingNetworkCalls())
+        })
     }
 }
 
 export function updateSetBlock(params) {
     return dispatch => {
+        dispatch(incrementPendingNetworkCalls())
         api.graph({
             query: `mutation {
                        updateSetblock(
@@ -210,15 +221,20 @@ export function updateSetBlock(params) {
                 // Handle payload
                 // Dispatch additional actions
             dispatch(updateBlock(payload.updateSetblock))
+            dispatch(setEditModeSchedule(false))
         })
         .catch(err => {
                 // Handle error
+        })
+        .finally(() => {
+            dispatch(decrementPendingNetworkCalls())
         })
     }
 }
 
 export function deleteSetblock(params) {
     return dispatch => {
+        dispatch(incrementPendingNetworkCalls())
         api.graph({
             query: `mutation {
                        deleteSetblock(
@@ -233,6 +249,9 @@ export function deleteSetblock(params) {
         })
         .catch(err => {
             // Handle error
+        })
+        .finally(() => {
+            dispatch(decrementPendingNetworkCalls())
         })
     }
 }
@@ -257,11 +276,16 @@ export function setSelectedDay(selectedDay) {
     }
 }
 
-export function setFetchingData(fetchingData) {
+export function decrementPendingNetworkCalls() {
     return {
-        type: FETCHING_DATA,
-        fetchingData
-    }
+        type: DECREMENT_PENDING_NETWORK_CALLS
+    };
+}
+
+export function incrementPendingNetworkCalls() {
+    return {
+        type: INCREMENT_PENDING_NETWORK_CALLS
+    };
 }
 
 export function setEditModeSchedule(editModeSchedule) {

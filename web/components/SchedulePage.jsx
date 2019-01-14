@@ -6,7 +6,6 @@ import { cloneDeep } from 'lodash';
 import BlockList from './BlockList';
 import CommitBlock from './CommitBlock';
 import Flex from './Flex';
-import LoadingDots from './Loading';
 import ScheduleHeader from './ScheduleHeader';
 import SideBar from './SideBar';
 import Text from './Text';
@@ -20,6 +19,7 @@ import {
     setSelectedDay,
     updateUnsavedSetblocks
 } from '../reducers/environment';
+import Loading from './Loading';
 
 
 class SchedulePage extends React.Component {
@@ -66,7 +66,9 @@ class SchedulePage extends React.Component {
     }
 
     componentDidUpdate (nextProps) {
-        const { currentTeamMember, editModeSchedule, selectedDay, history } = this.props;
+        const {
+            currentTeamMember, editModeSchedule, selectedDay, history 
+        } = this.props;
         // This is to make a different array for editing purpose, completed with empty set blocks
         // This only take effect if change the currentTeamMember
         if (nextProps.currentTeamMember && nextProps.currentTeamMember.id === 'error') {
@@ -102,39 +104,28 @@ class SchedulePage extends React.Component {
         return defaultSetBlocks
     }
 
-    renderIfItReady() {
-        const {
-            match, currentTeamMember, fetchingData, editModeSchedule, enableSubmit
-        } = this.props
-
-        if (fetchingData) {
-            return ( // If you are waiting for the API to respond, render a loading
-                <Flex center row>
-                    <Text weight='900'>Loading</Text>
-                    <LoadingDots />
-                </Flex>
-            )
-        } else {
-            return (
-                <Flex center column>
-                    <Text
-                        weight='900'
-                        aling='center'
-                        mb='0px'
-                        style={{ borderBottom: '1px solid red' }}
-                    >
-                        {match.params.teamMemberId ? currentTeamMember.name : 'Your'}
-                        {' Schedule\'s Page'}
-                    </Text>
-                    <BlockList />
-                    {editModeSchedule && (<CommitBlock enableSubmit={enableSubmit} />)}
-                </Flex>
-            )
-        }
+    renderMainContent() {
+        const { match, currentTeamMember, editModeSchedule, enableSubmit } = this.props
+        
+        return (
+            <Flex center column>
+                <Text
+                    weight='900'
+                    aling='center'
+                    mb='0px'
+                    style={{ borderBottom: '1px solid red' }}
+                >
+                    {match.params.teamMemberId ? currentTeamMember.name : 'Your'}
+                    {' Schedule\'s Page'}
+                </Text>
+                <BlockList />
+                {editModeSchedule && (<CommitBlock enableSubmit={enableSubmit} />)}
+            </Flex>
+        )
     }
 
     render() {
-        const { selectedDay } = this.props;
+        const { selectedDay, loading } = this.props;
         const { daysOfWeek } = this.state;
         return (
             <Flex
@@ -159,7 +150,8 @@ class SchedulePage extends React.Component {
                     >
                         <ScheduleHeader selectedDay={selectedDay} />
                     </Flex>
-                    {this.renderIfItReady()}
+                    <Loading />
+                    {!loading && this.renderMainContent()}
                 </Flex>
             </Flex>
         );
@@ -168,7 +160,8 @@ class SchedulePage extends React.Component {
 
 const mapStateToProps = ({ environment }) => {
     return {
-        ...environment
+        ...environment,
+        loading: environment.pendingNetworkCalls > 0,
     };
 };
 
