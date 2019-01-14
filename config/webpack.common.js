@@ -55,7 +55,7 @@ module.exports = {
                 from: 'public',
                 ignore: ['*.less']
             }
-        ]),
+        ])
     ],
     module: {
         rules: [

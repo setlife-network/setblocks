@@ -3,6 +3,7 @@ const merge = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 
 const common = require('./webpack.common')
 const paths = require('./paths')
@@ -80,6 +81,11 @@ module.exports = merge(common, {
             'process.env': {
                 NODE_ENV: JSON.stringify('production')
             }
-        })
+        }),
+        
+        // Progressive web app in progress
+        // new ManifestPlugin({
+        //     fileName: 'asset-manifest.json'
+        // })
     ]
 })
