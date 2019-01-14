@@ -75,7 +75,7 @@ class CommitBlock extends React.Component {
         const { selectedDay, enableSubmit } = this.props
         const { showToast } = this.state
         const onSaveToast = (
-            <Text color='green'>
+            <Text color='accent'>
                 {'SetBlock committed successfully!!'}
             </Text>
         )

@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-
 import Card from './Card';
 import Flex from './Flex';
 import Text from './Text';
+
+import theme from '../styles/theme'
 
 class DayBlock extends React.Component {
 
@@ -20,9 +21,9 @@ class DayBlock extends React.Component {
                     key={setBlock.id}
                     height='8px'
                     width='8px'
-                    borderBottom={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === 0.5 ? '4px #F93B6A solid' : '')}
-                    borderTop={setBlock.blockFraction === 1.0 ? '4px #F93B6A solid' : (setBlock.blockFraction === -0.5 ? '4px #F93B6A solid' : '')}
-                    bg='lightGrey'
+                    borderBottom={setBlock.blockFraction === 1.0 ? `4px ${theme.colors.accent} solid` : (setBlock.blockFraction === 0.5 ? `4px ${theme.colors.accent} solid` : '')}
+                    borderTop={setBlock.blockFraction === 1.0 ? `4px ${theme.colors.accent} solid` : (setBlock.blockFraction === -0.5 ? `4px ${theme.colors.accent} solid` : '')}
+                    bg='primaryLight'
                     my='0.3rem'
                     mr='0.3rem'
                 >
@@ -45,8 +46,8 @@ class DayBlock extends React.Component {
             >
                 <Card
                     width='100%'
-                    bg='white'
-                    borderLeft={selected ? '2px solid red' : '2px solid white'}
+                    bg='primary'
+                    borderLeft={selected ? `2px ${theme.colors.accent} solid` : `2px ${theme.colors.primary} solid`}
                     depth={9}
                     mx='0.5rem'
                     onClick={() => onClick(day)}
@@ -58,10 +59,10 @@ class DayBlock extends React.Component {
                             }
                         </Flex>
                         <Flex column mr='auto'>
-                            <Text align='center' mb='0rem' color={selected ? 'red' : 'textSecondary'}>
+                            <Text align='center' mb='0rem' color={selected ? 'accent' : 'textPrimary'}>
                                 {day.getDate()}
                             </Text>
-                            <Text align='center' mt='0rem' color={selected ? 'red' : 'textSecondary'}>
+                            <Text align='center' mt='0rem' color={selected ? 'accent' : 'textPrimary'}>
                                 {day.toDateString().slice(0, 3)}
                             </Text>
                         </Flex>

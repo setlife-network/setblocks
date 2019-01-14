@@ -21,6 +21,7 @@ import {
     updateUnsavedSetblocks
 } from '../reducers/environment';
 
+import theme from '../styles/theme'
 
 class SchedulePage extends React.Component {
     state = {
@@ -116,12 +117,15 @@ class SchedulePage extends React.Component {
             )
         } else {
             return (
-                <Flex center column>
+                <Flex
+                    center
+                    column
+                >
                     <Text
                         weight='900'
-                        aling='center'
+                        align='center'
                         mb='0px'
-                        style={{ borderBottom: '1px solid red' }}
+                        style={{ borderBottom: `1px solid ${theme.colors.secondary}` }}
                     >
                         {match.params.teamMemberId ? currentTeamMember.name : 'Your'}
                         {' Schedule\'s Page'}
@@ -140,6 +144,7 @@ class SchedulePage extends React.Component {
             <Flex
                 row
                 flexDirection='horizontal'
+                bg='primary'
                 width='100%'
                 className='SchedulePage'
             >
@@ -154,8 +159,8 @@ class SchedulePage extends React.Component {
                     width='100%'
                 >
                     <Flex
-                        bg='red'
                         center
+                        bg='primary'
                     >
                         <ScheduleHeader selectedDay={selectedDay} />
                     </Flex>
