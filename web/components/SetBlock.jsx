@@ -9,6 +9,7 @@ import Modal from './Modal';
 import Input from './Input';
 import Text from './Text';
 
+import theme from '../styles/theme'
 
 class SetBlock extends React.Component {
 
@@ -224,7 +225,7 @@ class SetBlock extends React.Component {
                 {
                     React.createElement(Edit3, {
                         size: 24,
-                        color: data.description || data.issueUrl ? 'blue' : 'black',
+                        color: data.description || data.issueUrl ? theme.colors.accent : theme.colors.secondaryDark,
                         onClick: onToggle
                     })
                 }
@@ -250,7 +251,7 @@ class SetBlock extends React.Component {
                             <Input textArea={false} value={issueUrlUnsaved || ''} onChange={handleIssueChange} />
 
                             <Card
-                                bg='backgroundSecondary'
+                                bg='secondary'
                                 minWidth='20%'
                                 maxWidth='100px'
                                 height='40px'
@@ -281,8 +282,8 @@ class SetBlock extends React.Component {
             <Card
                 height='16px'
                 width='16px'
-                borderBottom={data.blockFraction === 1.0 ? '8px #F93B6A solid' : (data.blockFraction === 0.5 ? '8px #F93B6A solid' : '')}
-                borderTop={data.blockFraction === 1.0 ? '8px #F93B6A solid' : (data.blockFraction === -0.5 ? '8px #F93B6A solid' : '')}
+                borderBottom={data.blockFraction === 1.0 ? `8px ${theme.colors.accent} solid` : (data.blockFraction === 0.5 ? `8px ${theme.colors.accent} solid` : '')}
+                borderTop={data.blockFraction === 1.0 ? `8px ${theme.colors.accent} solid` : (data.blockFraction === -0.5 ? `8px ${theme.colors.accent} solid` : '')}
                 bg='lightGrey'
                 mx='1rem'
             >
@@ -296,12 +297,12 @@ class SetBlock extends React.Component {
                 width='220px'
                 borderRadius='5px'
                 depth={9}
-                bg='lightGrey'
+                bg='secondaryLight'
                 mx='1rem'
                 className='swipeItem'
                 style={{
-                    borderRight: widthRight + 'px #F93B6A solid',
-                    borderLeft: widthLeft + 'px #F93B6A solid',
+                    borderRight: widthRight + `px ${theme.colors.accent} solid`,
+                    borderLeft: widthLeft + `px ${theme.colors.accent} solid`,
                     transition: 'border-width 250ms ease-in-out'
                 }}
                 onTouchStart={touchStartEvent => this.handleTouchStart(touchStartEvent)}

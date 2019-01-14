@@ -19,7 +19,7 @@ export default class TeamPage extends React.Component {
             <Flex
                 column
                 className='TeamPage'
-                bg='white'
+                bg='primary'
                 width='100%'
             >
                 <Header />
