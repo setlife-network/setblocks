@@ -11,7 +11,7 @@ import ScheduleHeader from './ScheduleHeader';
 import SideBar from './SideBar';
 import Text from './Text';
 
-import { DEFAULT_SETBLOCKS } from '../constants';
+import { DEFAULT_SETBLOCKS, TEAM_NAME_ID_MAP } from '../constants';
 
 import {
     fetchCurrentTeamMemberById,
@@ -29,13 +29,14 @@ class SchedulePage extends React.Component {
     
     componentDidMount() {
         const { history, match } = this.props;
-        const teamMemberId = match.params.teamMemberId || 'recGVSamjigJbZoJ8';// mocked id until to have a login
+        const teamMemberName = match.params.teamMemberName || 'Oscar Lafarga'
+        const teamMemberId = match.params.teamMemberId || TEAM_NAME_ID_MAP[teamMemberName]; // Workaround for id until to have a login
         this.props.fetchCurrentTeamMemberById({ id: teamMemberId })
         this.getDaysOfWeek()
         if (!match.params.teamMemberId) {
             const today = moment().toDate();
             // If the match.params don't have a teamMemberId are u seeing your schedule
-            history.push('/schedule/' + today.getDay());
+            history.push('/schedule/' + today.getDay() + '/' + teamMemberName);
             this.props.setEditModeSchedule(true);
             // /schedule - SchedulePage, have today's day selected by default
             this.props.setSelectedDay(today)
