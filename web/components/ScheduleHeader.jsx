@@ -17,7 +17,7 @@ export default class ScheduleHeader extends React.Component {
                 <Card
                     width='10px'
                     height='10px'
-                    bg='green'
+                    bg='textPrimary'
                     borderRadius={50}
                     my='auto'
                     mx='1rem'
@@ -25,7 +25,7 @@ export default class ScheduleHeader extends React.Component {
                 <Text
                     weight='600'
                     align='center'
-                    color='textSecondary'
+                    color='textPrimary'
                 >
                     {moment(selectedDay).format('dddd, MMMM D, YYYY')}
                 </Text>

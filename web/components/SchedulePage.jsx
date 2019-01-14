@@ -21,6 +21,7 @@ import {
 } from '../reducers/environment';
 import Loading from './Loading';
 
+import theme from '../styles/theme'
 
 class SchedulePage extends React.Component {
     state = {
@@ -66,9 +67,7 @@ class SchedulePage extends React.Component {
     }
 
     componentDidUpdate (nextProps) {
-        const {
-            currentTeamMember, editModeSchedule, selectedDay, history 
-        } = this.props;
+        const { currentTeamMember, editModeSchedule, selectedDay, history } = this.props;
         // This is to make a different array for editing purpose, completed with empty set blocks
         // This only take effect if change the currentTeamMember
         if (nextProps.currentTeamMember && nextProps.currentTeamMember.id === 'error') {
@@ -106,14 +105,17 @@ class SchedulePage extends React.Component {
 
     renderMainContent() {
         const { match, currentTeamMember, editModeSchedule, enableSubmit } = this.props
-        
+
         return (
-            <Flex center column>
+            <Flex
+                center
+                column
+            >
                 <Text
                     weight='900'
-                    aling='center'
+                    align='center'
                     mb='0px'
-                    style={{ borderBottom: '1px solid red' }}
+                    style={{ borderBottom: `1px solid ${theme.colors.secondary}` }}
                 >
                     {match.params.teamMemberId ? currentTeamMember.name : 'Your'}
                     {' Schedule\'s Page'}
@@ -131,6 +133,7 @@ class SchedulePage extends React.Component {
             <Flex
                 row
                 flexDirection='horizontal'
+                bg='primary'
                 width='100%'
                 className='SchedulePage'
             >
@@ -145,8 +148,8 @@ class SchedulePage extends React.Component {
                     width='100%'
                 >
                     <Flex
-                        bg='red'
                         center
+                        bg='primary'
                     >
                         <ScheduleHeader selectedDay={selectedDay} />
                     </Flex>

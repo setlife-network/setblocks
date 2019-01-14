@@ -42,16 +42,15 @@ export default {
         transparent: 'transparent',
         bottomColor: '#3B3B3B',
 
-        backgroundPrimary: '#E1E2E1',
-        backgroundSecondary: '#F5F5F6',
-        primary: '#f93b6a',
-        primaryLight: '#ff7498',
-        primaryDark: '#c00040',
-        textPrimary: '#ffffff',
-        secondary: '#00e676',
-        secondaryLight: '#66ffa6',
-        secondaryDark: '#00b248',
-        textSecondary: '#000000'
+        primary: '#eceff1',
+        primaryLight: '#ffffff',
+        primaryDark: '#babdbe',
+        secondary: '#b3e5fc',
+        secondaryLight: '#e6ffff',
+        secondaryDark: '#82b3c9',
+        textPrimary: '#000000',
+        textSecondary: '#000000',
+        accent: '#F93B6A'
     },
     gradients: {
         vertical: 'linear-gradient(#1C9EF6, #0ACFFE)',

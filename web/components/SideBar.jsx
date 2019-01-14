@@ -28,7 +28,7 @@ class SideBar extends React.Component {
                 column
                 className='SideBar'
                 justifyContent='space-around'
-                bg='lightGrey'
+                bg='primary'
             >
                 {
                     days.map(day => (
