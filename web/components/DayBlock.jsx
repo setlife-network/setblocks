@@ -10,12 +10,12 @@ import theme from '../styles/theme'
 
 class DayBlock extends React.Component {
 
-    renderTinySetBlocks = (setBlocks, day) => {
+    renderTinySetBlocks = (setBlocks, day, fetchingData) => {
         const blockDay = moment(day).format('YYYY-MM-DD')
         const setBlocksByDate = _.groupBy(setBlocks, 'date')
         let setBlocksToRender = setBlocksByDate[blockDay] || [];
         setBlocksToRender = _.orderBy(setBlocksToRender, 'blockTime') // Order by blockTime to have all the tinyBlock ordered
-        if (setBlocksToRender.length > 0) {
+        if (setBlocksToRender.length > 0 && !fetchingData) {
             return setBlocksToRender.map(setBlock => (
                 <Card
                     key={setBlock.id}

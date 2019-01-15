@@ -18,35 +18,38 @@ class CommitBlock extends React.Component {
     }
 
     upsertSetBlocks = () => {
-        const { selectedDay, unsavedSetBlocks, currentTeamMember } = this.props
+        const { selectedDay, unsavedSetBlocks, currentTeamMember, enableSubmit } = this.props
         const day = moment(selectedDay).format('YYYY-MM-DD');
-        unsavedSetBlocks[day].map( (setBlock) => {
-            if (setBlock.id) {
+        if (enableSubmit) {
+
+            unsavedSetBlocks[day].map( (setBlock) => {
+                if (setBlock.id) {
                 // Update
-                if (setBlock.blockFraction !== 0) {
+                    if (setBlock.blockFraction !== 0) {
                     // Update if change description, issueUrl, or blockFraction
-                    this.props.updateSetBlock(setBlock)
-                } else {
+                        this.props.updateSetBlock(setBlock)
+                    } else {
                     // Delete if blockFraction is 0
-                    this.props.deleteSetblock({ setblockId: setBlock.id })
-                }
-            } else if (setBlock.blockFraction !== 0) {
+                        this.props.deleteSetblock({ setblockId: setBlock.id })
+                    }
+                } else if (setBlock.blockFraction !== 0) {
                 // Create a new one if have blockFraction != 0
-                this.props.createSetBlock({ teamMemberId: currentTeamMember.id, date: day, ...setBlock, issueUrl: (setBlock.issueUrl || '') })
-            }
-        })
-
-        this.setState({
-            showToast: true // Improve toast system in a future
-        })
-        _.delay( () => { // This probably made a warning but is only temporal, this will be removed with the toast system
-            this.setState({
-                showToast: false // Improve toast system in a future
+                    this.props.createSetBlock({
+                        teamMemberId: currentTeamMember.id, date: day, ...setBlock, issueUrl: (setBlock.issueUrl || '') 
+                    })
+                }
             })
-            this.props.setEditModeSchedule(false);
-        }, 1000);
 
-
+            this.setState({
+                showToast: true // Improve toast system in a future
+            })
+            _.delay( () => { // This probably made a warning but is only temporal, this will be removed with the toast system
+                this.setState({
+                    showToast: false // Improve toast system in a future
+                })
+                this.props.setEditModeSchedule(false);
+            }, 1000);
+        }
     }
 
     countHours() {

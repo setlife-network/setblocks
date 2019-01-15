@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import TeamList from './TeamList';
 import Header from './Header';
@@ -12,6 +13,12 @@ export default class TeamPage extends React.Component {
     goToPage = (teamMember) => {
         const { history } = this.props;
         history.push('/team/' + teamMember.id + '/1');
+    }
+
+    goToEdit = (teamMember) => {
+        const { history } = this.props;
+        const today = moment().toDate();
+        history.push('/schedule/' + today.getDay() + '/' + teamMember.name)
     }
 
     render() {
@@ -30,7 +37,7 @@ export default class TeamPage extends React.Component {
                     {'Team'}
                 </Text>
 
-                <TeamList goToPage={this.goToPage} />
+                <TeamList goToPage={this.goToPage} goToEdit={this.goToEdit} />
             </Flex>
         );
     }

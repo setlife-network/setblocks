@@ -66,15 +66,15 @@ class SchedulePage extends React.Component {
         this.props.setSelectedDay(days[0])
     }
 
-    componentDidUpdate (nextProps) {
-        const { currentTeamMember, editModeSchedule, selectedDay, history } = this.props;
+    componentDidUpdate (prevProps) {
+        const { currentTeamMember, editModeSchedule, selectedDay, history, currentWeeklySetblocks } = this.props;
         // This is to make a different array for editing purpose, completed with empty set blocks
         // This only take effect if change the currentTeamMember
-        if (nextProps.currentTeamMember && nextProps.currentTeamMember.id === 'error') {
+        if (currentTeamMember && currentTeamMember.id === 'error') {
             history.replace('/team'); // If the teamMemberId is invalid should go to /team
         }
-        if ((editModeSchedule && currentTeamMember !== nextProps.currentTeamMember) || selectedDay !== nextProps.selectedDay) {
-            this.makeSetBlocksForEdit(nextProps.currentWeeklySetblocks);
+        if ((editModeSchedule && currentTeamMember !== prevProps.currentTeamMember) || selectedDay !== prevProps.selectedDay) {
+            this.makeSetBlocksForEdit(currentWeeklySetblocks);
             this.props.setEnableSubmit(false)
         }
     }
