@@ -37,7 +37,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
     as: 'button',
-    bg: 'red',
+    bg: 'accent',
     color: 'white',
     disabled: false,
     borderRadius: 3,

@@ -2,8 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Flex from './Flex';
 import DayBlock from './DayBlock';
+import Flex from './Flex';
 
 import { setEditModeSchedule, setSelectedDay } from '../reducers/environment';
 
@@ -28,7 +28,7 @@ class SideBar extends React.Component {
                 column
                 className='SideBar'
                 justifyContent='space-around'
-                bg='lightGrey'
+                bg='primary'
             >
                 {
                     days.map(day => (

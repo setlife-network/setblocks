@@ -6,6 +6,8 @@ import Flex from './Flex'
 import Text from './Text'
 import Card from './Card';
 
+import theme from '../styles/theme'
+
 export default ({
     text, selected, icon, route, width
 }) => (
@@ -17,10 +19,10 @@ export default ({
             style={{ textDecoration: 'none' }}
         >
             <Card
-                bg='white'
+                bg='primary'
                 width='100%'
                 height='100%'
-                borderTop={selected ? '2px green solid' : ''}
+                borderTop={selected ? `2px ${theme.colors.accent} solid` : ''}
                 depth={8}
             >
                 <Flex
@@ -31,10 +33,10 @@ export default ({
                 >
                     {React.createElement(icon, {
                         size: 24,
-                        color: selected ? 'green' : 'black'
+                        color: selected ? theme.colors.accent : theme.colors.secondaryDark
                     })}
                     <Text
-                        color={selected ? 'green' : 'black'}
+                        color={selected ? 'accent' : 'secondaryDark'}
                         size={[10]}
                         my='0'
                         weight='600'

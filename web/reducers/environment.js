@@ -1,38 +1,67 @@
+import api from 'scripts/api'
 import moment from 'moment';
 
-import api from 'scripts/api'
-
 // Index of Action Types
-const RECEIVE_TEAM_MEMBERS = 'RECEIVE_TEAM_MEMBERS'
-const RECEIVE_TEAM_MEMBER = 'RECEIVE_TEAM_MEMBER'
-const SET_SELECTED_DAY = 'SET_SELECTED_DAY'
-const FETCHING_DATA = 'FETCHING_DATA'
-const EDIT_MODE_SCHEDULE = 'EDIT_MODE_SCHEDULE'
-const UPDATE_BLOCK_FRACTION = 'UPDATE_BLOCK_FRACTION'
 const CREATE_SET_BLOCK = 'CREATE_SET_BLOCK'
+const DELETE_SET_BLOCK = 'DELETE_SET_BLOCK'
+const DECREMENT_PENDING_NETWORK_CALLS = 'DECREMENT_PENDING_NETWORK_CALLS'
+const EDIT_MODE_SCHEDULE = 'EDIT_MODE_SCHEDULE'
+const ENABLE_SUBMIT = 'ENABLE_SUBMIT'
+const INCREMENT_PENDING_NETWORK_CALLS = 'INCREMENT_PENDING_NETWORK_CALLS'
+const RECEIVE_TEAM_MEMBER = 'RECEIVE_TEAM_MEMBER'
+const RECEIVE_TEAM_MEMBERS = 'RECEIVE_TEAM_MEMBERS'
+const SET_SELECTED_DAY = 'SET_SELECTED_DAY'
+const UPDATE_BLOCK_FRACTION = 'UPDATE_BLOCK_FRACTION'
 const UPDATE_SET_BLOCK = 'UPDATE_SET_BLOCK'
 const UPDATE_UNSAVED_SET_BLOCKS = 'UPDATE_UNSAVED_SET_BLOCKS'
 
 // Reducer
 const initialState = {
-    teamMembers: [],
     currentTeamMember: {
         id: '',
         name: ''
     },
     currentWeeklySetblocks: [],
-    selectedDay: moment.now(),
-    fetchingData: false,
     editModeSchedule: false,
+    enableSubmit: false,
+    pendingNetworkCalls: 0,
+    teamMembers: [],
+    selectedDay: moment.now(),
     unsavedSetBlocks: [],
 }
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-    case RECEIVE_TEAM_MEMBERS:
+    case CREATE_SET_BLOCK:
         return {
             ...state,
-            teamMembers: action.members
+
+            currentWeeklySetblocks: action.teamMember.weeklySetblocks
+        }
+    case DELETE_SET_BLOCK:
+        return {
+            ...state,
+            currentWeeklySetblocks: state.currentWeeklySetblocks.filter(setBlock => setBlock.id !== action.setBlockId )
+        }
+    case DECREMENT_PENDING_NETWORK_CALLS:
+        return {
+            ...state,
+            pendingNetworkCalls: state.pendingNetworkCalls - 1
+        }
+    case EDIT_MODE_SCHEDULE:
+        return {
+            ...state,
+            editModeSchedule: action.editModeSchedule
+        }
+    case ENABLE_SUBMIT:
+        return {
+            ...state,
+            enableSubmit: action.enableSubmit
+        }
+    case INCREMENT_PENDING_NETWORK_CALLS:
+        return {
+            ...state,
+            pendingNetworkCalls: state.pendingNetworkCalls + 1
         }
     case RECEIVE_TEAM_MEMBER:
         return {
@@ -40,20 +69,15 @@ export default function reducer(state = initialState, action) {
             currentTeamMember: { id: action.member.id, name: action.member.name },
             currentWeeklySetblocks: action.member.weeklySetblocks
         }
+    case RECEIVE_TEAM_MEMBERS:
+        return {
+            ...state,
+            teamMembers: action.members
+        }
     case SET_SELECTED_DAY:
         return {
             ...state,
             selectedDay: action.selectedDay
-        }
-    case FETCHING_DATA:
-        return {
-            ...state,
-            fetchingData: action.fetchingData
-        }
-    case EDIT_MODE_SCHEDULE:
-        return {
-            ...state,
-            editModeSchedule: action.editModeSchedule
         }
     case UPDATE_BLOCK_FRACTION:
         return {
@@ -61,11 +85,6 @@ export default function reducer(state = initialState, action) {
             currentWeeklySetblocks: state.currentWeeklySetblocks.map(
                 (setBlock) => setBlock.id === action.blockId ? { ...setBlock, blockFraction: action.blockFraction } : setBlock
             )
-        }
-    case CREATE_SET_BLOCK:
-        return {
-            ...state,
-            currentWeeklySetblocks: action.teamMember.weeklySetblocks
         }
     case UPDATE_SET_BLOCK:
         return {
@@ -87,7 +106,7 @@ export default function reducer(state = initialState, action) {
 // Actions
 export function fetchAllTeamMembers(params) {
     return dispatch => {
-        dispatch(setFetchingData(true))
+        dispatch(incrementPendingNetworkCalls())
         api.graph({
             query: `query {
                 teamMembers {
@@ -105,14 +124,14 @@ export function fetchAllTeamMembers(params) {
             // Handle error
         })
         .finally(() => {
-            dispatch(setFetchingData(false))
+            dispatch(decrementPendingNetworkCalls())
         })
     }
 }
 
 export function fetchCurrentTeamMemberById(params) {
     return dispatch => {
-        dispatch(setFetchingData(true))
+        dispatch(incrementPendingNetworkCalls())
         api.graph({
             query: `query {
                       teamMemberById(id: "${params.id}") {
@@ -138,13 +157,14 @@ export function fetchCurrentTeamMemberById(params) {
             dispatch(receiveTeamMember({ id: 'error' }))
         })
         .finally(() => {
-            dispatch(setFetchingData(false))
+            dispatch(decrementPendingNetworkCalls())
         })
     }
 }
 
 export function createSetBlock(params) {
     return dispatch => {
+        dispatch(incrementPendingNetworkCalls())
         api.graph({
             query: `mutation {
                           TeamMember: createSetblock(
@@ -176,15 +196,19 @@ export function createSetBlock(params) {
         .catch(err => {
                 // Handle error
         })
+        .finally(() => {
+            dispatch(decrementPendingNetworkCalls())
+        })
     }
 }
 
 export function updateSetBlock(params) {
     return dispatch => {
+        dispatch(incrementPendingNetworkCalls())
         api.graph({
             query: `mutation {
                        updateSetblock(
-                        setblockId: "${params.setblockId}"
+                        setblockId: "${params.id}"
                         updatedFields: {
                             blockFraction: ${params.blockFraction},
                                 issueUrl: "${params.issueUrl}",
@@ -197,13 +221,40 @@ export function updateSetBlock(params) {
                 // Handle payload
                 // Dispatch additional actions
             dispatch(updateBlock(payload.updateSetblock))
+            dispatch(setEditModeSchedule(false))
         })
         .catch(err => {
                 // Handle error
         })
+        .finally(() => {
+            dispatch(decrementPendingNetworkCalls())
+        })
     }
 }
 
+export function deleteSetblock(params) {
+    return dispatch => {
+        dispatch(incrementPendingNetworkCalls())
+        api.graph({
+            query: `mutation {
+                       deleteSetblock(
+                        setblockId: "${params.setblockId}"
+                      )
+                    }`
+        })
+        .then(payload => {
+            // Handle payload
+            // Dispatch additional actions
+            dispatch(deleteBlock(params.setblockId))
+        })
+        .catch(err => {
+            // Handle error
+        })
+        .finally(() => {
+            dispatch(decrementPendingNetworkCalls())
+        })
+    }
+}
 export function receiveTeamMembers(members) {
     return {
         type: RECEIVE_TEAM_MEMBERS,
@@ -225,17 +276,29 @@ export function setSelectedDay(selectedDay) {
     }
 }
 
-export function setFetchingData(fetchingData) {
+export function decrementPendingNetworkCalls() {
     return {
-        type: FETCHING_DATA,
-        fetchingData
-    }
+        type: DECREMENT_PENDING_NETWORK_CALLS
+    };
+}
+
+export function incrementPendingNetworkCalls() {
+    return {
+        type: INCREMENT_PENDING_NETWORK_CALLS
+    };
 }
 
 export function setEditModeSchedule(editModeSchedule) {
     return {
         type: EDIT_MODE_SCHEDULE,
         editModeSchedule
+    }
+}
+
+export function setEnableSubmit(enableSubmit) {
+    return {
+        type: ENABLE_SUBMIT,
+        enableSubmit
     }
 }
 
@@ -265,5 +328,12 @@ export function updateBlock(setBlocks) {
     return {
         type: UPDATE_SET_BLOCK,
         setBlocks,
+    }
+}
+
+export function deleteBlock(setBlockId) {
+    return {
+        type: DELETE_SET_BLOCK,
+        setBlockId,
     }
 }

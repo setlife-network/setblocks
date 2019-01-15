@@ -1,5 +1,5 @@
-var path = require('path')
-var fs = require('fs')
+const path = require('path')
+const fs = require('fs')
 
 const projectDirectory = fs.realpathSync(process.cwd())
 const resolve = relativePath => path.resolve(projectDirectory, relativePath)

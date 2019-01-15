@@ -1,9 +1,10 @@
 import React from 'react';
 
-import Flex from './Flex';
-import Text from './Text';
 import Card from './Card';
+import Flex from './Flex';
 import Image from './Image';
+import Text from './Text';
+
 
 export default class TeamMember extends React.Component {
     render() {
@@ -11,7 +12,7 @@ export default class TeamMember extends React.Component {
         return (
             <>
                 <Card
-                    bg='backgroundSecondary'
+                    bg='primary'
                     width='95%'
                     minWidth='20%'
                     maxWidth='530px'
@@ -22,10 +23,9 @@ export default class TeamMember extends React.Component {
                 >
                     <Flex
                         direction='row'
-                        justifyContent='space-evenly'
                         mb='2rem'
                         width='100%'
-                        height='50px'
+                        height='60px'
                         onClick={goToPage}
                     >
                         <Card
@@ -34,20 +34,16 @@ export default class TeamMember extends React.Component {
                             bg={color}
                             borderRadius={50}
                             my='auto'
+                            ml='20%'
                         />
                         <Text
-                            color='textSecondary'
+                            color='textPrimary'
                             size='1rem'
                             weight='600'
+                            ml='15%'
                         >
                             {name}
                         </Text>
-
-                        <Image
-                            my='auto'
-                            height='20px'
-                            src={require('../images/SettingsIcon.png')}
-                        />
                     </Flex>
                 </Card>
             </>
