@@ -4,6 +4,7 @@ import TeamList from './TeamList';
 import Header from './Header';
 import Flex from './Flex';
 import Text from './Text';
+import Loading from './Loading';
 
 
 export default class TeamPage extends React.Component {
@@ -23,6 +24,7 @@ export default class TeamPage extends React.Component {
                 width='100%'
             >
                 <Header />
+                <Loading />
 
                 <Text align='center' size='2rem' my='0.5rem' weight='900'>
                     {'Team'}
