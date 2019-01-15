@@ -6,7 +6,7 @@
 // cached resources are updated in the background.
 
 export default function register () { // Register the service worker
-    if (process.env.NODE_ENV === 'development' && 'serviceWorker' in navigator) {
+    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             const swUrl = 'service-worker.js';
             navigator.serviceWorker

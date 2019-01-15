@@ -1,7 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
-const WebpackAssetsManifest = require('webpack-assets-manifest')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const paths = require('./paths')
@@ -59,11 +58,24 @@ module.exports = {
                 from: 'public',
                 ignore: ['*.less']
             },
+            // Copy the manifest and the icons to /public
+            {
+                from: 'web/manifest.json',
+                to: 'public/',
+                toType: 'file'
+            },
+            {
+                from: 'images/launchericon_192x192.png',
+                to: 'public/',
+                toType: 'file'
+            },
+            {
+                from: 'images/launchericon_512x512.png',
+                to: 'public/',
+                toType: 'file'
+            }
         ]),
-        new WebpackAssetsManifest({
-            // Options go here
-            publicPath: true,
-        }),
+        // Create a JSON file with the listed assets webpack created at bundle time
         new ManifestPlugin({
             fileName: 'asset-manifest.json', // Not to confuse with manifest.json
         }),
