@@ -60,18 +60,18 @@ module.exports = {
             },
             // Copy the manifest and the icons to /public
             {
-                from: 'web/manifest.json',
-                to: 'public/',
+                from: paths.source + '/manifest.json',
+                to: 'public',
                 toType: 'file'
             },
             {
-                from: 'images/launchericon_192x192.png',
-                to: 'public/',
+                from: paths.source + '/images/launchericon_192x192.png',
+                to: 'public',
                 toType: 'file'
             },
             {
-                from: 'images/launchericon_512x512.png',
-                to: 'public/',
+                from: paths.source + '/images/launchericon_512x512.png',
+                to: 'public',
                 toType: 'file'
             }
         ]),
