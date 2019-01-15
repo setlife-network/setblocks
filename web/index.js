@@ -15,6 +15,7 @@ import App from 'components/App'
 
 // redux setup
 import configureStore from 'scripts/configureStore'
+import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore(isProduction)
 
@@ -37,6 +38,7 @@ const renderContainer = Component => {
 }
 
 renderContainer(App)
+registerServiceWorker(); // Runs register() as default function
 
 if (module.hot) {
     module.hot.accept();

@@ -71,7 +71,7 @@ class SchedulePage extends React.Component {
         // This is to make a different array for editing purpose, completed with empty set blocks
         // This only take effect if change the currentTeamMember
         if (nextProps.currentTeamMember && nextProps.currentTeamMember.id === 'error') {
-            history.push('/team'); // If the teamMemberId is invalid should go to /team
+            history.replace('/team'); // If the teamMemberId is invalid should go to /team
         }
         if ((editModeSchedule && currentTeamMember !== nextProps.currentTeamMember) || selectedDay !== nextProps.selectedDay) {
             this.makeSetBlocksForEdit(nextProps.currentWeeklySetblocks);
@@ -115,7 +115,7 @@ class SchedulePage extends React.Component {
                     weight='900'
                     align='center'
                     mb='0px'
-                    style={{ borderBottom: `1px solid ${theme.colors.secondary}` }}
+                    style={{ borderBottom: `1px solid ${theme.colors.accent}` }}
                 >
                     {match.params.teamMemberId ? currentTeamMember.name : 'Your'}
                     {' Schedule\'s Page'}
@@ -149,7 +149,7 @@ class SchedulePage extends React.Component {
                 >
                     <Flex
                         center
-                        bg='primary'
+                        bg='accent'
                     >
                         <ScheduleHeader selectedDay={selectedDay} />
                     </Flex>
