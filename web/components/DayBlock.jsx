@@ -73,7 +73,8 @@ class DayBlock extends React.Component {
 
 const mapStateToProps = ({ environment }) => {
     return {
-        ...environment
+        ...environment,
+        fetchingData: environment.pendingNetworkCalls > 0
     };
 };
 
