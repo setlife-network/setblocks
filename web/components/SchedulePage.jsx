@@ -117,8 +117,8 @@ class SchedulePage extends React.Component {
                     mb='0px'
                     style={{ borderBottom: `1px solid ${theme.colors.accent}` }}
                 >
-                    {match.params.teamMemberId ? currentTeamMember.name : 'Your'}
-                    {' Schedule\'s Page'}
+                    {match.params.teamMemberId ? currentTeamMember.name + '\'s' : 'Your'}
+                    {' Schedule'}
                 </Text>
                 <BlockList />
                 {editModeSchedule && (<CommitBlock enableSubmit={enableSubmit} />)}
@@ -148,8 +148,8 @@ class SchedulePage extends React.Component {
                     width='100%'
                 >
                     <Flex
-                        center
-                        bg='accent'
+                        bg={theme.colors.primary}
+                        style={{ borderBottom: `2px ${theme.colors.grey} solid` }}
                     >
                         <ScheduleHeader selectedDay={selectedDay} />
                     </Flex>

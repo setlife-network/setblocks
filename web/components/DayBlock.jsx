@@ -42,27 +42,25 @@ class DayBlock extends React.Component {
                 column
                 center
                 className='DayBlock'
-                mx='0.5rem'
+                style={selected ? { borderBottom: `2px ${theme.colors.grey} solid`, borderTop: `2px ${theme.colors.grey} solid` } : {}}
             >
                 <Card
                     width='100%'
-                    bg='primary'
-                    borderLeft={selected ? `2px ${theme.colors.accent} solid` : `2px ${theme.colors.primary} solid`}
-                    depth={9}
+                    bg={selected ? theme.colors.lightGrey : theme.colors.primary}
                     mx='0.5rem'
                     onClick={() => onClick(day)}
                 >
                     <Flex row center>
-                        <Flex column mx='auto'>
+                        <Flex column mx='0.5rem'>
                             { // If you are waiting for the API to respond, it does not render
                                 this.renderTinySetBlocks(currentWeeklySetblocks, day, fetchingData)
                             }
                         </Flex>
                         <Flex column mr='auto'>
-                            <Text align='center' mb='0rem' color={selected ? 'accent' : 'textPrimary'}>
+                            <Text align='center' mb='0rem' size={25} lineHeight='1' color={selected ? 'accent' : theme.colors.overlay}>
                                 {day.getDate()}
                             </Text>
-                            <Text align='center' mt='0rem' color={selected ? 'accent' : 'textPrimary'}>
+                            <Text align='center' mt='0rem' size={11} lineHeight='1' color={selected ? 'accent' : theme.colors.overlay}>
                                 {day.toDateString().slice(0, 3)}
                             </Text>
                         </Flex>

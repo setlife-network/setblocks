@@ -19,7 +19,7 @@ export default ({
             style={{ textDecoration: 'none' }}
         >
             <Card
-                bg='primary'
+                bg={theme.colors.charcoal}
                 width='100%'
                 height='100%'
                 borderTop={selected ? `2px ${theme.colors.accent} solid` : ''}
@@ -33,10 +33,10 @@ export default ({
                 >
                     {React.createElement(icon, {
                         size: 24,
-                        color: selected ? theme.colors.accent : theme.colors.secondaryDark
+                        color: theme.colors.white
                     })}
                     <Text
-                        color={selected ? 'accent' : 'secondaryDark'}
+                        color={theme.colors.white}
                         size={[10]}
                         my='0'
                         weight='600'

@@ -7,6 +7,8 @@ import Flex from './Flex';
 
 import { setEditModeSchedule, setSelectedDay } from '../reducers/environment';
 
+import theme from '../styles/theme';
+
 class SideBar extends React.Component {
 
     goToScheduleDay(day) {
@@ -29,6 +31,7 @@ class SideBar extends React.Component {
                 className='SideBar'
                 justifyContent='space-around'
                 bg='primary'
+                style={{ borderRight: `2px ${theme.colors.grey} solid` }}
             >
                 {
                     days.map(day => (

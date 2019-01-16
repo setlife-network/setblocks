@@ -61,6 +61,7 @@ class BlockList extends React.Component {
                 )
             })
         } else if (!editModeSchedule && setBlocks) {
+            setBlocks = _.orderBy(setBlocks, 'blockTime') // To properly render in order
             return setBlocks.map((setBlock, index) => {
                 return <SetBlock data={setBlock} key={setBlock.id || index} />
             })
