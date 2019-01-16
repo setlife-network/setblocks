@@ -4,6 +4,7 @@ import moment from 'moment';
 import Text from './Text';
 import Card from './Card';
 import Flex from './Flex';
+import theme from '../styles/theme';
 
 
 export default class ScheduleHeader extends React.Component {
@@ -13,22 +14,27 @@ export default class ScheduleHeader extends React.Component {
             <Flex
                 row
                 className='ScheduleHeader'
+                center
+                width='100%'
             >
                 <Card
                     width='10px'
                     height='10px'
-                    bg='textPrimary'
+                    bg={theme.colors.transparent /* For the moment */}
                     borderRadius={50}
                     my='auto'
-                    mx='1rem'
+                    mx='0.5rem'
                 />
                 <Text
-                    weight='600'
+                    size={27}
                     align='center'
-                    color='textPrimary'
+                    color={theme.colors.textPrimary}
+                    my='0.5rem'
+                    mx='auto'
                 >
-                    {moment(selectedDay).format('dddd, MMMM D, YYYY')}
+                    {moment(selectedDay).format('dddd Do')}
                 </Text>
+
             </Flex>
         );
     }

@@ -16,7 +16,7 @@ class TeamList extends React.Component {
     }
 
     render() {
-        const { teamMembers, goToPage } = this.props;
+        const { teamMembers, goToPage, goToEdit } = this.props;
         return (
             <>
                 {teamMembers.map(teamMember => {
@@ -25,6 +25,7 @@ class TeamList extends React.Component {
                             key={teamMember.id}
                             name={teamMember.name}
                             goToPage={() => { goToPage(teamMember) }}
+                            goToEdit={() => { goToEdit(teamMember) }}
                             color={this.generateColor()}
                         />
                     )

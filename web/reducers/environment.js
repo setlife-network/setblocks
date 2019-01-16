@@ -90,7 +90,10 @@ export default function reducer(state = initialState, action) {
         return {
             ...state,
             currentWeeklySetblocks: state.currentWeeklySetblocks.map(
-                (setBlock) => setBlock.id === action.setBlocks.blockId ? action.setBlocks : setBlock
+                (setBlock) => setBlock.id === action.setBlock.id
+                    ? { ...setBlock, blockFraction: action.setBlock.blockFraction, issueUrl: action.setBlock.issueUrl, description: action.setBlock.description }
+                    : setBlock
+
             )
         }
     case UPDATE_UNSAVED_SET_BLOCKS:
@@ -218,9 +221,11 @@ export function updateSetBlock(params) {
                     }`
         })
         .then(payload => {
-                // Handle payload
-                // Dispatch additional actions
-            dispatch(updateBlock(payload.updateSetblock))
+            // Take the id from the message
+            const id = payload.updateSetblock.split(' ')[2]
+            // Make the object to update
+            const updatedSetBlock = { blockFraction: params.blockFraction, issueUrl: params.issueUrl, description: params.description, id: id }
+            dispatch(updateBlock(updatedSetBlock))
             dispatch(setEditModeSchedule(false))
         })
         .catch(err => {
@@ -324,10 +329,10 @@ export function createBlock(teamMember) {
     }
 }
 
-export function updateBlock(setBlocks) {
+export function updateBlock(setBlock) {
     return {
         type: UPDATE_SET_BLOCK,
-        setBlocks,
+        setBlock,
     }
 }
 

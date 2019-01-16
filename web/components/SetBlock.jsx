@@ -280,10 +280,10 @@ class SetBlock extends React.Component {
         //Square that represents the fraction of time allocated in the setBlock, in readOnly mode
         const tinyBlocks = (
             <Card
-                height='16px'
-                width='16px'
-                borderBottom={data.blockFraction === 1.0 ? `8px ${theme.colors.accent} solid` : (data.blockFraction === 0.5 ? `8px ${theme.colors.accent} solid` : '')}
-                borderTop={data.blockFraction === 1.0 ? `8px ${theme.colors.accent} solid` : (data.blockFraction === -0.5 ? `8px ${theme.colors.accent} solid` : '')}
+                height='70px'
+                width='10px'
+                borderBottom={data.blockFraction === 1.0 ? `35px ${theme.colors.accent} solid` : (data.blockFraction === 0.5 ? `35px ${theme.colors.accent} solid` : '')}
+                borderTop={data.blockFraction === 1.0 ? `35px ${theme.colors.accent} solid` : (data.blockFraction === -0.5 ? `35px ${theme.colors.accent} solid` : '')}
                 bg='lightGrey'
                 mx='1rem'
             >
@@ -320,38 +320,44 @@ class SetBlock extends React.Component {
         )
 
         return (
-            <Flex column center className='SetBlock' m='auto'>
-                <Flex row center>
-                    {!editMode && (tinyBlocks)}
-                    <Text
-                        weight='600'
-                        aling='center'
-                        mb='5px'
-                    >
-                        {data.blockTime}
-                    </Text>
-                </Flex>
-                <Flex column>
-                    {!editMode && ( // If is editMode is not necessary show the description
+            <Flex row width='100%' mt='1rem'>
+                <Flex column center className='SetBlock'>
+                    <Flex row center width='100%'>
                         <Text
-                            align='center'
-                            my='0px'
-                            mx='1rem'
+                            weight='600'
+                            aling='center'
+                            size={editMode ? 15 : 20}
+                            mt='10px'
+                            mb='5px'
+                            ml='1rem'
+                            mr='auto'
                         >
-                            {data.description}
+                            {(data.blockTime && !editMode) ? data.blockTime.split('(')[1].slice(0, -1) : data.blockTime}
                         </Text>
-                    )}
-                    {editMode && ( // Icon to set/edit description and issueURL
-                        <Flex row>
-                            {
-                                this.editDialog()
-                            }
-                            { //Timeline where you can swipe and tap to set the blockFraction
-                                timeLine
-                            }
-                        </Flex>
-                    )}
+                    </Flex>
+                    <Flex column width='100%'>
+                        {!editMode && ( // If is editMode is not necessary show the description
+                            <Text
+                                align='left'
+                                my='0px'
+                                ml='1rem'
+                            >
+                                {data.description || 'You haven´t planed anything for this block' }
+                            </Text>
+                        )}
+                        {editMode && ( // Icon to set/edit description and issueURL
+                            <Flex row ml='0.5rem'>
+                                {
+                                    this.editDialog()
+                                }
+                                { //Timeline where you can swipe and tap to set the blockFraction
+                                    timeLine
+                                }
+                            </Flex>
+                        )}
+                    </Flex>
                 </Flex>
+                {!editMode && (<Flex center ml='auto'>{tinyBlocks}</Flex>)}
             </Flex>
         );
     }
