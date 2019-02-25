@@ -83,7 +83,15 @@ Alice gets 1 free request to a contractor every month. She can then pay $X for e
 Bob pays a Y% development fee on all transactions sent through his Setblocks integration. Setblocks is fully open-source and Bob can opt-out of this fee at any time by configuring his integration accordingly and self-hosting the Setblocks data.
 
 
+### Features
 
+Team Membership
+- As a project owner, I want to add a team member (by name) so that I can hire a team
+- As a project owner, I want to add multiple team members so that I can trade Setblocks with my team members
+
+Compensated Services
+- As a team member, I want to set a billable rate for each block worked so that I can solicit Investors to pay for the services provided during a block
+- As an Investor, I want to purchase blocks of work from team members so that I can benefit from services provided
 
 
 
