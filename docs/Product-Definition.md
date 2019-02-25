@@ -68,19 +68,21 @@ Bob assigns funds to the following issues:
 | 9. Polish & optimize UI                  | $750  | 10 hours |
 | 10. Document & deliver release package    | $250  | 5 hours |
 
-When Bob decides an issue is complete, he will close the issue via commit message that includes proof that the issue has been completed. Alice will have R hours (default R = 24) to review the issue and request any final changes by re-opening the issue. A 1/2 payment is disbursed immediately upon closing the issue, but the remaining 1/2 will not be disbursed until 24 hours have passed from the close of an issue. If Bob and Alice cannot agree on a closed issue, they can continue closing and re-opening through a continued collaboration until Bob decides to force-close the issue. This would disburse the other 1/2 payment for the issue, but a force-close stays on Bob's activity history for 1 year and may deter future clients from working with him. Bob will also only receive the other 1/2 payment if the $3000 from Payment 1 hasn't already been depleted. The maximum Bob can receive from force-closing issues is $3000 and the Client retains access to all work product delivered thus far.
+When Bob decides an issue is complete, he will close the issue via commit message that includes proof that the issue has been completed. Alice will have R hours (default R = 24) to review the issue and request any final changes by re-opening the issue. A 1/2 payment is disbursed immediately upon closing the issue, but the remaining 1/2 will not be disbursed until 24 hours have passed from the close of an issue. If Bob and Alice cannot agree on a closed issue, they can continue closing and re-opening through a continued collaboration until Bob decides to force-close the issue. This would disburse the other 1/2 payment for the issue, but a force-close stays on Bob's activity history for 1 year and may deter future clients from working with him. Bob will also only receive the other 1/2 payment if the $3000 from Payment 1 hasn't already been depleted from closing issues. The maximum Bob can receive from force-closing issues is $3000 and the Client retains access to all work product delivered thus far.
 
 Bob and Alice can agree to change the allocation of issues or the total budget at any time.
 
 Suppose Bob completes issues 1 and 2 and Alice agrees to close both. Bob has earned $500 from the $3000 budget from Payment 1. Alice decides that she may have overestimated the quality of Bob's work and decides that she only wants to spend another $500 on issues 3 and 4 to finish the design and planning work. She respectfully offers this change to Bob which would defund all issues except for 3 and 4.
 
-However, Bob may also realize that he underestimated the amount of time it will take for issues 3 and 4 and gives Alice a counteroffer of $500 on issue 3 and $500 on issue 4. Alice thinks this is reasonable and they both sign off to change the remaining $2500/$3000 budget from Payment 1 to $1000 and continue collaborating until issues 3 and 4 have been closed.
+However, Bob may also realize that he underestimated the amount of time it will take for issues 3 and 4 and gives Alice a counteroffer of $500 on issue 3 and $500 on issue 4. Alice thinks this is reasonable and they both sign off to change the remaining $2500/$3000 budget from Payment 1 to $500/$1000 and continue collaborating until issues 3 and 4 have been closed.
 
 ### Pricing
 
 Alice gets 1 free request to a contractor every month. She can then pay $X for each request upto 10 requests per month. Alice can also pay a monthly subscription valued at $X * 10 requests upfront to receive unlimited requests.
 
-Bob pays a Y% development fee on all transactions sent through his Setblocks integration. Setblocks is fully open-source and Bob can opt-out of this fee at any time by configuring his integration accordingly and self-hosting the Setblocks data.
+Bob pays a Y% development fee on all transactions sent through his Setblocks integration. 
+
+Setblocks is fully open-source and Bob can opt-out of these fee at any time by configuring his integration accordingly and self-hosting the Setblocks data.
 
 
 ### Features
