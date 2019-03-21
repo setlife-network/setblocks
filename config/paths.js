@@ -11,6 +11,7 @@ module.exports = {
     config: resolve('config'),
     htmlRoot: resolve('web/index.html'),
     nodeModules: resolve('node_modules'),
+    pages: resolve('web/pages'),
     public: resolve('public'),
     reducers: resolve('web/reducers'),
     scripts: resolve('web/scripts'),

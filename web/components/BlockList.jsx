@@ -9,7 +9,7 @@ import { DEFAULT_SETBLOCKS } from '../constants';
 
 import {
     setEnableSubmit, updateUnsavedSetblocks,
-} from '../reducers/environment';
+} from '../reducers/scheduling';
 
 class BlockList extends React.Component {
 
@@ -42,25 +42,25 @@ class BlockList extends React.Component {
 
     render() {
         const {
-            editModeSchedule, currentWeeklySetblocks, unsavedSetBlocks, selectedDay 
+            editModeEnabled, currentWeeklySetblocks, unsavedSetBlocks, selectedDay 
         } = this.props;
         const selectedDayFormatted = moment(selectedDay).format('YYYY-MM-DD')
         let setBlocksByDate =  _.groupBy(currentWeeklySetblocks, 'date');
         let setBlocks = setBlocksByDate[selectedDayFormatted];
 
-        if (editModeSchedule && unsavedSetBlocks ) {
+        if (editModeEnabled && unsavedSetBlocks ) {
             // As it is your schedule, you can see the empty blocks, to complete then, that's why it is completed with the missing ones
             return this.completeWithEmptySetBlocks(setBlocks).map((setBlock, index) => {
                 return (
                     <SetBlock
                         data={setBlock}
                         key={setBlock.id || (index + selectedDayFormatted)}
-                        editMode={editModeSchedule}
+                        editMode={editModeEnabled}
                         updateSetBlock={(editedSetBlock) => this.updateUnsavedSetBlock(selectedDayFormatted, index, editedSetBlock )}
                     />
                 )
             })
-        } else if (!editModeSchedule && setBlocks) {
+        } else if (!editModeEnabled && setBlocks) {
             setBlocks = _.orderBy(setBlocks, 'blockTime') // To properly render in order
             return setBlocks.map((setBlock, index) => {
                 return <SetBlock data={setBlock} key={setBlock.id || index} />

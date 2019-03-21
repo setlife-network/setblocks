@@ -3,23 +3,23 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { cloneDeep } from 'lodash';
 
-import BlockList from './BlockList';
-import CommitBlock from './CommitBlock';
-import Flex from './Flex';
-import ScheduleHeader from './ScheduleHeader';
-import SideBar from './SideBar';
-import Text from './Text';
+import BlockList from 'components/BlockList';
+import CommitBlock from 'components/CommitBlock';
+import Flex from 'components/Flex';
+import Loading from 'components/Loading';
+import ScheduleHeader from 'components/ScheduleHeader';
+import SideBar from 'components/SideBar';
+import Text from 'components/Text';
 
 import { DEFAULT_SETBLOCKS, TEAM_NAME_ID_MAP } from '../constants';
 
 import {
-    fetchCurrentTeamMemberById,
-    setEditModeSchedule,
+    changeEditModeEnabled,
+    changeSelectedDay,
     setEnableSubmit,
-    setSelectedDay,
     updateUnsavedSetblocks
-} from '../reducers/environment';
-import Loading from './Loading';
+} from '../reducers/scheduling';
+import { fetchCurrentTeamMemberById } from '../reducers/team'
 
 import theme from '../styles/theme'
 
@@ -38,12 +38,12 @@ class SchedulePage extends React.Component {
             const today = moment().toDate();
             // If the match.params don't have a teamMemberId are u seeing your schedule
             history.push('/schedule/' + today.getDay() + '/' + teamMemberName);
-            this.props.setEditModeSchedule(true);
+            this.props.changeEditModeEnabled(true);
             // /schedule - SchedulePage, have today's day selected by default
-            this.props.setSelectedDay(today)
+            this.props.changeSelectedDay(today)
         } else {
             // Edit mode in only available in your own schedule
-            this.props.setEditModeSchedule(false);
+            this.props.changeEditModeEnabled(false);
         }
 
     }
@@ -63,17 +63,23 @@ class SchedulePage extends React.Component {
         this.setState({
             daysOfWeek: days,
         })
-        this.props.setSelectedDay(days[0])
+        this.props.changeSelectedDay(days[0])
     }
 
     componentDidUpdate (prevProps) {
-        const { currentTeamMember, editModeSchedule, selectedDay, history, currentWeeklySetblocks } = this.props;
+        const {
+            currentTeamMember,
+            editModeEnabled,
+            selectedDay,
+            history,
+            currentWeeklySetblocks
+        } = this.props;
         // This is to make a different array for editing purpose, completed with empty set blocks
         // This only take effect if change the currentTeamMember
         if (currentTeamMember && currentTeamMember.id === 'error') {
             history.replace('/team'); // If the teamMemberId is invalid should go to /team
         }
-        if ((editModeSchedule && currentTeamMember !== prevProps.currentTeamMember) || selectedDay !== prevProps.selectedDay) {
+        if ((editModeEnabled && currentTeamMember !== prevProps.currentTeamMember) || selectedDay !== prevProps.selectedDay) {
             this.makeSetBlocksForEdit(currentWeeklySetblocks);
             this.props.setEnableSubmit(false)
         }
@@ -104,7 +110,7 @@ class SchedulePage extends React.Component {
     }
 
     renderMainContent() {
-        const { match, currentTeamMember, editModeSchedule, enableSubmit } = this.props
+        const { match, currentTeamMember, editModeEnabled, enableSubmit } = this.props
 
         return (
             <Flex
@@ -121,7 +127,7 @@ class SchedulePage extends React.Component {
                     {' Schedule'}
                 </Text>
                 <BlockList />
-                {editModeSchedule && (<CommitBlock enableSubmit={enableSubmit} />)}
+                {editModeEnabled && (<CommitBlock enableSubmit={enableSubmit} />)}
             </Flex>
         )
     }
@@ -170,9 +176,9 @@ const mapStateToProps = ({ environment }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        changeEditModeEnabled: (enabled) => dispatch(changeEditModeEnabled(enabled)),
+        changeSelectedDay: (selectedDay) => dispatch(changeSelectedDay(selectedDay)),
         fetchCurrentTeamMemberById: (params) => dispatch(fetchCurrentTeamMemberById(params)),
-        setSelectedDay: (selectedDay) => dispatch(setSelectedDay(selectedDay)),
-        setEditModeSchedule: (editMode) => dispatch(setEditModeSchedule(editMode)),
         setEnableSubmit: (enableSubmit) => dispatch(setEnableSubmit(enableSubmit)),
         updateUnsavedSetblocks: (unsavedSetBlocks) => dispatch(updateUnsavedSetblocks(unsavedSetBlocks))
     };

@@ -8,9 +8,12 @@ import Flex from './Flex'
 import routes from '../routes'
 import NavigationBar from './NavigationBar';
 
+import { checkAuthentication } from '../reducers/auth'
+
 class App extends React.Component {
     componentDidMount() {
         // Run initialization functions here
+        this.props.checkAuthentication()
     }
 
     render() {
@@ -35,9 +38,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-    };
+const mapDispatchToProps = {
+    checkAuthentication
 };
 
 export default compose(

@@ -32,6 +32,7 @@ module.exports = {
             scripts: paths.scripts,
             styles: paths.styles,
             components: paths.components,
+            pages: paths.pages,
             public: paths.public,
             reducers: paths.reducers
         }

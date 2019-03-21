@@ -8,8 +8,11 @@ import Flex from './Flex';
 import Text from './Text';
 
 import {
-    createSetBlock, deleteSetblock, setEditModeSchedule, updateSetBlock 
-} from '../reducers/environment';
+    changeEditModeEnabled,
+    createSetBlock,
+    deleteSetblock,
+    updateSetBlock 
+} from '../reducers/scheduling';
 
 class CommitBlock extends React.Component {
 
@@ -50,7 +53,7 @@ class CommitBlock extends React.Component {
                 this.setState({
                     showToast: false // Improve toast system in a future
                 })
-                this.props.setEditModeSchedule(false);
+                this.props.changeEditModeEnabled(false);
             }, 1000);
         }
     }
@@ -144,10 +147,10 @@ const mapStateToProps = ({ environment }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        changeEditModeEnabled: (enabled) => dispatch(changeEditModeEnabled(enabled)),
         createSetBlock: (params) => dispatch(createSetBlock(params)),
         deleteSetblock: (params) => dispatch(deleteSetblock(params)),
         updateSetBlock: (params) => dispatch(updateSetBlock(params)),
-        setEditModeSchedule: (editMode) => dispatch(setEditModeSchedule(editMode))
     };
 };
 

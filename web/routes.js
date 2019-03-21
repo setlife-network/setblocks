@@ -1,9 +1,11 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 
-import TeamPage from 'components/TeamPage';
-import SchedulePage from './components/SchedulePage';
-import Flex from './components/Flex';
+import Flex from 'components/Flex';
+
+import LandingPage from 'pages/LandingPage';
+import SchedulePage from 'pages/SchedulePage';
+import TeamPage from 'pages/TeamPage';
 
 
 /*
@@ -20,7 +22,7 @@ import Flex from './components/Flex';
 export default (
     <Flex className='routes-container' width='100vw'>
         <Switch>
-            <Route exact path='/' component={TeamPage} />
+            <Route exact path='/' component={LandingPage} />
             <Route key='teamMemberSchedule' path='/team/:teamMemberId/:dayOfWeek' component={SchedulePage} />
             <Route key='myOwnSchedule' path='/schedule/:dayOfWeek/:teamMemberName' component={SchedulePage} />
             <Route key='editMyOwnSchedule' path='/schedule/edit/:setblockId?' component={SchedulePage} />

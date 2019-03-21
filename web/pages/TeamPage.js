@@ -1,11 +1,11 @@
 import React from 'react';
 import moment from 'moment';
 
-import TeamList from './TeamList';
-import Header from './Header';
-import Flex from './Flex';
-import Text from './Text';
-import Loading from './Loading';
+import TeamList from 'components/TeamList';
+import Header from 'components/Header';
+import Flex from 'components/Flex';
+import Text from 'components/Text';
+import Loading from 'components/Loading';
 
 
 export default class TeamPage extends React.Component {

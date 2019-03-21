@@ -47,3 +47,4 @@ package-lock.json
 
 # Mac filesystem
 **/.DS_Store
+.DS_Store
