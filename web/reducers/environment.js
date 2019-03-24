@@ -44,6 +44,12 @@ export default function reducer(state = initialState, action) {
 
 
 
+export function changeError() {
+    return {
+        type: CHANGE_ERROR
+    };
+}
+
 export function decrementPendingNetworkCalls() {
     return {
         type: DECREMENT_PENDING_NETWORK_CALLS
