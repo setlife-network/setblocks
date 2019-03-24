@@ -15,7 +15,7 @@
     "prebuild": "rm -rf public && mkdir public",
     "build": "./node_modules/webpack/bin/webpack.js -p --config config/webpack.config.prod.js",
     "start": "node server.js",
-    "test": "jest --colors"
+    "test": "jest --colors --verbose"
   },
   "jest": {
     "globals": {},
