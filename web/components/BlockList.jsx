@@ -73,9 +73,9 @@ class BlockList extends React.Component {
     }
 }
 
-const mapStateToProps = ({ environment }) => {
+const mapStateToProps = ({ scheduling }) => {
     return {
-        ...environment
+        ...scheduling
     };
 };
 

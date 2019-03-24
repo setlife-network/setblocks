@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationBar Component should render correctly 1`] = `
+<Flex
+  className="NavigationBar"
+  width="100%"
+>
+  <Flex
+    className="nav-container"
+    width="100vw"
+  >
+    <_default
+      icon={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [
+            Object {
+              "aria-hidden": [Function],
+              "children": [Function],
+              "fill": "none",
+              "focusable": "false",
+              "height": [Function],
+              "role": [Function],
+              "stroke": "currentColor",
+              "strokeLinecap": "round",
+              "strokeLinejoin": "round",
+              "viewBox": "0 0 24 24",
+              "width": [Function],
+            },
+          ],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bxivhb",
+            "isStatic": false,
+            "rules": Array [
+              "
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+",
+            ],
+          },
+          "displayName": "Users",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bxivhb",
+          "target": "svg",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      key="Team"
+      route="/team"
+      selected={false}
+      text="Team"
+      width={50}
+    />
+    <_default
+      icon={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [
+            Object {
+              "aria-hidden": [Function],
+              "children": [Function],
+              "fill": "none",
+              "focusable": "false",
+              "height": [Function],
+              "role": [Function],
+              "stroke": "currentColor",
+              "strokeLinecap": "round",
+              "strokeLinejoin": "round",
+              "viewBox": "0 0 24 24",
+              "width": [Function],
+            },
+          ],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-htpNat",
+            "isStatic": false,
+            "rules": Array [
+              "
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+",
+            ],
+          },
+          "displayName": "Calendar",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-htpNat",
+          "target": "svg",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      key="Schedule"
+      route="/schedule"
+      selected={false}
+      text="Schedule"
+      width={50}
+    />
+  </Flex>
+</Flex>
+`;

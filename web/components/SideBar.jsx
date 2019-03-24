@@ -49,9 +49,10 @@ class SideBar extends React.Component {
     }
 }
 
-const mapStateToProps = ({ environment }) => {
+const mapStateToProps = ({ environment, scheduling }) => {
     return {
-        ...environment
+        ...environment,
+        ...scheduling
     };
 };
 

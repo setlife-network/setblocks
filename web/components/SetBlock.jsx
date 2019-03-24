@@ -363,9 +363,11 @@ class SetBlock extends React.Component {
     }
 }
 
-const mapStateToProps = ({ environment }) => {
+const mapStateToProps = ({ environment, team, scheduling }) => {
     return {
-        ...environment
+        ...environment,
+        ...scheduling,
+        ...team
     };
 };
 

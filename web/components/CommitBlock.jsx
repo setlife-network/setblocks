@@ -139,9 +139,10 @@ class CommitBlock extends React.Component {
     }
 }
 
-const mapStateToProps = ({ environment }) => {
+const mapStateToProps = ({ scheduling, team }) => {
     return {
-        ...environment
+        ...scheduling,
+        ...team
     };
 };
 
