@@ -14,22 +14,41 @@
     "lint": "eslint ./web",
     "prebuild": "rm -rf public && mkdir public",
     "build": "./node_modules/webpack/bin/webpack.js -p --config config/webpack.config.prod.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test:jest": "jest --colors"
+  },
+  "jest": {
+    "globals": {},
+    "setupFilesAfterEnv": ["<rootDir>/tests/setup/setupFramework.js"],
+    "testPathIgnorePatterns": [
+      "<rootDir>/tests/setup/",
+      "<rootDir>/api/"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "moduleNameMapper": {
+      "^scripts(.*)$": "<rootDir>/web/scripts$1",
+      "^styles(.*)$": "<rootDir>/web/styles$1",
+      "^components(.*)$": "<rootDir>/web/components$1",
+      "^reducers(.*)$": "<rootDir>/web/reducers$1",
+      "\\.(css|less|png|jpg|jpeg)$": "<rootDir>/tests/setup/mock.js"
+    }
   },
   "bin": {
     "setlife": "./setlife.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/setlife-network/setlife-tools.git"
+    "url": "git+https://github.com/setlife-network/setblocks.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/setlife-network/setlife-tools/issues"
+    "url": "https://github.com/setlife-network/setblocks/issues"
   },
-  "homepage": "https://github.com/setlife-network/setlife-tools#readme",
+  "homepage": "https://github.com/setlife-network/setblocks#readme",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@fortawesome/fontawesome": "^1.1.3",
@@ -45,6 +64,7 @@
     "cross-os": "^1.3.0",
     "dotenv": "^6.2.0",
     "ejs": "^2.5.6",
+    "enzyme": "^3.9.0",
     "express": "^4.14.0",
     "express-graphql": "github:otech47/express-graphql",
     "forever": "^0.15.3",
@@ -89,6 +109,8 @@
     "cross-os": "^1.3.0",
     "css-loader": "^1.0.0",
     "cssnano": "^4.1.0",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "enzyme-to-json": "^3.3.5",
     "es6-promise": "^4.2.5",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^13.0.0",
@@ -99,7 +121,7 @@
     "eslint-plugin-react": "^6.8.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
-    "jest": "^23.3.0",
+    "jest": "^24.5.0",
     "jest-extended": "^0.7.2",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
