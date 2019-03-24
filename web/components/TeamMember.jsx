@@ -11,6 +11,7 @@ import theme from '../styles/theme';
 export default class TeamMember extends React.Component {
     render() {
         const { goToPage, name, color, goToEdit } = this.props;
+        
         return (
             <>
                 <Card

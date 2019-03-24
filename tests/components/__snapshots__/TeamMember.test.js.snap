@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TeamMember Component should render correctly 1`] = `
+<Fragment>
+  <Styled(styled.div)
+    bg="primary"
+    depth={7}
+    height="60px"
+    maxWidth="530px"
+    minWidth="20%"
+    mt="1rem"
+    mx="auto"
+    width="95%"
+  >
+    <Flex
+      center={true}
+      row={true}
+    >
+      <Flex
+        direction="row"
+        height="60px"
+        mb="2rem"
+        width="100%"
+      >
+        <Styled(styled.div)
+          borderRadius={50}
+          height="10px"
+          ml="20%"
+          my="auto"
+          width="10px"
+        />
+        <Text
+          color="textPrimary"
+          fontFamily="Nunito,sans-serif"
+          letterSpacing="0.025rem"
+          lineHeight={1.6}
+          ml="15%"
+          size="1rem"
+          weight="600"
+        >
+          Team Member #1
+        </Text>
+      </Flex>
+      <Flex
+        height="60px"
+        mr="50px"
+      >
+        <Edit3
+          color="#8CC3E6"
+          size={24}
+        />
+      </Flex>
+    </Flex>
+  </Styled(styled.div)>
+</Fragment>
+`;
