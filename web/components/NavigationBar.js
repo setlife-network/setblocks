@@ -7,7 +7,7 @@ import NavLinkItem from './NavLinkItem';
 import { NAVIGATION } from '../constants';
 import Flex from './Flex';
 
-class NavigationBar extends React.Component {
+export class NavigationBar extends React.Component {
     renderNavItem = (item) => {
         const { path } = this.props;
         const route = '/' + _.split(path, '/', 2)[1];

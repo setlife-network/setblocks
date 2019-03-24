@@ -2,13 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { TeamList } from '../../web/components/TeamList';
 
+import Button from '../../web/components/Button';
+
+import { MOCK_TEAM_MEMBERS } from '../data'
+
 let renderedComponent;
-let MOCK_TEAM_MEMBERS = [
-    {
-        id: '00000001',
-        name: 'Team Member #1'
-    }
-]
 
 let mock = () => jest.fn();
 let mockFetchAllTeamMembers

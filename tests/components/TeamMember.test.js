@@ -4,11 +4,9 @@ import TeamMember from '../../web/components/TeamMember';
 
 import Text from '../../web/components/Text';
 
+import { MOCK_TEAM_MEMBER } from '../data'
+
 let renderedComponent;
-let MOCK_TEAM_MEMBER = {
-    id: '00000001',
-    name: 'Team Member #1'
-}
 
 let mock = () => jest.fn();
 
