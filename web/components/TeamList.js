@@ -5,7 +5,7 @@ import TeamMember from './TeamMember'
 
 import { fetchAllTeamMembers } from '../reducers/team'
 
-class TeamList extends React.Component {
+export class TeamList extends React.Component {
 
     componentDidMount() {
         this.props.fetchAllTeamMembers()
