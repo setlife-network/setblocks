@@ -167,9 +167,11 @@ class SchedulePage extends React.Component {
     }
 }
 
-const mapStateToProps = ({ environment }) => {
+const mapStateToProps = ({ environment, scheduling, team }) => {
     return {
         ...environment,
+        ...scheduling,
+        ...team,
         loading: environment.pendingNetworkCalls > 0,
     };
 };
