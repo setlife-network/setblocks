@@ -1,11 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
 
+import Button from 'components/Button';
 import Flex from 'components/Flex';
 import Text from 'components/Text';
 import Loading from 'components/Loading';
 
+import { authenticateWithBlockstack, logout } from '../reducers/auth'
+
 class LandingPage extends React.Component {
+    handleBlockstackLogin = () => {
+        this.props.authenticateWithBlockstack()
+    }
 
     render() {
 
@@ -28,6 +35,14 @@ class LandingPage extends React.Component {
                     {'Schedule your workload in blocks and build a transparent proof of work for each issue'}
                 </Text>
 
+                <Button onClick={this.handleBlockstackLogin}>
+                    Log in with Blockstack
+                </Button>
+
+                <Button onClick={this.props.logout}>
+                    Log out
+                </Button>
+
             </Flex>
         );
     }
@@ -40,7 +55,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-
+    authenticateWithBlockstack,
+    logout
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

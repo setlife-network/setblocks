@@ -2,6 +2,7 @@ import api from 'scripts/api'
 import moment from 'moment';
 
 // Index of Action Types
+const CHANGE_ERROR = 'environment/CHANGE_ERROR'
 const DECREMENT_PENDING_NETWORK_CALLS = 'environment/DECREMENT_PENDING_NETWORK_CALLS'
 const INCREMENT_PENDING_NETWORK_CALLS = 'environment/INCREMENT_PENDING_NETWORK_CALLS'
 const RESET_PENDING_NETWORK_CALLS = 'environment/RESET_PENDING_NETWORK_CALLS'

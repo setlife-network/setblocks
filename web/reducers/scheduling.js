@@ -1,6 +1,7 @@
 import moment from 'moment';
 
 // Index of Action Types
+const CHANGE_CURRENT_WEEKLY_SETBLOCKS = 'scheduling/CHANGE_CURRENT_WEEKLY_SETBLOCKS'
 const CHANGE_EDIT_MODE_ENABLED = 'scheduling/CHANGE_EDIT_MODE_ENABLED'
 const CHANGE_SELECTED_DAY = 'scheduling/CHANGE_SELECTED_DAY'
 const ENABLE_SUBMIT = 'scheduling/ENABLE_SUBMIT'

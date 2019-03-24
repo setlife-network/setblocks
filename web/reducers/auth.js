@@ -1,4 +1,4 @@
-import moment from 'moment';
+// import * as blockstack from 'blockstack';
 
 // Index of Action Types
 const RECEIVE_USER = 'RECEIVE_USER'
@@ -18,6 +18,23 @@ import {
     resetPendingNetworkCalls
 } from './environment'
 
+export function authenticateWithBlockstack() {
+    return dispatch => {
+        console.log('authenticateWithBlockstack')
+        // blockstack.redirectToSignIn()
+
+        // if (blockstack.isUserSignedIn()) {
+        //   const userData = blockstack.loadUserData()
+        //   console.log(userData.profile)
+        // } else if (blockstack.isSignInPending()) {
+        //     blockstack.handlePendingSignIn()
+        //     .then(userData => {
+        //         console.log(userData.profile)
+        //     })
+        // }
+    }
+}
+
 export function checkAuthentication(params) {
     return dispatch => {
 //         dispatch(incrementPendingNetworkCalls())
@@ -34,6 +51,12 @@ export function checkAuthentication(params) {
 //         .finally(() => {
 //             dispatch(decrementPendingNetworkCalls())
 //         })
+    }
+}
+
+export function logout() {
+    return dispatch => {
+        blockstack.signUserOut(window.location.origin)
     }
 }
 

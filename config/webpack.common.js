@@ -120,7 +120,8 @@ module.exports = {
             },
             {
                 include: /\.json$/,
-                loader: 'json-loader'
+                loader: 'json-loader',
+                exclude: /node_modules/
             }
         ]
     },
