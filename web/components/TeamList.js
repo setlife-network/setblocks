@@ -36,9 +36,9 @@ export class TeamList extends React.Component {
     }
 }
 
-const mapStateToProps = ({ environment }) => {
+const mapStateToProps = ({ team }) => {
     return {
-        ...environment
+        ...team
     };
 };
 
