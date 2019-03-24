@@ -14,7 +14,7 @@ describe('TeamMember Component', () => {
     beforeEach(() => {
 
         renderedComponent = shallow(
-            <TeamList
+            <TeamMember
                 name={MOCK_TEAM_MEMBER.name}
             />
         );
