@@ -79,7 +79,7 @@ export function fetchCurrentTeamMemberById(params) {
         .then(payload => {
                 // Handle payload
                 // Dispatch additional actions
-            dispatch(receiveTeamMember(payload.teamMemberById))
+            dispatch(changeCurrentTeamMember(payload.teamMemberById))
             dispatch(changeCurrentWeeklySetblocks(payload.teamMemberById.weeklySetblocks))
         })
         .catch(err => {

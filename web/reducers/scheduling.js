@@ -38,6 +38,8 @@ export function changeCurrentWeeklySetblocks(setblocks) {
 
 export function createSetBlock(params) {
     return dispatch => {
+        console.log('createSetBlock')
+        console.log(params)
         dispatch(incrementPendingNetworkCalls())
         api.graph({
             query: `mutation {
