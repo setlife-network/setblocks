@@ -38,7 +38,7 @@ const renderContainer = Component => {
 }
 
 renderContainer(App)
-registerServiceWorker(); // Runs register() as default function
+// registerServiceWorker(); // Runs register() as default function
 
 if (module.hot) {
     module.hot.accept();
