@@ -63,6 +63,19 @@ app.use(cookieSession({
     expires: moment().add(180, 'days').toDate()
 }));
 
+app.use('/api/v/1/github-oauth', (req, res) => {
+    console.log('oauth')
+    console.log(req.query)
+    require('./api/handlers/github')
+    .fetchAccessToken({ code: req.query.code })
+    .then(accessToken => {
+        console.log('accessToken')
+        console.log(accessToken)
+        req.session.setblocksUser = 1
+        res.redirect('https://www.setblocks.com/team')
+    })
+})
+
 // GraphiQL Docs
 // TODO refactor to graphql playground
 var graphqlHTTP = require('express-graphql');
@@ -80,18 +93,6 @@ app.use('/api/v/:vid/graph', graphqlHTTP(function(req, res) {
     };
 }));
 
-app.get('/api/github-oauth', (req, res) => {
-    console.log('oauth')
-    console.log(req.query)
-    require('./api/handlers/github')
-    .fetchAccessToken({ code: req.query.code })
-    .then(accessToken => {
-        console.log('accessToken')
-        console.log(accessToken)
-        req.session.setblocksUser = 1
-        res.redirect('https://www.setblocks.com/team')
-    })
-})
 
 
 app.listen(port, function() {
