@@ -7,7 +7,7 @@ import Flex from 'components/Flex';
 import Text from 'components/Text';
 import Loading from 'components/Loading';
 
-import { authenticateWithBlockstack, logout } from '../reducers/auth'
+import { authenticateWithBlockstack, authenticateWithGithub, logout } from '../reducers/auth'
 
 class LandingPage extends React.Component {
     handleBlockstackLogin = () => {
@@ -62,6 +62,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     authenticateWithBlockstack,
+    authenticateWithGithub,
     logout
 }
 
