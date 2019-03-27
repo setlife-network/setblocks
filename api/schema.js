@@ -97,6 +97,7 @@ var apiSchema = new g.GraphQLSchema(
                     },
 
                     resolve: function(root, args) {
+                        args.req = root.req
                         return apiModules.authentication.checkUserSession(args);
                     }
                 },

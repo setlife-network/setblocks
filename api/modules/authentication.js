@@ -6,12 +6,13 @@ const authentication = module.exports = (function() {
 
     const checkUserSession = (params) => {
         return new Promise((resolve, reject) => {
+            console.log(params.req.session)
             getSession(params)
             .then(user => {
                 if (user != null) {
                     resolve(user);
                 } else {
-                    params.req.session.omUser = null
+                    params.req.session.setblocksUser = null
                     throw 'User has no session'
                 }
             })
@@ -52,11 +53,19 @@ const authentication = module.exports = (function() {
     const getSession = (params) => {
         return new Promise((resolve, reject) => {
             if (params.req.session.setblocksUser) {
-                User
-                .where({ id: params.req.session.setblocksUser })
-                .fetch()
-                .then(resolve)
-                .catch(reject);
+                // User
+                // .where({ id: params.req.session.setblocksUser })
+                // .fetch()
+                // .then(resolve)
+                // .catch(reject);
+                github.fetchUserData({ accessToken: params.req.session.setblocksUser })
+                .then(userData => {
+                    console.log('userData')
+                    console.log(userData)
+                    resolve(userData)
+                })
+
+
             } else {
                 resolve();
             }

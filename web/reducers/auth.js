@@ -51,26 +51,28 @@ export function authenticateWithGithub() {
         console.log('authenticateWithGithub')
 
         window.open(`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${OAUTH_REDIRECT_URI}&scope=user%20repo`)
+        // window.close()
     }
 }
 
 
 export function checkAuthentication(params) {
     return dispatch => {
-//         dispatch(incrementPendingNetworkCalls())
-// 
-//         api.graph({
-//             query: `{}`
-//         })
-//         .then(payload => {
-//             dispatch(receiveUser(payload.TeamMember))
-//         })
-//         .catch(err => {
-//             dispatch(resetPendingNetworkCalls())
-//         })
-//         .finally(() => {
-//             dispatch(decrementPendingNetworkCalls())
-//         })
+        dispatch(incrementPendingNetworkCalls())
+
+        api.graph({
+            query: `query{ checkUserSession }`
+        })
+        .then(payload => {
+            console.log(payload)
+            // dispatch(receiveUser(payload.TeamMember))
+        })
+        .catch(err => {
+            dispatch(resetPendingNetworkCalls())
+        })
+        .finally(() => {
+            dispatch(decrementPendingNetworkCalls())
+        })
     }
 }
 
