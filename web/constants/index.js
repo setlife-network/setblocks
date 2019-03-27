@@ -5,7 +5,7 @@ export const SITE_ROOT = process.env.NODE_ENV == 'production' ? 'https://www.set
 export const API_ROOT = SITE_ROOT + '/api/v/1/'
 
 export const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
-export const OAUTH_REDIRECT_URI = 'https://www.setblocks.com/api/github-oauth'
+export const OAUTH_REDIRECT_URI = 'https://www.setblocks.com/api/v/1/github-oauth'
 
 export const NAVIGATION = {
     items: [
