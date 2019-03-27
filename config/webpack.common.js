@@ -92,7 +92,7 @@ module.exports = {
             filename: 'service-worker.js',
             minify: true, // minify and uglify the script
             navigateFallback: '/index.html',
-            staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+            staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
         }),
     ],
     module: {
