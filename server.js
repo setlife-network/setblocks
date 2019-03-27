@@ -63,10 +63,10 @@ app.use(cookieSession({
 }));
 
 // GitHub OAuth Handler
+const github = require('./api/handlers/github')
 
 app.get('/api/v/1/github-oauth', (req, res) => {
-    require('./api/handlers/github')
-    .fetchAccessToken({ code: req.query.code })
+    github.fetchAccessToken({ code: req.query.code })
     .then(accessToken => {
         req.session.setblocksUser = accessToken
         
