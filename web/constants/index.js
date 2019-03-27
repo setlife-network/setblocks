@@ -4,7 +4,7 @@ import { Users } from 'styled-icons/feather/Users.cjs'
 export const SITE_ROOT = process.env.NODE_ENV == 'production' ? 'https://www.setblocks.com' : 'http://localhost:3000';
 export const API_ROOT = SITE_ROOT + '/api/v/1/'
 
-export const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID.toString()
+export const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 export const OAUTH_REDIRECT_URI = 'https://www.setblocks.com/github-oauth'
 
 export const NAVIGATION = {

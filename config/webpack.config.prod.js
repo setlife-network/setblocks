@@ -80,7 +80,7 @@ module.exports = merge(common, {
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('production'),
-                GITHUB_CLIENT_ID: '88ee5c32729990ca3a14'
+                GITHUB_CLIENT_ID: JSON.stringify('88ee5c32729990ca3a14')
             }
         }),
         
