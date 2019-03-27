@@ -15,7 +15,7 @@ import App from 'components/App'
 
 // redux setup
 import configureStore from 'scripts/configureStore'
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore(isProduction)
 

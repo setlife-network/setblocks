@@ -83,17 +83,17 @@ module.exports = {
         // SW plugin configuration
         // The following option parameters and configuration are directly taken from react-create-app
         // as it's a production ready configuration that works pretty well for our needs.
-        new SWPrecacheWebpackPlugin({
+        // new SWPrecacheWebpackPlugin({
             // By default, a cache-busting query parameter is appended to requests
             // used to populate the caches, to ensure the responses are fresh.
             // If a URL is already hashed by Webpack, then there is no concern
             // about it being stale, and the cache-busting can be skipped.
-            dontCacheBustUrlsMatching: /\.\w{8}\./,
-            filename: 'service-worker.js',
-            minify: true, // minify and uglify the script
-            navigateFallback: '/index.html',
-            staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
-        }),
+        //     dontCacheBustUrlsMatching: /\.\w{8}\./,
+        //     filename: 'service-worker.js',
+        //     minify: true, // minify and uglify the script
+        //     navigateFallback: '/index.html',
+        //     staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
+        // }),
     ],
     module: {
         rules: [
