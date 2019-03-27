@@ -70,7 +70,7 @@ app.get('/api/v/1/github-oauth', (req, res) => {
     .then(accessToken => {
         req.session.setblocksUser = accessToken
         
-        res.redirect('http://localhost:8080')
+        res.redirect(process.env.WEB_ROOT)
     })
 })
 
