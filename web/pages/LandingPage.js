@@ -13,6 +13,9 @@ class LandingPage extends React.Component {
     handleBlockstackLogin = () => {
         this.props.authenticateWithBlockstack()
     }
+    handleGithubLogin = () => {
+        this.props.authenticateWithGithub()
+    }
 
     render() {
 
@@ -35,8 +38,11 @@ class LandingPage extends React.Component {
                     {'Schedule your workload in blocks and build a transparent proof of work for each issue'}
                 </Text>
 
-                <Button onClick={this.handleBlockstackLogin}>
-                    Log in with Blockstack
+                {/* <Button onClick={this.handleBlockstackLogin}> */}
+                {/*     Log in with Blockstack */}
+                {/* </Button> */}
+                <Button onClick={this.handleGithubLogin}>
+                    Log in with GitHub
                 </Button>
 
                 <Button onClick={this.props.logout}>

@@ -1,5 +1,12 @@
 // import * as blockstack from 'blockstack';
 
+import {
+    GITHUB_CLIENT_ID,
+    OAUTH_REDIRECT_URI,
+    USER_PROPS
+} from '../constants'
+
+
 // Index of Action Types
 const RECEIVE_USER = 'RECEIVE_USER'
 
@@ -21,6 +28,10 @@ import {
 export function authenticateWithBlockstack() {
     return dispatch => {
         console.log('authenticateWithBlockstack')
+
+        api.graph({
+            query: `checkUserSession{${USER_PROPS}}`
+        })
         // blockstack.redirectToSignIn()
 
         // if (blockstack.isUserSignedIn()) {
@@ -34,6 +45,15 @@ export function authenticateWithBlockstack() {
         // }
     }
 }
+
+export function authenticateWithGithub() {
+    return dispatch => {
+        console.log('authenticateWithGithub')
+
+        window.open(`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${OAUTH_REDIRECT_URI}&scope=user%20repo`, '_self')
+    }
+}
+
 
 export function checkAuthentication(params) {
     return dispatch => {
@@ -56,7 +76,7 @@ export function checkAuthentication(params) {
 
 export function logout() {
     return dispatch => {
-        blockstack.signUserOut(window.location.origin)
+        // blockstack.signUserOut(window.location.origin)
     }
 }
 

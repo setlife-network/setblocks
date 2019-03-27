@@ -2,6 +2,7 @@ require('dotenv').config()
 var express = require('express');
 var path = require('path');
 var fs = require('fs');
+var moment = require('moment');
 
 var app = express();
 
@@ -50,6 +51,18 @@ var corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// Cookie Authentication configuration
+var cookieSession = require('cookie-session');
+var cookieParser = require('cookie-parser');
+
+app.set('trust proxy', 1);
+app.use(cookieParser());
+app.use(cookieSession({
+    name: 'session',
+    keys: ['setblocksUser'],
+    expires: moment().add(180, 'days').toDate()
+}));
+
 // GraphiQL Docs
 // TODO refactor to graphql playground
 var graphqlHTTP = require('express-graphql');
@@ -66,6 +79,19 @@ app.use('/api/v/:vid/graph', graphqlHTTP(function(req, res) {
         graphiql: true
     };
 }));
+
+app.get('/github-oauth', (req, res) => {
+    console.log('oauth')
+    console.log(req.query)
+    require('./api/handlers/github')
+    .fetchAccessToken({ code: req.query.code })
+    .then(accessToken => {
+        console.log('accessToken')
+        console.log(accessToken)
+        req.session.setblocksUser = 1
+        res.redirect('https://www.setblocks.com/team')
+    })
+})
 
 
 app.listen(port, function() {

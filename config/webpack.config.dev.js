@@ -34,7 +34,8 @@ module.exports = merge(common, {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('development')
+                NODE_ENV: JSON.stringify('development'),
+                GITHUB_CLIENT_ID: '88ee5c32729990ca3a14'
             }
         })
     ]

@@ -90,6 +90,16 @@ var apiSchema = new g.GraphQLSchema(
             description: 'Endpoints with GET functionality go here',
 
             fields: {
+                checkUserSession: {
+                    type: g.GraphQLString,
+                    description: 'Fetches a data model object by specified properties',
+                    args: {
+                    },
+
+                    resolve: function(root, args) {
+                        return apiModules.authentication.checkUserSession(args);
+                    }
+                },
                 teamMembers: {
                     type: new g.GraphQLList(types.TeamMemberType),
                     description: 'Fetches a data model object by specified properties',

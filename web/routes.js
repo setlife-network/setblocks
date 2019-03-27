@@ -22,8 +22,8 @@ import TeamPage from 'pages/TeamPage';
 export default (
     <Flex className='routes-container' width='100vw'>
         <Switch>
-            {/* <Route exact path='/' component={LandingPage} /> */}
-            <Route exact path='/' component={TeamPage} />
+            <Route exact path='/' component={LandingPage} />
+            {/* <Route exact path='/' component={TeamPage} /> */}
 
             <Route key='teamMemberSchedule' path='/team/:teamMemberId/:dayOfWeek' component={SchedulePage} />
             <Route key='myOwnSchedule' path='/schedule/:dayOfWeek/:teamMemberName' component={SchedulePage} />
