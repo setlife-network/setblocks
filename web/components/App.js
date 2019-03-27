@@ -14,27 +14,36 @@ class App extends React.Component {
     componentDidMount() {
         // Run initialization functions here
         this.props.checkAuthentication()
+        .then(loggedIn => {
+            if (loggedIn) this.props.history.push('/team')
+        })
     }
 
     render() {
         const { location } = this.props;
+
         return (
             <>
                 <Flex height='92vh'>
                     {routes}
                 </Flex>
+                
                 <Flex
                     height='8vh'
+                    bg='primary'
                 >
-                    <NavigationBar path={location.pathname} />
+                    {this.props.loggedInUser.id != null &&
+                        <NavigationBar path={location.pathname} />
+                    }
                 </Flex>
             </>
         );
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ auth }) => {
     return {
+        ...auth
     };
 };
 

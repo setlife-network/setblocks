@@ -17,13 +17,23 @@ const github = module.exports = (function () {
     const fetchUserData = (params) => {
         return new Promise((resolve, reject) => {
             const octokit = new Octokit({
-                auth: params.accessToken
+                auth: 'token ' + params.accessToken
             })
 
-            octokit.repos.list()
+            octokit.users.getAuthenticated({})
             .then(results => {
-                console.log('results')
-                console.log(results)
+                if (results.status == 200) {
+                    // console.log('results.data')
+                    // console.log(results.data)
+                    const { html_url, id, name } = results.data
+                    resolve({
+                        id,
+                        name,
+                        githubUrl: html_url
+                    })
+                } else {
+                    reject('An error occurred')
+                }
             })
         })
     }
@@ -35,8 +45,6 @@ const github = module.exports = (function () {
                 url: `${GITHUB_OAUTH_URL}?client_id=${GITHUB.CLIENT_ID}&client_secret=${GITHUB.CLIENT_SECRET}&code=${params.code}`
             })
             .then(response => {
-                console.log('response')
-                console.log(response)
                 resolve(response.access_token)
             })
         });

@@ -91,8 +91,8 @@ var apiSchema = new g.GraphQLSchema(
 
             fields: {
                 checkUserSession: {
-                    type: g.GraphQLString,
-                    description: 'Fetches a data model object by specified properties',
+                    type: types.UserType,
+                    description: 'Fetches a user',
                     args: {
                     },
 
@@ -123,7 +123,18 @@ var apiSchema = new g.GraphQLSchema(
                     resolve: function(root, args) {
                         return apiModules.team.fetchTeamMemberById(args);
                     }
-                }
+                },
+                logoutUser: {
+                    type: g.GraphQLString,
+                    description: 'Clears the user session',
+                    args: {
+                    },
+
+                    resolve: function(root, args) {
+                        args.req = root.req
+                        return apiModules.authentication.logoutUser(args);
+                    }
+                },
             }
         })
     }

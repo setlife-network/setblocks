@@ -3,6 +3,7 @@ var types = module.exports = (function() {
         SetblockInputType: require('./SetblockInputType'),
         SetblockType: require('./SetblockType'),
         TeamMemberType: require('./TeamMemberType'),
+        UserType: require('./UserType'),
         graphql: require('./graphql')
     };
 })();

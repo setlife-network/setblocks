@@ -28,25 +28,21 @@ class LandingPage extends React.Component {
             >
                 <Loading />
 
-                <Text align='center' size='1.25rem' my='0.5rem'>
+                <Text align='center' size='1.5rem' my='1.5rem'>
                     {'Welcome to SetBlocks'}
                 </Text>
-                <Text align='center' size='1rem' m='0.5rem'>
+                <Text align='center' size='1rem' m='0.75rem 2rem'>
                     {'Build your remote team with a simple collaborative interface'}
                 </Text>
-                <Text align='center' size='1rem' m='0.5rem'>
-                    {'Schedule your workload in blocks and build a transparent proof of work for each issue'}
+                <Text align='center' size='1rem' m='0.75rem 2rem'>
+                    {'Schedule your workload in blocks and build a transparent "proof of work"'}
                 </Text>
 
                 {/* <Button onClick={this.handleBlockstackLogin}> */}
                 {/*     Log in with Blockstack */}
                 {/* </Button> */}
-                <Button onClick={this.handleGithubLogin}>
+                <Button onClick={this.handleGithubLogin} m='5rem'>
                     Log in with GitHub
-                </Button>
-
-                <Button onClick={this.props.logout}>
-                    Log out
                 </Button>
 
             </Flex>

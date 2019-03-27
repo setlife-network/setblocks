@@ -2,11 +2,12 @@ const _ = require('lodash');
 const moment = require('moment');
 
 const authentication = module.exports = (function() {
+
     const { User } = require('../models')
 
     const checkUserSession = (params) => {
         return new Promise((resolve, reject) => {
-            console.log(params.req.session)
+
             getSession(params)
             .then(user => {
                 if (user != null) {
@@ -51,20 +52,22 @@ const authentication = module.exports = (function() {
     };
 
     const getSession = (params) => {
+
         return new Promise((resolve, reject) => {
+
             if (params.req.session.setblocksUser) {
                 // User
                 // .where({ id: params.req.session.setblocksUser })
                 // .fetch()
                 // .then(resolve)
                 // .catch(reject);
+                const github = require('../handlers/github')
+
                 github.fetchUserData({ accessToken: params.req.session.setblocksUser })
                 .then(userData => {
-                    console.log('userData')
-                    console.log(userData)
                     resolve(userData)
                 })
-
+                .catch(reject)
 
             } else {
                 resolve();

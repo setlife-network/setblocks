@@ -13,7 +13,7 @@ const RECEIVE_USER = 'RECEIVE_USER'
 // Reducer
 const initialState = {
     loggedInUser: {
-        id: null,
+        id: null
     }
 }
 
@@ -50,8 +50,7 @@ export function authenticateWithGithub() {
     return dispatch => {
         console.log('authenticateWithGithub')
 
-        window.open(`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user%20repo`, '_self')
-        // window.close()
+        window.open(`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${OAUTH_REDIRECT_URI}&scope=user%20repo`, '_self')
     }
 }
 
@@ -60,24 +59,34 @@ export function checkAuthentication(params) {
     return dispatch => {
         dispatch(incrementPendingNetworkCalls())
 
-        api.graph({
-            query: `query{ checkUserSession }`
+        return api.graph({
+            query: `query{ checkUserSession{ id, name, githubUrl } }`
         })
         .then(payload => {
-            console.log(payload)
-            // dispatch(receiveUser(payload.TeamMember))
+            dispatch(receiveUser(payload.checkUserSession))
+            dispatch(decrementPendingNetworkCalls())
+            return Promise.resolve(true)
         })
         .catch(err => {
             dispatch(resetPendingNetworkCalls())
-        })
-        .finally(() => {
-            dispatch(decrementPendingNetworkCalls())
         })
     }
 }
 
 export function logout() {
     return dispatch => {
+        dispatch(incrementPendingNetworkCalls())
+
+        return api.graph({
+            query: `query{ logoutUser }`
+        })
+        .then(payload => {
+            dispatch(receiveUser({ id: null }))
+            dispatch(decrementPendingNetworkCalls())
+        })
+        .catch(err => {
+            dispatch(resetPendingNetworkCalls())
+        })
         // blockstack.signUserOut(window.location.origin)
     }
 }

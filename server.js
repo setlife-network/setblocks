@@ -15,9 +15,6 @@ var port = isProduction ? process.env.PORT : 3000;
 app.use(express.static(__dirname + '/public'));
 
 app.get('*', function(req, res, next) {
-    console.log('catchall')
-    console.log(req.path)
-
     // Prevents an HTML response for API calls
     if (req.path.indexOf('/api/') != -1) {
         return next();
@@ -68,15 +65,12 @@ app.use(cookieSession({
 // GitHub OAuth Handler
 
 app.get('/api/v/1/github-oauth', (req, res) => {
-    console.log('github')
-
     require('./api/handlers/github')
     .fetchAccessToken({ code: req.query.code })
     .then(accessToken => {
-        console.log('accessToken')
-        console.log(accessToken)
         req.session.setblocksUser = accessToken
-        res.redirect('https://www.setblocks.com')
+        
+        res.redirect('http://localhost:8080')
     })
 })
 
