@@ -50,7 +50,7 @@ export function authenticateWithGithub() {
     return dispatch => {
         console.log('authenticateWithGithub')
 
-        window.open(`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${OAUTH_REDIRECT_URI}&scope=user%20repo`, '_self')
+        window.open(`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${OAUTH_REDIRECT_URI}&scope=user%20repo`)
     }
 }
 
