@@ -80,7 +80,7 @@ app.use('/api/v/:vid/graph', graphqlHTTP(function(req, res) {
     };
 }));
 
-app.get('/github-oauth', (req, res) => {
+app.get('/api/github-oauth', (req, res) => {
     console.log('oauth')
     console.log(req.query)
     require('./api/handlers/github')
