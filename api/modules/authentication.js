@@ -11,8 +11,6 @@ const authentication = module.exports = (function() {
             getSession(params)
             .then(user => {
                 if (user != null) {
-                    console.log('user')
-                    console.log(user)
                     resolve(user);
                 } else {
                     params.req.session.setblocksUser = null
@@ -67,8 +65,6 @@ const authentication = module.exports = (function() {
 
                 github.fetchUserData({ accessToken: params.req.session.setblocksUser })
                 .then(userData => {
-                    console.log('userData')
-                    console.log(userData)
                     resolve(userData)
                 })
                 .catch(reject)

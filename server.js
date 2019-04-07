@@ -41,12 +41,14 @@ var whitelist = [
     'https://www.github.com/',
     'https://github.com/',
     'https://github.com',
+    'github.com',
 ];
 var corsOptions = {
-    origin: function(origin, callback) {
-        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-        callback(null, originIsWhitelisted);
-    },
+    // origin: function(origin, callback) {
+    //     var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+    //     callback(null, originIsWhitelisted);
+    // },
+    origin: '*',
     credentials: true,
     methods: ['GET,PUT,POST,DELETE,OPTIONS'],
     allowedHeaders: ['Access-Control-Allow-Headers', 'Origin', 'Access-Control-Allow-Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Cache-Control']
