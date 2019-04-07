@@ -14,6 +14,31 @@ const github = module.exports = (function () {
     //     auth: undefined,
     // })
 
+    const fetchRepo = (params) => {
+        return new Promise((resolve, reject) => {
+            const octokit = new Octokit({
+                auth: 'token ' + params.accessToken
+            })
+
+            const path = params.url.split('github.com/')[1]
+
+            const owner = path.split('/')[0]
+            const repo = path.split('/')[1]
+
+            octokit.repos.get({ owner, repo })
+            .then(results => {
+                if (results.status == 200) {
+                    console.log('results.data')
+                    console.log(results.data)
+                    resolve(results.data)
+                } else {
+                    reject('An error occurred')
+                }
+            })
+            .catch(reject)
+        })
+    }
+
     const fetchUserData = (params) => {
         return new Promise((resolve, reject) => {
             const octokit = new Octokit({
@@ -52,6 +77,7 @@ const github = module.exports = (function () {
 
     return {
         fetchAccessToken,
+        fetchRepo,
         fetchUserData
     };
 

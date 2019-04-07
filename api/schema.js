@@ -90,6 +90,20 @@ var apiSchema = new g.GraphQLSchema(
             description: 'Endpoints with GET functionality go here',
 
             fields: {
+                checkRepoRights: {
+                    type: new g.GraphQLNonNull(g.GraphQLString),
+                    description: 'Fetches a user repo rights',
+                    args: {
+                        url: {
+                            type: g.GraphQLString
+                        }
+                    },
+
+                    resolve: function(root, args) {
+                        args.req = root.req
+                        return apiModules.authentication.checkRepoRights(args);
+                    }
+                },
                 checkUserSession: {
                     type: types.UserType,
                     description: 'Fetches a user',

@@ -5,6 +5,32 @@ const authentication = module.exports = (function() {
 
     const { User } = require('../models')
 
+    const checkRepoRights = (params) => {
+
+        return new Promise((resolve, reject) => {
+
+            if (params.req.session.setblocksUser) {
+                const github = require('../handlers/github')
+
+                github.fetchRepo({
+                    accessToken: params.req.session.setblocksUser,
+                    url: params.url
+                })
+                .then(userData => {
+                    if (userData.permissions.admin) {
+                        resolve(JSON.stringify(userData.permissions))
+                    } else {
+                        resolve('false')
+                    }
+                })
+                .catch(reject)
+
+            } else {
+                resolve('false');
+            }
+        });
+    };
+
     const checkUserSession = (params) => {
         return new Promise((resolve, reject) => {
 
@@ -103,6 +129,7 @@ const authentication = module.exports = (function() {
     };
 
     return {
+        checkRepoRights,
         checkUserSession,
         loginWithGithub,
         logoutUser

@@ -101,5 +101,9 @@ app.use('/api/v/:vid/graph', graphqlHTTP(function(req, res) {
 
 app.listen(port, function() {
     console.log('SetLife-ReactWithApi: Server running on port ' + port);
-    // require('./api/modules/team').fetchAllTeamMembers({})
+    // require('./api/handlers/github').fetchRepo({
+    //     accessToken: 'da95ff834eb90c6f63c5d72c6d77393b3a604e06',
+    //     url: 'https://github.com/bitcoin/bitcoin'
+    //     // url: 'https://github.com/setlife-network/tech-education'
+    // })
 });
