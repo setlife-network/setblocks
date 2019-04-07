@@ -37,7 +37,10 @@ var whitelist = [
     'http://localhost:8080',
     'http://localhost:3000',
     'https://www.setblocks.com',
-    'https://setblocks.herokuapp.com/'
+    'https://setblocks.herokuapp.com/',
+    'https://www.github.com/',
+    'https://github.com/',
+    'https://github.com',
 ];
 var corsOptions = {
     origin: function(origin, callback) {
