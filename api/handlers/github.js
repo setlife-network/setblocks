@@ -50,10 +50,11 @@ const github = module.exports = (function () {
                 if (results.status == 200) {
                     // console.log('results.data')
                     // console.log(results.data)
-                    const { html_url, id, name } = results.data
+                    const { html_url, id, name, email } = results.data
                     resolve({
                         id,
                         name,
+                        email,
                         githubUrl: html_url
                     })
                 } else {

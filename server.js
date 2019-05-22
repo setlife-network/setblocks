@@ -44,11 +44,10 @@ var whitelist = [
     'github.com',
 ];
 var corsOptions = {
-    // origin: function(origin, callback) {
-    //     var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-    //     callback(null, originIsWhitelisted);
-    // },
-    origin: '*',
+    origin: function(origin, callback) {
+        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        callback(null, originIsWhitelisted);
+    },
     credentials: true,
     methods: ['GET,PUT,POST,DELETE,OPTIONS'],
     allowedHeaders: ['Access-Control-Allow-Headers', 'Origin', 'Access-Control-Allow-Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Cache-Control']
@@ -85,7 +84,7 @@ app.get('/api/v/1/github-oauth', (req, res) => {
 var graphqlHTTP = require('express-graphql');
 var apiSchema = require('./api/schema');
 
-app.use('/api/v/:vid/graph', graphqlHTTP(function(req, res) {
+app.use('/api/v/:vid/graph', graphqlHTTP((req, res) => {
     return {
         schema: apiSchema,
         rootValue: {
@@ -96,8 +95,6 @@ app.use('/api/v/:vid/graph', graphqlHTTP(function(req, res) {
         graphiql: true
     };
 }));
-
-
 
 app.listen(port, function() {
     console.log('SetLife-ReactWithApi: Server running on port ' + port);

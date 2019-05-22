@@ -9,6 +9,9 @@ export class TeamList extends React.Component {
 
     componentDidMount() {
         this.props.fetchAllTeamMembers()
+        .then(membersExist => {
+            
+        })
     }
 
     generateColor () {

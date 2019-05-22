@@ -35,26 +35,41 @@ export function changeCurrentTeamMember(member) {
 
 export function fetchAllTeamMembers(params) {
     return dispatch => {
+
+//         let teamMembers = window.localStorage.getItem('teamMembers')
+// 
+//         console.log('teamMembers')
+//         console.log(teamMembers)
+//         if (teamMembers == null) {
+//             return Promise.resolve(false)
+//         } else {
+//             dispatch(receiveTeamMembers(teamMembers))
+//         }
+        
         dispatch(incrementPendingNetworkCalls())
-        api.graph({
-            query: `query {
-                teamMembers {
-                    id,
-                    name
-                }
-            }`
-        })
-        .then(payload => {
-            // Handle payload
-            // Dispatch additional actions
-            dispatch(receiveTeamMembers(payload.teamMembers))
-        })
-        .catch(err => {
-            // Handle error
-        })
-        .finally(() => {
-            dispatch(decrementPendingNetworkCalls())
-        })
+
+        return (
+            api.graph({
+                query: `query {
+                    teamMembers {
+                        id,
+                        name
+                    }
+                }`
+            })
+            .then(payload => {
+                // Handle payload
+                // Dispatch additional actions
+                dispatch(receiveTeamMembers(payload.teamMembers))
+                return Promise.resolve(true)
+            })
+            .catch(err => {
+                // Handle error
+            })
+            .finally(() => {
+                dispatch(decrementPendingNetworkCalls())
+            })
+        )
     }
 }
 

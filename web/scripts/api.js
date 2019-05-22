@@ -21,7 +21,6 @@ export default {
                 data: JSON.stringify(query)
             })
             .then((res) => {
-                console.log(res);
                 res.json();
             })
             .catch(err => console.error(err))

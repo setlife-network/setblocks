@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router';
 import Flex from 'components/Flex';
 
 import LandingPage from 'pages/LandingPage';
+import PaymentPage from 'pages/PaymentPage';
 import SchedulePage from 'pages/SchedulePage';
 import TeamPage from 'pages/TeamPage';
 
@@ -30,6 +31,7 @@ export default (
             <Route key='editMyOwnSchedule' path='/schedule/edit/:setblockId?' component={SchedulePage} />
             <Route key='myOwnSchedule' path='/schedule' component={SchedulePage} />
             <Route key='teamMemberSchedule' path='/team' component={TeamPage} />
+            <Route path='/pay' component={PaymentPage} />
         </Switch>
     </Flex>
 );

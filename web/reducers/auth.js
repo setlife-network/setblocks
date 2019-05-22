@@ -60,7 +60,11 @@ export function checkAuthentication(params) {
         dispatch(incrementPendingNetworkCalls())
 
         return api.graph({
-            query: `query{ checkUserSession{ id, name, githubUrl } }`
+            query: `query{
+                checkUserSession{
+                    id, name, githubUrl
+                }
+            }`
         })
         .then(payload => {
             dispatch(receiveUser(payload.checkUserSession))

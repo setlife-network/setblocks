@@ -15,16 +15,16 @@ export default class TeamMember extends React.Component {
         return (
             <>
                 <Card
-                    bg='primary'
-                    width='95%'
+                    bg='white'
+                    width='90%'
                     minWidth='20%'
                     maxWidth='530px'
                     height='60px'
                     mx='auto'
-                    mt='1rem'
-                    depth={7}
+                    mt='1.5rem'
+                    depth={1}
                 >
-                    <Flex row center>
+                    <Flex row center px='1rem'>
                         <Flex
                             direction='row'
                             mb='2rem'
@@ -38,22 +38,23 @@ export default class TeamMember extends React.Component {
                                 bg={color}
                                 borderRadius={50}
                                 my='auto'
-                                ml='20%'
+                                mx='5%'
                             />
                             <Text
                                 color='textPrimary'
                                 size='1rem'
+                                my='auto'
                                 weight='600'
-                                ml='15%'
+                                ml='5%'
                             >
                                 {name}
                             </Text>
                         </Flex>
-                        <Flex height='60px' mr='50px'>
+                        <Flex height='60px'>
                             { // Workaround for edit until to have a login
                                 React.createElement(Edit3, {
                                     size: 24,
-                                    color: theme.colors.lightBlue,
+                                    color: theme.colors.charcoal,
                                     onClick: goToEdit
                                 })
                             }

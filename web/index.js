@@ -28,7 +28,7 @@ const renderContainer = Component => {
             <ThemeProvider theme={theme}>
                 <Provider store={store}>
                     <Router>
-                        <Component />
+                        <Component/>
                     </Router>
                 </Provider>
             </ThemeProvider>
@@ -46,4 +46,4 @@ if (module.hot) {
         const NextApp = require('components/App').default
         renderContainer(NextApp)
     });
-} 
+}

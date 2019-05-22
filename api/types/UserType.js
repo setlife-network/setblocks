@@ -8,6 +8,9 @@ var UserType = module.exports = new g.GraphQLObjectType({
             id: {
                 type: g.GraphQLString
             },
+            email: {
+                type: g.GraphQLString
+            },
             githubUrl: {
                 type: g.GraphQLString
             },

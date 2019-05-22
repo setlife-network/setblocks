@@ -7,6 +7,8 @@ export const API_ROOT = SITE_ROOT + '/api/v/1/'
 export const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 export const OAUTH_REDIRECT_URI = process.env.NODE_ENV == 'production' ? 'https://www.setblocks.com/api/v/1/github-oauth' : 'http://localhost:3000/api/v/1/github-oauth'
 
+export const STRIPE_PUBLIC_KEY = 'pk_test_CBiYbQTw17rarZ2chWMVolp6'
+
 export const NAVIGATION = {
     items: [
         {

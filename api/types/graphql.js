@@ -28,7 +28,6 @@ var GraphQLLong = new GraphQL.GraphQLScalarType({
 });
 
 module.exports = {
-    BookshelfType: require('graphql-bookshelf'),
     GraphQLBoolean: GraphQL.GraphQLBoolean,
     GraphQLError: require('graphql/error').GraphQLError,
     GraphQLFloat: GraphQL.GraphQLFloat,
