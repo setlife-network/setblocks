@@ -47,7 +47,7 @@ class TeamPage extends React.Component {
 
                 <TeamList goToPage={this.goToPage} goToEdit={this.goToEdit} />
 
-                <Button onClick={this.handleLogout} m='5rem'>
+                <Button onClick={this.handleLogout} m='5rem auto'>
                     Log out
                 </Button>
             </Flex>

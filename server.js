@@ -73,7 +73,6 @@ app.get('/api/v/1/github-oauth', (req, res) => {
     github.fetchAccessToken({ code: req.query.code })
     .then(accessToken => {
         req.session.setblocksUser = accessToken
-        console.log(accessToken)
         
         res.redirect(process.env.POST_AUTH_REDIRECT_URL)
     })

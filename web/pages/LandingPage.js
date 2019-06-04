@@ -41,7 +41,7 @@ class LandingPage extends React.Component {
                 {/* <Button onClick={this.handleBlockstackLogin}> */}
                 {/*     Log in with Blockstack */}
                 {/* </Button> */}
-                <Button onClick={this.handleGithubLogin} m='5rem'>
+                <Button onClick={this.handleGithubLogin} m='5rem auto'>
                     Log in with GitHub
                 </Button>
 

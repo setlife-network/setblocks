@@ -52,7 +52,7 @@
   },
   "homepage": "https://github.com/setlife-network/setblocks#readme",
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
+    "@babel/polyfill": "^7.4.4",
     "@fortawesome/fontawesome": "^1.1.3",
     "@fortawesome/fontawesome-svg-core": "1.2.10",
     "@fortawesome/react-fontawesome": "0.1.3",
@@ -71,7 +71,7 @@
     "enzyme": "^3.9.0",
     "express": "^4.14.0",
     "express-graphql": "^0.8.0",
-    "forever": "^0.15.3",
+    "forever": "^1.0.0",
     "formik": "^1.3.0",
     "fs-extra": "^2.0.0",
     "graphql": "^14.2.1",
@@ -95,7 +95,7 @@
     "styled-components": "^4.0.0-beta.1",
     "styled-icons": "^3.7.0",
     "styled-is": "^1.1.5",
-    "styled-system": "^3.1.11"
+    "styled-system": "^3.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
@@ -126,7 +126,7 @@
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.5.0",
-    "jest-extended": "^0.7.2",
+    "jest-extended": "^0.11.1",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.2",
@@ -141,7 +141,7 @@
     "uglifyjs-webpack-plugin": "^1.3.0",
     "url-loader": "^1.1.1",
     "webpack": "^4.17.1",
-    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.7",
     "webpack-manifest-plugin": "^2.0.4",
