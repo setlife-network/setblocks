@@ -22,10 +22,11 @@ export class TeamList extends React.Component {
         const { teamMembers, goToPage, goToEdit } = this.props;
         return (
             <>
-                {teamMembers.map(teamMember => {
+                {teamMembers.map((teamMember, index) => {
                     return (
                         <TeamMember
                             key={teamMember.id}
+                            index={index}
                             name={teamMember.name}
                             goToPage={() => { goToPage(teamMember) }}
                             goToEdit={() => { goToEdit(teamMember) }}

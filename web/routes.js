@@ -24,14 +24,40 @@ export default (
     <Flex className='routes-container' width='100vw'>
         <Switch>
             <Route exact path='/' component={LandingPage} />
-            {/* <Route exact path='/' component={TeamPage} /> */}
 
-            <Route key='teamMemberSchedule' path='/team/:teamMemberId/:dayOfWeek' component={SchedulePage} />
-            <Route key='myOwnSchedule' path='/schedule/:dayOfWeek/:teamMemberName' component={SchedulePage} />
-            <Route key='editMyOwnSchedule' path='/schedule/edit/:setblockId?' component={SchedulePage} />
-            <Route key='myOwnSchedule' path='/schedule' component={SchedulePage} />
-            <Route key='teamMemberSchedule' path='/team' component={TeamPage} />
-            <Route path='/pay' component={PaymentPage} />
+            <Route
+                key='schedule'
+                path='/schedule/:dayOfWeek/:teamMemberName'
+                component={SchedulePage}
+            />
+            <Route
+                key='schedule/edit'
+                path='/schedule/edit/:setblockId?'
+                component={SchedulePage}
+            />
+            <Route
+                key='schedule'
+                path='/schedule'
+                component={SchedulePage}
+            />
+            <Route
+                key='team'
+                path='/team/:teamMemberId/:dayOfWeek'
+                component={SchedulePage}
+            />
+            <Route
+                key='team'
+                path='/team'
+                component={TeamPage}
+            />
+            <Route
+                key='pay'
+                path='/pay'
+                component={PaymentPage}
+            />
+            
+
+            
         </Switch>
     </Flex>
 );

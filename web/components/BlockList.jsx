@@ -42,10 +42,15 @@ class BlockList extends React.Component {
 
     render() {
         const {
-            editModeEnabled, currentWeeklySetblocks, unsavedSetBlocks, selectedDay 
+            currentWeeklySetblocks,
+            editModeEnabled,
+            goToPaymentPage,
+            unsavedSetBlocks,
+            selectedDay 
         } = this.props;
+
         const selectedDayFormatted = moment(selectedDay).format('YYYY-MM-DD')
-        let setBlocksByDate =  _.groupBy(currentWeeklySetblocks, 'date');
+        let setBlocksByDate = _.groupBy(currentWeeklySetblocks, 'date');
         let setBlocks = setBlocksByDate[selectedDayFormatted];
 
         if (editModeEnabled && unsavedSetBlocks ) {
@@ -63,7 +68,13 @@ class BlockList extends React.Component {
         } else if (!editModeEnabled && setBlocks) {
             setBlocks = _.orderBy(setBlocks, 'blockTime') // To properly render in order
             return setBlocks.map((setBlock, index) => {
-                return <SetBlock data={setBlock} key={setBlock.id || index} />
+                return (
+                    <SetBlock
+                        key={setBlock.id || index}
+                        goToPaymentPage={goToPaymentPage}
+                        data={setBlock}
+                    />
+                )
             })
         } else {
             return (

@@ -272,6 +272,10 @@ class SetBlock extends React.Component {
         )
     }
 
+    handleFund = () => {
+        console.log(this.props)
+        this.props.goToPaymentPage()
+    }
 
     render() {
         const { editMode } = this.props;
@@ -320,7 +324,7 @@ class SetBlock extends React.Component {
         )
 
         return (
-            <Flex row width='100%' mt='1rem'>
+            <Flex row width='100%' mt='1rem' onClick={this.handleFund}>
                 <Flex column center className='SetBlock'>
                     <Flex row center width='100%'>
                         <Text

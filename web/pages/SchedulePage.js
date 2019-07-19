@@ -109,6 +109,10 @@ class SchedulePage extends React.Component {
         return defaultSetBlocks
     }
 
+    goToPaymentPage = () => {
+        this.props.history.push('/pay')
+    }
+
     renderMainContent() {
         const { match, currentTeamMember, editModeEnabled, enableSubmit } = this.props
 
@@ -123,10 +127,13 @@ class SchedulePage extends React.Component {
                     mb='0px'
                     style={{ borderBottom: `1px solid ${theme.colors.accent}` }}
                 >
-                    {match.params.teamMemberId ? currentTeamMember.name + '\'s' : 'Your'}
+                    {match.params.teamMemberId
+                        ? currentTeamMember.name + '\'s'
+                        : 'Your'
+                    }
                     {' Schedule'}
                 </Text>
-                <BlockList />
+                <BlockList goToPaymentPage={this.goToPaymentPage}/>
                 {editModeEnabled && (<CommitBlock enableSubmit={enableSubmit} />)}
             </Flex>
         )
