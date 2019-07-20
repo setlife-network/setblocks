@@ -274,7 +274,11 @@ class SetBlock extends React.Component {
 
     handleFund = () => {
         console.log(this.props)
-        this.props.goToPaymentPage()
+        if (this.props.data.funded) {
+            this.props.goToStreamPage(this.props.data.id)
+        } else {
+            this.props.goToPaymentPage(this.props.data.id)
+        }
     }
 
     render() {

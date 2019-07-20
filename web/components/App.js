@@ -19,7 +19,7 @@ class App extends React.Component {
         // Run initialization functions here
         this.props.checkAuthentication()
         .then(loggedIn => {
-            if (loggedIn) this.props.history.push('/team')
+            // if (loggedIn) this.props.history.push('/team')
         })
     }
 

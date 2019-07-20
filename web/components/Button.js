@@ -11,6 +11,7 @@ const Button = styled(Card)`
     font-size: 15px;
     outline: 0;
     border: none;
+    cursor: pointer;
     
     ${is('transparent')`
         ${mixins.clickableBg};

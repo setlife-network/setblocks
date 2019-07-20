@@ -8,6 +8,8 @@ export const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 export const OAUTH_REDIRECT_URI = process.env.NODE_ENV == 'production' ? 'https://www.setblocks.com/api/v/1/github-oauth' : 'http://localhost:3000/api/v/1/github-oauth'
 
 export const STRIPE_PUBLIC_KEY = 'pk_test_CBiYbQTw17rarZ2chWMVolp6'
+export const BTC_ADDRESS = process.env.BTC_ADDRESS
+export const STREAM_LINK = process.env.STREAM_LINK
 
 export const NAVIGATION = {
     items: [
@@ -38,8 +40,10 @@ export const TEAM_NAME_ID_MAP = {
     'Oscar Lafarga': 'recGVSamjigJbZoJ8',
     'Quinn Pruitt': 'rec0akTPTocs76bQU',
     'David Lafarga': 'recaUadUZZ7qomfLM',
-    'Victoria Lafarga': 'reczBZOIamQbd1Anq'
+    'Victoria Lafarga': 'reczBZOIamQbd1Anq',
+    'Rebeca Rubio': 'recIjWZB2RuV7YslI'
 }
+
 
 export const USER_PROPS = `
     id,
@@ -49,6 +53,7 @@ export const USER_PROPS = `
       date,
       blockTime,
       blockFraction,
+      funded,
       description
     }
 `

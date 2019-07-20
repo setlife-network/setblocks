@@ -6,6 +6,7 @@ import Flex from 'components/Flex';
 import LandingPage from 'pages/LandingPage';
 import PaymentPage from 'pages/PaymentPage';
 import SchedulePage from 'pages/SchedulePage';
+import StreamPage from 'pages/StreamPage';
 import TeamPage from 'pages/TeamPage';
 
 
@@ -52,8 +53,13 @@ export default (
             />
             <Route
                 key='pay'
-                path='/pay'
+                path='/pay/:setblockId'
                 component={PaymentPage}
+            />
+            <Route
+                key='stream'
+                path='/stream/:setblockId'
+                component={StreamPage}
             />
             
 

@@ -45,6 +45,7 @@ class BlockList extends React.Component {
             currentWeeklySetblocks,
             editModeEnabled,
             goToPaymentPage,
+            goToStreamPage,
             unsavedSetBlocks,
             selectedDay 
         } = this.props;
@@ -72,6 +73,7 @@ class BlockList extends React.Component {
                     <SetBlock
                         key={setBlock.id || index}
                         goToPaymentPage={goToPaymentPage}
+                        goToStreamPage={goToStreamPage}
                         data={setBlock}
                     />
                 )

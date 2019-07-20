@@ -1,9 +1,14 @@
+require('dotenv').config()
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const paths = require('./paths')
+
+console.log('process.env')
+console.log(process.env.WEB_ROOT)
 
 module.exports = {
     // where webpack resolves files relative to
@@ -80,6 +85,14 @@ module.exports = {
         new ManifestPlugin({
             fileName: 'asset-manifest.json', // Not to confuse with manifest.json
         }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+                GITHUB_CLIENT_ID: JSON.stringify(process.env.GITHUB_CLIENT_ID),
+                BTC_ADDRESS: JSON.stringify(process.env.BTC_ADDRESS),
+                STREAM_LINK: JSON.stringify(process.env.STREAM_LINK)
+            }
+        })
         // SW plugin configuration
         // The following option parameters and configuration are directly taken from react-create-app
         // as it's a production ready configuration that works pretty well for our needs.

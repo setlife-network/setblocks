@@ -53,6 +53,7 @@ class SchedulePage extends React.Component {
         const endOfWeek = moment().endOf('isoWeek');
 
         const days = [];
+        const selectedDayOfWeek = (this.props.match.params.dayOfWeek - 1) || 0
         let day = startOfWeek;
 
         while (day <= endOfWeek) {
@@ -63,7 +64,7 @@ class SchedulePage extends React.Component {
         this.setState({
             daysOfWeek: days,
         })
-        this.props.changeSelectedDay(days[0])
+        this.props.changeSelectedDay(days[selectedDayOfWeek])
     }
 
     componentDidUpdate (prevProps) {
@@ -109,8 +110,12 @@ class SchedulePage extends React.Component {
         return defaultSetBlocks
     }
 
-    goToPaymentPage = () => {
-        this.props.history.push('/pay')
+    goToPaymentPage = (setblockId) => {
+        this.props.history.push('/pay/' + setblockId)
+    }
+
+    goToStreamPage = (setblockId) => {
+        this.props.history.push('/stream/' + setblockId)
     }
 
     renderMainContent() {
@@ -133,7 +138,10 @@ class SchedulePage extends React.Component {
                     }
                     {' Schedule'}
                 </Text>
-                <BlockList goToPaymentPage={this.goToPaymentPage}/>
+                <BlockList
+                    goToPaymentPage={this.goToPaymentPage}
+                    goToStreamPage={this.goToStreamPage}
+                />
                 {editModeEnabled && (<CommitBlock enableSubmit={enableSubmit} />)}
             </Flex>
         )

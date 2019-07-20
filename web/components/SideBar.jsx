@@ -13,11 +13,13 @@ class SideBar extends React.Component {
 
     goToScheduleDay(day) {
         const { history, match } = this.props;
+        const dayIndex = day.getDay() == 0 ? 7 : day.getDay()
+
         if (match.params.teamMemberId) {
-            history.push('/team/' + match.params.teamMemberId + '/' + day.getDay());
+            history.push('/team/' + match.params.teamMemberId + '/' + dayIndex);
         } else {
             // If the match.params don't have a teamMemberId are u seeing your schedule
-            history.push('/schedule/' + day.getDay());
+            history.push('/schedule/' + dayIndex);
             this.props.changeEditModeEnabled(true);
         }
         this.props.changeSelectedDay(day);

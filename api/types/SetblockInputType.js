@@ -8,6 +8,9 @@ var SetblockInputType = module.exports = new g.GraphQLInputObjectType({
             blockFraction: {
                 type: g.GraphQLFloat
             },
+            funded: {
+                type: g.GraphQLString
+            },
             issueUrl: {
                 type: g.GraphQLString
             },

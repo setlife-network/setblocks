@@ -19,6 +19,10 @@ var SetblockType = module.exports = new g.GraphQLObjectType({
                 type: g.GraphQLFloat,
                 description: 'Must be either 1.0 or 0.5'
             },
+            funded: {
+                type: g.GraphQLString,
+                description: 'Whether or not this Setblock has a confirmed payment sent to the Team Member that scheduled it'
+            },
             issueUrl: {
                 type: g.GraphQLString,
                 description: 'A reference to the GitHub isssue being worked on during this setblock'
