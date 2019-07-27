@@ -9,7 +9,7 @@ import { DEFAULT_SETBLOCKS } from '../constants';
 
 import {
     setEnableSubmit, updateUnsavedSetblocks,
-} from '../reducers/scheduling';
+} from '../ducks/scheduling';
 
 class BlockList extends React.Component {
 

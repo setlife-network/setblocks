@@ -95,7 +95,25 @@ app.use('/api/v/:vid/graph', graphqlHTTP((req, res) => {
     };
 }));
 
-app.listen(port, function() {
+const lightningNode = require('./api/modules/lightningNode')
+
+app.get('/api/getWalletInfo', (req, res) => {
+    lightningNode.getUserWalletInfo({ user: req.query.user })
+    .then(info => {
+        res.json(info)
+    })
+})
+
+// Real-time messaging web sockets
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+
+io.on('connection', function(data) {
+    console.log('connection on: ');
+    // console.log(data);
+});
+
+server.listen(port, function() {
     console.log('SetLife-ReactWithApi: Server running on port ' + port);
     // require('./api/handlers/github').fetchRepo({
     //     url: 'https://github.com/bitcoin/bitcoin'

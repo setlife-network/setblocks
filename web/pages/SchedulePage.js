@@ -18,8 +18,8 @@ import {
     changeSelectedDay,
     setEnableSubmit,
     updateUnsavedSetblocks
-} from '../reducers/scheduling';
-import { fetchCurrentTeamMemberById } from '../reducers/team'
+} from '../ducks/scheduling';
+import { fetchCurrentTeamMemberById } from '../ducks/team'
 
 import theme from '../styles/theme'
 

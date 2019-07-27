@@ -30,7 +30,7 @@ Get familiar with the **setlife** folder structure
 |-- /web/							# Application source code
 	|-- /components/			    # React components
 	|-- /constants/					# Any constant variable used throughout the app
-	|-- /reducers/					# Redux Reducers + Redux Actions in the same file
+	|-- /ducks/					    # [Redux Reducers + Redux Actions in the same file](https://github.com/erikras/ducks-modular-redux)
 	|-- /scripts/					# Functions for API calls, data formatters, validators, etc
 	|-- /styles/					# All .less stylesheets
 ```

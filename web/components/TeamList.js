@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import TeamMember from './TeamMember'
 
-import { fetchAllTeamMembers } from '../reducers/team'
+import { fetchAllTeamMembers } from '../ducks/team'
 
 export class TeamList extends React.Component {
 

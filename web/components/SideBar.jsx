@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import DayBlock from './DayBlock';
 import Flex from './Flex';
 
-import { changeEditModeEnabled, changeSelectedDay } from '../reducers/scheduling';
+import { changeEditModeEnabled, changeSelectedDay } from '../ducks/scheduling';
 
 import theme from '../styles/theme';
 

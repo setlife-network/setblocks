@@ -62,8 +62,6 @@ export default (
                 component={StreamPage}
             />
             
-
-            
         </Switch>
     </Flex>
 );

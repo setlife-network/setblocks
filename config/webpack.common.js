@@ -39,7 +39,7 @@ module.exports = {
             components: paths.components,
             pages: paths.pages,
             public: paths.public,
-            reducers: paths.reducers
+            ducks: paths.ducks
         }
     },
     optimization: {

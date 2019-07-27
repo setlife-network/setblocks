@@ -9,7 +9,7 @@ import Flex from 'components/Flex';
 import Text from 'components/Text';
 import Loading from 'components/Loading';
 
-import { logout } from '../reducers/auth'
+import { logout } from '../ducks/auth'
 
 class TeamPage extends React.Component {
 

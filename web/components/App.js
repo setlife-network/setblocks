@@ -11,7 +11,7 @@ import NavigationBar from './NavigationBar';
 
 import routes from '../routes'
 
-import { checkAuthentication } from '../reducers/auth'
+import { checkAuthentication } from '../ducks/auth'
 
 class App extends React.Component {
     componentDidMount() {
