@@ -97,6 +97,8 @@ app.use('/api/v/:vid/graph', graphqlHTTP((req, res) => {
 
 const lightningNode = require('./api/modules/lightningNode')
 
+lightningNode.subscribeToChainAddress({ user: 'ALICE' })
+
 app.get('/api/getWalletInfo', (req, res) => {
     lightningNode.getUserWalletInfo({ user: req.query.user })
     .then(info => {

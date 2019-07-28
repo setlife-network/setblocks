@@ -28,7 +28,8 @@ class PaymentPage extends React.Component {
 
     handleBtcPayment = (event) => {
         console.log('handleBtcPayment')
-        this.props.history.push(`/stream/${setblockId}`)
+        console.log(this.props)
+        this.props.history.push(`/stream/${this.props.match.params.setblockId}`)
         // this.props.simulatePayment()
     }
 

@@ -31,11 +31,11 @@ function subscribe(socket) {
                 data: event
             });
         };
-        const paymentReceivedHandler = (event) => {
-            console.log('payment.received');
+        const setblockFundedHandler = (event) => {
+            console.log('setblock.funded');
             console.log(event);
             emitter({
-                event: 'payment.received',
+                event: 'setblock.funded',
                 data: event
             });
         };
@@ -45,13 +45,13 @@ function subscribe(socket) {
         };
 
         socket.on('stream.started', streamStartedHandler);
-        socket.on('payment.received', paymentReceivedHandler);
+        socket.on('setblock.funded', setblockFundedHandler);
         socket.on('disconnect', disconnectHandler);
 
         const unsubscribe = () => {
             console.log('unsubscribe');
             socket.off('stream.started', loginHandler);
-            socket.off('payment.received', paymentReceivedHandler);
+            socket.off('setblock.funded', setblockFundedHandler);
             socket.off('disconnect', disconnectHandler);
         };
 
