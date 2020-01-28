@@ -272,6 +272,14 @@ class SetBlock extends React.Component {
         )
     }
 
+    handleFund = () => {
+        console.log(this.props)
+        if (this.props.data.funded) {
+            this.props.goToStreamPage(this.props.data.id)
+        } else {
+            this.props.goToPaymentPage(this.props.data.id)
+        }
+    }
 
     render() {
         const { editMode } = this.props;
@@ -320,7 +328,7 @@ class SetBlock extends React.Component {
         )
 
         return (
-            <Flex row width='100%' mt='1rem'>
+            <Flex row width='100%' mt='1rem' onClick={this.handleFund}>
                 <Flex column center className='SetBlock'>
                     <Flex row center width='100%'>
                         <Text

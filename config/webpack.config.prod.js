@@ -76,13 +76,7 @@ module.exports = merge(common, {
         new CompressionPlugin({
             test: /\.(js|css|html)$/,
             deleteOriginalAssets: false
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production'),
-                GITHUB_CLIENT_ID: JSON.stringify('88ee5c32729990ca3a14')
-            }
-        }),
+        })
         
         // Progressive web app in progress
         // new ManifestPlugin({

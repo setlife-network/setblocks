@@ -9,7 +9,7 @@ import Flex from 'components/Flex';
 import Text from 'components/Text';
 import Loading from 'components/Loading';
 
-import { logout } from '../reducers/auth'
+import { logout } from '../ducks/auth'
 
 class TeamPage extends React.Component {
 
@@ -37,6 +37,7 @@ class TeamPage extends React.Component {
                 className='TeamPage'
                 bg='primary'
                 width='100%'
+                style={{ overflowY: 'scroll' }}
             >
                 <Header />
                 <Loading />
@@ -47,7 +48,7 @@ class TeamPage extends React.Component {
 
                 <TeamList goToPage={this.goToPage} goToEdit={this.goToEdit} />
 
-                <Button onClick={this.handleLogout} m='5rem auto'>
+                <Button onClick={this.handleLogout} m='3rem auto' py='0.5rem'>
                     Log out
                 </Button>
             </Flex>

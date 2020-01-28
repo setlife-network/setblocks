@@ -12,7 +12,7 @@ import {
     createSetBlock,
     deleteSetblock,
     updateSetBlock 
-} from '../reducers/scheduling';
+} from '../ducks/scheduling';
 
 class CommitBlock extends React.Component {
 

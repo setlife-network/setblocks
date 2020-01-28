@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import TeamMember from './TeamMember'
 
-import { fetchAllTeamMembers } from '../reducers/team'
+import { fetchAllTeamMembers } from '../ducks/team'
 
 export class TeamList extends React.Component {
 
@@ -22,10 +22,11 @@ export class TeamList extends React.Component {
         const { teamMembers, goToPage, goToEdit } = this.props;
         return (
             <>
-                {teamMembers.map(teamMember => {
+                {teamMembers.map((teamMember, index) => {
                     return (
                         <TeamMember
                             key={teamMember.id}
+                            index={index}
                             name={teamMember.name}
                             goToPage={() => { goToPage(teamMember) }}
                             goToEdit={() => { goToEdit(teamMember) }}

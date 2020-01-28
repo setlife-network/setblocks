@@ -18,8 +18,8 @@ import {
     changeSelectedDay,
     setEnableSubmit,
     updateUnsavedSetblocks
-} from '../reducers/scheduling';
-import { fetchCurrentTeamMemberById } from '../reducers/team'
+} from '../ducks/scheduling';
+import { fetchCurrentTeamMemberById } from '../ducks/team'
 
 import theme from '../styles/theme'
 
@@ -53,6 +53,7 @@ class SchedulePage extends React.Component {
         const endOfWeek = moment().endOf('isoWeek');
 
         const days = [];
+        const selectedDayOfWeek = (this.props.match.params.dayOfWeek - 1) || 0
         let day = startOfWeek;
 
         while (day <= endOfWeek) {
@@ -63,7 +64,7 @@ class SchedulePage extends React.Component {
         this.setState({
             daysOfWeek: days,
         })
-        this.props.changeSelectedDay(days[0])
+        this.props.changeSelectedDay(days[selectedDayOfWeek])
     }
 
     componentDidUpdate (prevProps) {
@@ -109,6 +110,14 @@ class SchedulePage extends React.Component {
         return defaultSetBlocks
     }
 
+    goToPaymentPage = (setblockId) => {
+        this.props.history.push('/pay/' + setblockId)
+    }
+
+    goToStreamPage = (setblockId) => {
+        this.props.history.push('/stream/' + setblockId)
+    }
+
     renderMainContent() {
         const { match, currentTeamMember, editModeEnabled, enableSubmit } = this.props
 
@@ -123,10 +132,16 @@ class SchedulePage extends React.Component {
                     mb='0px'
                     style={{ borderBottom: `1px solid ${theme.colors.accent}` }}
                 >
-                    {match.params.teamMemberId ? currentTeamMember.name + '\'s' : 'Your'}
+                    {match.params.teamMemberId
+                        ? currentTeamMember.name + '\'s'
+                        : 'Your'
+                    }
                     {' Schedule'}
                 </Text>
-                <BlockList />
+                <BlockList
+                    goToPaymentPage={this.goToPaymentPage}
+                    goToStreamPage={this.goToStreamPage}
+                />
                 {editModeEnabled && (<CommitBlock enableSubmit={enableSubmit} />)}
             </Flex>
         )

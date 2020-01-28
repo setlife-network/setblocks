@@ -1,6 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import rootReducer from '../reducers'
+import createSagaMiddleware from 'redux-saga';
+
+import rootReducer from '../ducks'
+import rootSaga from '../sagas';
 
 export default function configureStore(isProduction) {
     let store
@@ -12,17 +15,19 @@ export default function configureStore(isProduction) {
         )
     } else {
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+        const sagaMiddleware = createSagaMiddleware();
         
         store = createStore(
             rootReducer,
             composeEnhancers(
-                applyMiddleware(thunk)
+                applyMiddleware(thunk, sagaMiddleware)
             )
         )
+        sagaMiddleware.run(rootSaga);
 
         if (module.hot) {
-            module.hot.accept('../reducers', () => {
-                const nextRootReducer = require('../reducers').default
+            module.hot.accept('../ducks', () => {
+                const nextRootReducer = require('../ducks').default
                 store.replaceReducer(nextRootReducer)
             })
         }

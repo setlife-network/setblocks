@@ -49,6 +49,7 @@ var schedule = module.exports = (function () {
             let updatedFieldData = {}
             Object.keys(updatedFields).map(k => {
                 if (k == 'blockFraction') updatedFieldData['Blocks'] = updatedFields[k]
+                if (k == 'funded') updatedFieldData['Funded'] = updatedFields[k]
                 if (k == 'issueUrl') updatedFieldData['Issue'] = updatedFields[k]
                 if (k == 'description') updatedFieldData['Description'] = updatedFields[k]
             })

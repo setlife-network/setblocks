@@ -42,6 +42,7 @@ var TeamMemberType = module.exports = new g.GraphQLObjectType({
                                         date: r.fields.Date,
                                         blockTime: r.fields.Blocktime,
                                         blockFraction: r.fields.Blocks,
+                                        funded: r.fields.Funded,
                                         issueUrl: r.fields.Issue,
                                         description: r.fields.Description
                                     })

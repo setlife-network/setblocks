@@ -86,6 +86,7 @@ export function fetchCurrentTeamMemberById(params) {
                           date,
                           blockTime,
                           blockFraction,
+                          funded,
                           description
                         }
                       }

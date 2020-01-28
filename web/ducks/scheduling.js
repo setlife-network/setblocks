@@ -108,15 +108,15 @@ export function updateSetBlock(params) {
         dispatch(incrementPendingNetworkCalls())
         api.graph({
             query: `mutation {
-                       updateSetblock(
-                        setblockId: "${params.id}"
-                        updatedFields: {
-                            blockFraction: ${params.blockFraction},
-                                issueUrl: "${params.issueUrl}",
-                                description: "${params.description}"
-                        }
-                      )
-                    }`
+                updateSetblock(
+                    setblockId: "${params.id}"
+                    updatedFields: {
+                        blockFraction: ${params.blockFraction},
+                        issueUrl: "${params.issueUrl}",
+                        description: "${params.description}"
+                    }
+                )
+            }`
         })
         .then(payload => {
             
