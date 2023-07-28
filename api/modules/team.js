@@ -12,7 +12,7 @@ var team = module.exports = (function() {
                 viewName: 'All'
             })
             .then(records => {
-                const teamMembers = records.map(r => {
+                const teamMembers = records.filter(r => r.fields.Active).map(r => {
                     return {
                         id: r.id,
                         name: r.fields.Name
