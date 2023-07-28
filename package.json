@@ -4,6 +4,9 @@
   "description": "",
   "main": "server.js",
   "private": true,
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "clean": "rm -rf node_modules && rm -rf public",
     "dev": "cross-os dev:os",
