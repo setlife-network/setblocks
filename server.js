@@ -7,7 +7,7 @@ var moment = require('moment');
 var app = express();
 
 var isProduction = process.env.NODE_ENV === 'production';
-var port = isProduction ? process.env.PORT : 3000;
+var port = isProduction ? process.env.PORT : (process.env.DEV_PORT || 3000);
 
 // var settings = require('./api/config/settings');
 // app.use(settings.forceHttps);

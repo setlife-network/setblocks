@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 
 const common = require('./webpack.common')
 const paths = require('./paths')
@@ -14,17 +14,18 @@ module.exports = merge(common, {
             paths.appIndex
         ]
     },
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     // webpack-dev-server config
     devServer: {
         // where to look for static files when building
-        contentBase: paths.public,
+        static: paths.public,
         // bundled files will be available in browser under this path
-        publicPath: '/',
         historyApiFallback: true,
         hot: true,
         host: '0.0.0.0',
-        inline: true,
+        devMiddleware: {
+            publicPath: '/',
+        },
         open: false
     },
     output: {
