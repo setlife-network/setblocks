@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 // const ManifestPlugin = require('webpack-manifest-plugin')
 
@@ -15,20 +15,7 @@ module.exports = merge(common, {
         app: paths.appIndex
     },
     optimization: {
-        minimizer: [
-            new UglifyJsPlugin({
-                uglifyOptions: {
-                    compress: {
-                        // remove console logs
-                        drop_console: true
-                    },
-                    output: {
-                        // remove comments
-                        comments: false
-                    }
-                }
-            })
-        ],
+        minimizer: [new TerserPlugin()],
         // extract css to single file
         splitChunks: {
             cacheGroups: {
