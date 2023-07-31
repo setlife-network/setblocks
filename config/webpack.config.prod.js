@@ -1,9 +1,9 @@
 const webpack = require('webpack')
-const merge = require('webpack-merge')
+const { merge } = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
+// const ManifestPlugin = require('webpack-manifest-plugin')
 
 const common = require('./webpack.common')
 const paths = require('./paths')
