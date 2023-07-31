@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const paths = require('./paths')
@@ -40,10 +40,9 @@ module.exports = {
     optimization: {
         splitChunks: {
             cacheGroups: {
-                default: false,
+                // default: false,
                 vendor: {
                     test: /[\\/]node_modules[\\/]/,
-                    name: 'vendor',
                     chunks: 'all'
                 }
             }
@@ -77,7 +76,7 @@ module.exports = {
             }
         ]),
         // Create a JSON file with the listed assets webpack created at bundle time
-        new ManifestPlugin({
+        new WebpackManifestPlugin({
             fileName: 'asset-manifest.json', // Not to confuse with manifest.json
         }),
         // SW plugin configuration
